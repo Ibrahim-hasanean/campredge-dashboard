@@ -19,7 +19,10 @@ export function AuthPage() {
           <div
             className="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
             style={{
-              backgroundImage: `url(${toAbsoluteUrl("/media/bg/bg-1.jpg")})`,
+              backgroundImage: `url(${toAbsoluteUrl(
+                "/media/bg/splash-screen.gif"
+              )})`,
+              backgroundPosition: "center"
             }}
           >
             {/*begin: Aside Container*/}
@@ -29,7 +32,7 @@ export function AuthPage() {
                 <img
                   alt="Logo"
                   className="max-h-70px"
-                  src={toAbsoluteUrl("/media/logos/logo.jpeg")}
+                  src={toAbsoluteUrl("/media/logos/logo.png")}
                 />
               </Link>
               {/* end:: Aside header */}
@@ -61,7 +64,6 @@ export function AuthPage() {
               </Switch>
             </div>
             {/*end::Content body*/}
-
           </div>
           {/*end::Content*/}
         </div>
