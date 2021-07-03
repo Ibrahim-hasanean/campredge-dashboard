@@ -6,6 +6,7 @@ import { login } from "api/Auth";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { GlobalContext } from "contexts/GlobalState";
 import { GLOBALSTATE_ACTIONS } from "app/constants";
+import { phoneRegExp } from "helpers/generalRegex";
 
 /*
   INTL (i18n) docs:
@@ -18,7 +19,7 @@ import { GLOBALSTATE_ACTIONS } from "app/constants";
 */
 
 const initialValues = {
-  email: "",
+  phoneNumber: "",
   password: ""
 };
 
@@ -28,10 +29,10 @@ function Login(props) {
   const [, dispatch] = React.useContext(GlobalContext);
 
   const LoginSchema = Yup.object().shape({
-    email: Yup.string()
-      .email("Wrong email format")
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
+    phoneNumber: Yup.string()
+      .matches(phoneRegExp, "Wrong Phone number format")
+      .min(10, "Minimum 10 symbols")
+      .max(10, "Maximum 10 symbols")
       .required(
         intl.formatMessage({
           id: "AUTH.VALIDATION.REQUIRED_FIELD"
@@ -73,12 +74,13 @@ function Login(props) {
     onSubmit: (values, { setStatus, setSubmitting }) => {
       enableLoading();
       const loginData = {
-        email: values.email,
+        phoneNumber: values.phoneNumber,
         password: values.password
       };
 
       login(loginData)
         .then(response => {
+          console.log(response, "login response");
           disableLoading();
           if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
             dispatch({ type: GLOBALSTATE_ACTIONS.SET_IS_AUTH, data: response });
@@ -110,7 +112,9 @@ function Login(props) {
         <h3 className="font-size-h1">
           <FormattedMessage id="AUTH.LOGIN.TITLE" />
         </h3>
-        <p className="text-muted font-weight-bold">أدخل الايميل وكلمة المرور</p>
+        <p className="text-muted font-weight-bold">
+          Enter your username and password
+        </p>
       </div>
       {/* end::Head */}
 
@@ -126,30 +130,31 @@ function Login(props) {
         ) : (
           <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
             <div className="alert-text">
-              الرجاء ادخال <strong>الايميل</strong> وكلمة المرور للمتابعة
+              Please enter your <strong>Phone Number</strong> and{" "}
+              <strong>Password</strong> to continue.
             </div>
           </div>
         )}
 
         <div className="form-group fv-plugins-icon-container">
           <input
-            placeholder="الايميل"
-            type="email"
+            placeholder="059-912-3456"
+            type="tel"
             className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "email"
+              "phoneNumber"
             )}`}
-            name="email"
-            {...formik.getFieldProps("email")}
+            name="phoneNumber"
+            {...formik.getFieldProps("phoneNumber")}
           />
-          {formik.touched.email && formik.errors.email ? (
+          {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
             <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.email}</div>
+              <div className="fv-help-block">{formik.errors.phoneNumber}</div>
             </div>
           ) : null}
         </div>
         <div className="form-group fv-plugins-icon-container">
           <input
-            placeholder="كلمة المرور"
+            placeholder="Password"
             type="password"
             className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
               "password"
