@@ -22,7 +22,7 @@ export function UserProfileDropdown() {
           }
         >
           <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">
-            مرحبا,
+            Hi,
           </span>
           <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-1">
             {admin.firstname} {admin.lastname}
@@ -37,18 +37,18 @@ export function UserProfileDropdown() {
       </Dropdown.Toggle>
       <Dropdown.Menu className="p-0 m-0 dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
         <div
-          className="d-flex align-items-center justify-content-end flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top"
+          className="d-flex align-items-center flex-wrap p-8 bgi-size-cover bgi-no-repeat rounded-top"
           style={{
             backgroundImage: `url(${toAbsoluteUrl("/media/misc/bg-1.jpg")})`
           }}
         >
-          <div className="text-white m-0  mr-3 font-size-h5">
-            {admin.firstname} {admin.lastname}
-          </div>
           <div className="symbol bg-white-o-15 mr-3">
             <span className="symbol-label text-success font-weight-bold font-size-h4">
               {admin.firstname[0]}
             </span>
+          </div>
+          <div className="text-white m-0  mr-3 font-size-h5">
+            {admin.firstname} {admin.lastname}
           </div>
         </div>
         <div className="navi navi-spacer-x-0 pt-5">
