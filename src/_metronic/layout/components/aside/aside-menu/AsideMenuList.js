@@ -28,17 +28,17 @@ export function AsideMenuList({ layoutProps }) {
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
             </span>
-            <span className="menu-text">لوحة التحكم</span>
+            <span className="menu-text">Dashboard</span>
           </NavLink>
         </li>
         {/*end::1 Level*/}
 
         {/* الطلبات */}
         {/* begin::section */}
-        <li className="menu-section ">
+        {/* <li className="menu-section ">
           <h4 className="menu-text">الطلبات</h4>
           <i className="menu-icon flaticon-more-v2"></i>
-        </li>
+        </li> */}
         {/* end:: section */}
 
         {/* eCommerce */}
@@ -46,7 +46,7 @@ export function AsideMenuList({ layoutProps }) {
         {/*end::1 Level*/}
 
         {/*begin::1 Level*/}
-        <li
+        {/* <li
           className={`menu-item ${getMenuItemActive("/orders", false)}`}
           aria-haspopup="true"
         >
@@ -56,19 +56,19 @@ export function AsideMenuList({ layoutProps }) {
             </span>
             <span className="menu-text">الطلبات</span>
           </NavLink>
-        </li>
+        </li> */}
         {/*end::1 Level*/}
 
         {/* المستخدمين */}
         {/* begin::section */}
-        <li className="menu-section ">
+        {/* <li className="menu-section ">
           <h4 className="menu-text">المستخدمين</h4>
           <i className="menu-icon flaticon-more-v2"></i>
-        </li>
+        </li> */}
         {/* end:: section */}
 
         {/*begin::1 Level*/}
-        <li
+        {/* <li
           className={`menu-item ${getMenuItemActive("/users", false)}`}
           aria-haspopup="true"
         >
@@ -80,7 +80,7 @@ export function AsideMenuList({ layoutProps }) {
             </span>
             <span className="menu-text">المستخدمين</span>
           </NavLink>
-        </li>
+        </li> */}
         {/*end::1 Level*/}
 
         {/* Error Pages */}
