@@ -26,7 +26,7 @@ export function HeaderMenu({ layoutProps }) {
           )}`}
         >
           <NavLink className="menu-link" to="/dashboard">
-            <span className="menu-text">لوحة التحكم</span>
+            <span className="menu-text">Dashboard</span>
             {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
           </NavLink>
         </li>
