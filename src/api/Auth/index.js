@@ -4,7 +4,6 @@ import axios from "axios";
 export const login = async loginData => {
   try {
     const response = await axios.post(`/admin/login`, loginData);
-    console.log(response, "login response");
     let data = {};
     switch (response.status) {
       case API_COMMON_STATUS.SUCCESS:
@@ -13,9 +12,9 @@ export const login = async loginData => {
           ...response.data
         };
         break;
-      case API_COMMON_STATUS.ERROR:
+      case API_COMMON_STATUS.BAD_REQUEST:
         data = {
-          responseStatus: API_COMMON_STATUS.ERROR,
+          responseStatus: API_COMMON_STATUS.BAD_REQUEST,
           message: response.data.message
         };
         break;
