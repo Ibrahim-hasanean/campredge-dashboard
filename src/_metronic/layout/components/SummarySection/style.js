@@ -11,15 +11,15 @@ export const useStyles = makeStyles(theme => ({
     }
   },
   firstCard: {
-    background: "linear-gradient(135deg, #ff875e 1%, #fc629d 100%)"
+    background: "linear-gradient(135deg, #ED4886 1%, #B855A4 100%)"
   },
   secondCard: {
-    background: "linear-gradient(135deg, #3bd1bf 0%, #119bd2 100%)"
+    background: "linear-gradient(135deg, #865FC0 0%, #5446BA 100%)"
   },
   thirdCard: {
-    background: "linear-gradient(135deg, #ee70e9 0%, #8363f9 100%)"
+    background: "linear-gradient(135deg, #46C5F1 0%, #6592DA 100%)"
   },
   fourthCard: {
-    background: "linear-gradient(135deg, #f7cd13 1%, #39ce86 100%)"
+    background: "linear-gradient(135deg, #FFB92D 1%, #F5805A 100%)"
   }
 }));
