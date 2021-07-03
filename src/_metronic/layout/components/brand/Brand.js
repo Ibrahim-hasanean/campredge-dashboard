@@ -23,19 +23,24 @@ export function Brand() {
   return (
     <>
       {/* begin::Brand */}
-      <div
-        className='brand flex-column-auto'
-        id="kt_brand"
-      >
+      <div className="brand flex-column-auto" id="kt_brand">
         {/* begin::Logo */}
         <Link to="/" className="brand-logo">
-          <img alt="logo" width="20%" src={toAbsoluteUrl("/media/logos/logo.jpeg")} />
+          <img
+            alt="logo"
+            width="20%"
+            src={toAbsoluteUrl("/media/logos/logo.png")}
+          />
         </Link>
         {/* end::Logo */}
         {/* begin::Toggle */}
         <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
           <span className="svg-icon svg-icon-xl">
-            <SVG src={toAbsoluteUrl("/media/svg/icons/Navigation/Angle-double-left.svg")} />
+            <SVG
+              src={toAbsoluteUrl(
+                "/media/svg/icons/Navigation/Angle-double-left.svg"
+              )}
+            />
           </span>
         </button>
       </div>

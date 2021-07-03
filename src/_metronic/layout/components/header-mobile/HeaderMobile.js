@@ -29,19 +29,29 @@ export function HeaderMobile() {
       >
         {/*begin::Logo*/}
         <Link to="/">
-          <img alt="logo" width="30px" src={toAbsoluteUrl("/media/logos/logo.jpeg")} />
+          <img
+            alt="logo"
+            width="30px"
+            src={toAbsoluteUrl("/media/logos/logo.png")}
+          />
         </Link>
         {/*end::Logo*/}
 
         {/*begin::Toolbar*/}
         <div className="d-flex align-items-center">
           {/*begin::Aside Mobile Toggle*/}
-          <button className="btn p-0 burger-icon burger-icon-left" id="kt_aside_mobile_toggle">
+          <button
+            className="btn p-0 burger-icon burger-icon-left"
+            id="kt_aside_mobile_toggle"
+          >
             <span />
           </button>
           {/*end::Aside Mobile Toggle*/}
           {/*begin::Header Menu Mobile Toggle*/}
-          <button className="btn p-0 burger-icon ml-4" id="kt_header_mobile_toggle">
+          <button
+            className="btn p-0 burger-icon ml-4"
+            id="kt_header_mobile_toggle"
+          >
             <span />
           </button>
           {/*end::Header Menu Mobile Toggle*/}
