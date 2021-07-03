@@ -5,7 +5,7 @@ export const getHomeSummary = async token => {
   try {
     const response = await axios.get(`/admin/home`, {
       headers: {
-        Authorization: `Bearer ${token}`
+        Authorization: token
       }
     });
     let data = {};
