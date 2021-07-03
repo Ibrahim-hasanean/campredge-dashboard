@@ -12,10 +12,10 @@ export const useStyles = makeStyles(theme => ({
   },
   cardIcon: {
     position: "absolute",
-    left: 0,
+    right: 0,
     bottom: 0,
-    opacity: 0.4,
-    width: "80px",
-    height: "80px"
+    opacity: 0.2,
+    width: "50%",
+    height: "100%"
   }
 }));
