@@ -47,7 +47,7 @@ const SummarySection = ({ homeDetails }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        ملخص اجمالي
+        Overall Summary
       </Typography>
       <Grid container spacing={3} className={classes.summarySectionContainer}>
         {CARDS_DATA.map(card => (
