@@ -17,14 +17,15 @@ const Reducer = (state, action) => {
       const payload = action.data;
       localStorage.setItem("token", payload.token);
       localStorage.setItem("isAuth", true);
-      localStorage.setItem("firsname", payload.admin.name);
-      localStorage.setItem("lastname", payload.admin.name);
+      localStorage.setItem("firsname", payload.admin.firstName);
+      localStorage.setItem("lastname", payload.admin.secondName);
       return {
         ...state,
         isAuthorized: true,
         admin: {
-          firstname: payload.admin.name,
-          lastname: payload.admin.name
+          firstname: payload.admin.firstName,
+          lastname: payload.admin.secondName,
+          phoneNumber: payload.admin.phoneNumber
         }
       };
     }
