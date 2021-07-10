@@ -61,14 +61,14 @@ export function AsideMenuList({ layoutProps }) {
 
         {/* المستخدمين */}
         {/* begin::section */}
-        {/* <li className="menu-section ">
-          <h4 className="menu-text">المستخدمين</h4>
+        <li className="menu-section ">
+          <h4 className="menu-text">Users</h4>
           <i className="menu-icon flaticon-more-v2"></i>
-        </li> */}
+        </li>
         {/* end:: section */}
 
         {/*begin::1 Level*/}
-        {/* <li
+        <li
           className={`menu-item ${getMenuItemActive("/users", false)}`}
           aria-haspopup="true"
         >
@@ -78,9 +78,9 @@ export function AsideMenuList({ layoutProps }) {
                 src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
               />
             </span>
-            <span className="menu-text">المستخدمين</span>
+            <span className="menu-text">Users</span>
           </NavLink>
-        </li> */}
+        </li>
         {/*end::1 Level*/}
 
         {/* Error Pages */}
