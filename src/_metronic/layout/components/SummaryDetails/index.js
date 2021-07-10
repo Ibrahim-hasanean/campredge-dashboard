@@ -8,23 +8,23 @@ const SummaryDetails = ({ homeDetails }) => {
 
   return (
     <Grid container className={classes.summaryDetailsContainer}>
-      <Grid item sm={6} style={{ padding: "5px", width: "100%" }}>
+      <Grid item sm={6}>
         <Typography variant="h5" gutterBottom>
-          اليوم
+          Today
         </Typography>
         <Typography variant="h5" gutterBottom>
           {new Date().toDateString()}
         </Typography>
-        <SummaryTable data={homeDetails.todaySummary} />
+        <SummaryTable data={homeDetails.day} />
       </Grid>
-      <Grid item sm={6} style={{ padding: "5px", width: "100%" }}>
+      <Grid item sm={6}>
         <Typography variant="h5" gutterBottom>
-          هذا الأسبوع
+          This Week
         </Typography>
         <Typography variant="h5" gutterBottom>
           {new Date().toDateString()}
         </Typography>
-        <SummaryTable data={homeDetails.weeklySummary} weekly />
+        <SummaryTable data={homeDetails.week} />
       </Grid>
     </Grid>
   );
