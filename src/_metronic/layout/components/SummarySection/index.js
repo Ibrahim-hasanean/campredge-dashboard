@@ -13,26 +13,26 @@ const SummarySection = ({ homeDetails }) => {
   const CARDS_DATA = useMemo(
     () => [
       {
-        title: "مجموع العملاء النشطين",
-        value: homeDetails.totalUser,
+        title: "Active Drivers",
+        value: homeDetails.activeDrivers,
         icon: GroupIcon,
         className: classes.firstCard
       },
       {
-        title: "إجمالي الطلبات",
-        value: homeDetails.totalOrders,
+        title: "Total Orders",
+        value: homeDetails.total?.ordersNO,
         icon: ShoppingCartIcon,
         className: classes.secondCard
       },
       {
-        title: "مجموع المبيعات",
-        value: homeDetails.totalSeller,
+        title: "Total Cost",
+        value: homeDetails.total?.totalCost,
         icon: AttachMoneyIcon,
         className: classes.thirdCard
       },
       {
-        title: "مجموع الأرباح",
-        value: homeDetails.totalEarning,
+        title: "Total Wallet",
+        value: homeDetails.total?.totalWallet,
         icon: LocalAtmIcon,
         className: classes.fourthCard
       }
