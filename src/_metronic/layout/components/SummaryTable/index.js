@@ -9,37 +9,26 @@ import {
 
 import { useStyles, StyledTableRow, StyledTableCell } from "./style";
 
-const SummaryTable = ({ data, weekly }) => {
+const SummaryTable = ({ data }) => {
   const classes = useStyles();
 
   const rows = useMemo(
     () => [
       {
-        title: "إجمالي الطلبات",
-        value: data?.totalOrders
+        title: "Total Orders",
+        value: data?.ordersNO
       },
       {
-        title: "الطلبات المعلقة",
-        value: data?.pendingOrders
+        title: "Total Cost",
+        value: data?.totalCost
       },
       {
-        title: "الطلبات المستلمة",
-        value: data?.deliveredOrders
-      },
-      {
-        title: "الطلبات المرفوضة",
-        value: data?.rejectedOrders
+        title: "Total Wallet",
+        value: data?.totalWallet
       }
     ],
     [data]
   );
-
-  if (weekly) {
-    rows.push({
-      title: "الزبائن الجدد",
-      value: data?.newCustomer
-    });
-  }
 
   const renderCardValue = value =>
     value || value === 0 ? value : <CircularProgress size={30} />;
@@ -50,8 +39,7 @@ const SummaryTable = ({ data, weekly }) => {
           {rows.map(row => (
             <StyledTableRow key={row.title} hover>
               <StyledTableCell
-                style={{ borderLeft: "1px solid #ccc" }}
-                align="right"
+                style={{ borderRight: "1px solid #ccc" }}
                 component="th"
                 scope="row"
               >
