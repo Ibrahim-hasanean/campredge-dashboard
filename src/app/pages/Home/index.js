@@ -13,6 +13,7 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
+
     getHomeSummary(token)
       .then(response => {
         if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
