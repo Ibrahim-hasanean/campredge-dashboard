@@ -46,7 +46,7 @@ const DashboardPage = () => {
         open={!!hasError}
         handleClose={handleClose}
         type="error"
-        text="حدث خطأ ما يرجى المحاولة مرة اخرى"
+        text="Something went wrong please try again"
       />
     </>
   );
