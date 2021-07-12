@@ -2,14 +2,14 @@ import { API_COMMON_STATUS, getUnknownStatusError } from "helpers/api-helper";
 import axios from "axios";
 
 export const getUsers = async query => {
-  let url = "/users/all";
+  let url = "/admin/users";
   if (query) {
     url = `/users/all?${query}`;
   }
   try {
     const response = await axios.get(url, {
       headers: {
-        Authorization: `Bearer ${localStorage.getItem("token")}`
+        Authorization: localStorage.getItem("token")
       }
     });
     let data = {};
