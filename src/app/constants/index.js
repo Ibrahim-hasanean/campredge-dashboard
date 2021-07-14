@@ -83,36 +83,48 @@ export const usersHeadCells = [
     id: "userName",
     numeric: false,
     disablePadding: false,
-    label: "اسم المستخدم"
-  },
-  {
-    id: "accountName",
-    numeric: true,
-    disablePadding: false,
-    label: "اسم الحساب"
+    label: "User Name"
   },
   {
     id: "userEmail",
     numeric: true,
     disablePadding: false,
-    label: "الايميل"
+    label: "E-mail"
+  },
+  {
+    id: "DOB",
+    numeric: true,
+    disablePadding: false,
+    label: "DOB"
   },
   {
     id: "phoneNumber",
     numeric: true,
     disablePadding: false,
-    label: "رقم الهاتف"
+    label: "Phone"
   },
   {
-    id: "userType",
+    id: "ordersNumber",
     numeric: true,
     disablePadding: false,
-    label: "نوع المستخدم"
+    label: "Orders Number"
+  },
+  {
+    id: "wallet",
+    numeric: true,
+    disablePadding: false,
+    label: "User Wallet"
+  },
+  {
+    id: "accountStatus",
+    numeric: true,
+    disablePadding: false,
+    label: "Account status"
   },
   {
     id: "actions",
     numeric: true,
     disablePadding: false,
-    label: "اجراءات"
+    label: "Actions"
   }
 ];
