@@ -19,17 +19,17 @@ const TableToolbar = props => {
     >
       {numSelected > 0 ? (
         <Typography className={classes.title} color="inherit" variant="h6">
-          {numSelected} {usersTable ? "مستخدم محدد" : "طلب محدد"}
+          {numSelected} {usersTable ? "Selected Users" : "طلب محدد"}
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h5">
-          {usersTable ? "المستخدمين" : "الطلبات"}
+          {usersTable ? "Users" : "الطلبات"}
         </Typography>
       )}
 
       {numSelected > 0 && <NotificationModal selectedUsersIds={selected} />}
       {usersTable && (
-        <Tooltip title="تحديث بيانات المستخدمين">
+        <Tooltip title="Update users data">
           <IconButton color="primary" onClick={updateTableData}>
             <UpdateIcon />
           </IconButton>
