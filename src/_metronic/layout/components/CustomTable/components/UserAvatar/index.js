@@ -8,7 +8,11 @@ const UserAvatar = ({ user }) => {
       <Avatar src={user.profileImageURL}>{`${(user.firstName &&
         user.firstName[0]) ||
         "😥"}`}</Avatar>
-      <Typography style={{ margin: 5 }} variant="caption">
+      <Typography
+        style={{ margin: 5, flexGrow: 1 }}
+        align="left"
+        variant="caption"
+      >
         {user.firstName || "No name 😥"} {user.secondName || "No name 😥"}
       </Typography>
     </Grid>
