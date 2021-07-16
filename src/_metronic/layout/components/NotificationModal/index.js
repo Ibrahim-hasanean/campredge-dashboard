@@ -116,10 +116,7 @@ const NotificationModal = ({ selectedUsersIds }) => {
             />
           </DialogContent>
           <DialogActions>
-            <CustomButton type="submit">
-              {/* {loading && <span className="ml-3 spinner spinner-white"></span>} */}
-              submit
-            </CustomButton>
+            <CustomButton type="submit">submit</CustomButton>
             <Button onClick={handleCloseNotificationsDialog} color="secondary">
               Cancel
             </Button>
