@@ -1,6 +1,8 @@
 import React from "react";
 import TableHeader from "./components/TableHeader";
 import TableToolbar from "./components/TableToolbar";
+import UserAvatar from "./components/UserAvatar";
+import AccountStatusIcons from "./components/AccountStatusIcons";
 import {
   Table,
   TableBody,
@@ -98,7 +100,7 @@ export default function EnhancedTable({ data, updateTableData, usersTable }) {
 
   const handleSelectAllClick = event => {
     if (event.target.checked) {
-      const newSelecteds = data.map(item => item.id);
+      const newSelecteds = data.map(item => item._id);
       setSelected(newSelecteds);
       return;
     }
@@ -215,7 +217,7 @@ export default function EnhancedTable({ data, updateTableData, usersTable }) {
                 {stableSort(data, getComparator(order, orderBy))
                   ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   ?.map((item, index) => {
-                    const isItemSelected = isSelected(item.id);
+                    const isItemSelected = isSelected(item._id);
                     const labelId = `enhanced-table-checkbox-${index}`;
 
                     return (
@@ -224,12 +226,12 @@ export default function EnhancedTable({ data, updateTableData, usersTable }) {
                         role="checkbox"
                         aria-checked={isItemSelected}
                         tabIndex={-1}
-                        key={item.id}
+                        key={item._id}
                         selected={isItemSelected}
                       >
                         <TableCell padding="checkbox">
                           <Checkbox
-                            onClick={event => handleClick(event, item.id)}
+                            onClick={event => handleClick(event, item._id)}
                             checked={isItemSelected}
                             inputProps={{ "aria-labelledby": labelId }}
                           />
@@ -243,22 +245,51 @@ export default function EnhancedTable({ data, updateTableData, usersTable }) {
                           {!usersTable ? item.order_number : index + 1}
                         </TableCell>
                         <TableCell align="center">
-                          {!usersTable ? item.user_name : item.name}
+                          {!usersTable ? (
+                            item.user_name
+                          ) : (
+                            <UserAvatar user={item} />
+                          )}
                         </TableCell>
                         <TableCell align="center">
                           {!usersTable
                             ? item.seller_name
-                            : item.account_name || "account name"}
+                            : item.email || "No-email😥@gmail.com"}
                         </TableCell>
-                        <TableCell align="right">
+                        <TableCell align="center">
                           {!usersTable
                             ? item.order_date
-                            : item.email || "email@gmail.com"}
+                            : item.dateBirth || "No DOB 😥"}
                         </TableCell>
                         <TableCell align="center">
-                          {!usersTable ? item.order_total : item.phone}
+                          {!usersTable
+                            ? item.order_total
+                            : item.phoneNumber || "No number 😥"}
                         </TableCell>
                         <TableCell align="center">
+                          {!usersTable
+                            ? item.delivery_method
+                            : item.ordersNumber}
+                        </TableCell>
+                        <TableCell
+                          align="center"
+                          style={item.wallet < 0 ? { color: "red" } : {}}
+                        >
+                          {!usersTable ? item.delivery_method : item.wallet}
+                        </TableCell>
+                        <TableCell align="center">
+                          <AccountStatusIcons
+                            suspended={item.suspend}
+                            verified={item.verified}
+                          />
+                        </TableCell>
+                        <TableCell align="center">
+                          <UsersTableActions
+                            user={item}
+                            updateSnackbarState={setSnackbarState}
+                          />
+                        </TableCell>
+                        {/* <TableCell align="center">
                           {!usersTable ? item.delivery_method : item.type}
                         </TableCell>
                         <TableCell align="center">
@@ -284,7 +315,7 @@ export default function EnhancedTable({ data, updateTableData, usersTable }) {
                         </TableCell>
                         {!usersTable && (
                           <TableCell align="center">{item.fees}</TableCell>
-                        )}
+                        )} */}
                       </TableRow>
                     );
                   })}
