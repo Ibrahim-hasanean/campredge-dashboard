@@ -81,13 +81,13 @@ const NotificationModal = ({ selectedUsersIds }) => {
 
   return (
     <>
-      <Tooltip title="أرسل اشعارات">
+      <Tooltip title="Send Notification">
         <div>
           <CustomButton
             onClick={handleClickOpenNotificationsDialog}
             icon={<NotificationsIcon />}
           >
-            أرسل اشعارات
+            Send Notification
           </CustomButton>
         </div>
       </Tooltip>
@@ -95,18 +95,18 @@ const NotificationModal = ({ selectedUsersIds }) => {
         open={openNotificationsModal}
         onClose={handleCloseNotificationsDialog}
       >
-        <DialogTitle>أرسل الاشعارات الى المستخدمين</DialogTitle>
+        <DialogTitle>Send Notification to selected Users</DialogTitle>
         <form ref={notificationFormRef} onSubmit={sendUsersNotification}>
           <DialogContent className={classes.dialogContent}>
             <CustomInput
               size="medium"
-              placeholder="عنوان الرسالة او الاشعار"
+              placeholder="Notification Title"
               name="notifyTitle"
               fullWidth
               margin="dense"
             />
             <CustomInput
-              placeholder="ادخل نص الاشعار"
+              placeholder="Notification Body"
               name="notifyText"
               fullWidth
               multiline
