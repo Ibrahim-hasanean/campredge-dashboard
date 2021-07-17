@@ -1,30 +1,55 @@
 import React from "react";
-import { Tooltip, IconButton } from "@material-ui/core";
-import BlockIcon from "@material-ui/icons/Block";
-import UpdateIcon from "@material-ui/icons/Update";
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import UserFormDialog from "../UserFormDialog";
-import { blockUser } from "api/Users";
+import { IconButton } from "@material-ui/core";
+// import UserFormDialog from "../UserFormDialog";
+import CustomMenu from "../CustomMenu";
+import CustomDialog from "../CustomDialog";
+import AddToWallet from "./components/AddToWallet";
+import UserDetails from "./components/UserDetails";
+import MoreIcon from "@material-ui/icons/More";
+import { suspendUser, unSuspendUser } from "api/Users";
 import { API_COMMON_STATUS } from "helpers/api-helper";
+import { getUserMenuOptions } from "./constant";
 
 const UsersTableActions = ({ user, updateSnackbarState }) => {
-  const [openUserDialog, setOpenUserDialog] = React.useState(false);
-  const [isBlocked, setIsBlocked] = React.useState(user.isBlocked);
-  const userId = user.id;
+  const [openUserDetailsDialog, setOpenUserDetailsDialog] = React.useState(
+    false
+  );
+  const [openUserWalletDialog, setOpenUserWalletDialog] = React.useState(false);
+  const [isSuspended, setIsSuspended] = React.useState(user.suspend);
+  const userId = user._id;
 
-  const handleClickOpenUserDialog = () => {
-    setOpenUserDialog(true);
+  const actionClickHandler = action => {
+    if (action === "User details") {
+      //open details dialog
+      setOpenUserDetailsDialog(true);
+    } else if (action === "Add to wallet") {
+      // call add to wallet api
+      setOpenUserWalletDialog(true);
+    } else if (action === "Suspend user") {
+      //call suspend user api
+      setIsSuspended(true);
+      suspendUserHandler();
+    } else if (action === "UnSuspend user") {
+      //call UnSuspend user api
+      unSuspendUserHandler();
+    }
   };
 
-  const handleCloseUserDialog = () => {
-    setOpenUserDialog(false);
+  const closeUserDetailsDialog = () => {
+    setOpenUserDetailsDialog(false);
   };
 
-  const blockUserHandler = () => {
-    blockUser(userId)
+  const closeUserWalletDialog = () => {
+    setOpenUserWalletDialog(false);
+  };
+
+  const suspendUserHandler = () => {
+    suspendUser(userId)
       .then(response => {
+        console.log("test user action", response);
         if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-          setIsBlocked(response.isBlocked);
+          // setIsSuspended(response.isSuspended);
+          // update user status in users Array
           updateSnackbarState({
             open: true,
             message: response.message,
@@ -44,28 +69,70 @@ const UsersTableActions = ({ user, updateSnackbarState }) => {
       });
   };
 
+  const unSuspendUserHandler = () => {
+    unSuspendUser(userId)
+      .then(response => {
+        console.log("test user action", response);
+        if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+          // delete user from users Array
+          updateSnackbarState({
+            open: true,
+            message: response.message,
+            variant: "success"
+          });
+        } else {
+          updateSnackbarState({
+            open: true,
+            message: response.message,
+            variant: "error"
+          });
+        }
+      })
+      .catch(error => {
+        console.log(error);
+        updateSnackbarState({
+          open: true,
+          message: "Error 😥",
+          variant: "error"
+        });
+      });
+  };
+
   return (
     <>
-      {openUserDialog && (
-        <UserFormDialog
-          open={openUserDialog}
-          handleClose={handleCloseUserDialog}
-          userData={user}
-        />
-      )}
-      <Tooltip title="تحديث بيانات المستخدم">
-        <IconButton color="primary" onClick={handleClickOpenUserDialog}>
-          <UpdateIcon />
-        </IconButton>
-      </Tooltip>
-      <Tooltip title={isBlocked ? "رفع الحجب" : "حجب المتسخدم"}>
-        <IconButton
-          color={isBlocked ? "primary" : "secondary"}
-          onClick={blockUserHandler}
+      <CustomMenu
+        options={getUserMenuOptions({ isSuspended })}
+        button={IconButton}
+        buttonContent={<MoreIcon />}
+        itemClickHandler={actionClickHandler}
+      />
+
+      {openUserDetailsDialog && (
+        <CustomDialog
+          open={openUserDetailsDialog}
+          handleClose={closeUserDetailsDialog}
+          title={`${user.firstName} ${user.secondName} details`}
         >
-          {isBlocked ? <CheckCircleOutlineIcon /> : <BlockIcon />}
-        </IconButton>
-      </Tooltip>
+          <UserDetails userId={userId} />
+        </CustomDialog>
+      )}
+
+      {openUserWalletDialog && (
+        <CustomDialog
+          open={openUserWalletDialog}
+          handleClose={closeUserWalletDialog}
+          title={`Add to ${user.firstName || "😥"} ${user.secondName ||
+            "😥"} wallet`}
+          contentText={`You can add any amount to this user wallet`}
+          maxWidth="xs"
+        >
+          <AddToWallet
+            userId={userId}
+            updateSnackbarState={updateSnackbarState}
+            closeDialog={closeUserWalletDialog}
+          />
+        </CustomDialog>
+      )}
     </>
   );
 };
