@@ -34,9 +34,18 @@ import GlobalState from "contexts/GlobalState";
 const { PUBLIC_URL } = process.env;
 
 axios.defaults.baseURL = API_END_POINT;
-// axios.defaults.validateStatus = status => {
-//   return status < 500;
-// };
+axios.defaults.validateStatus = status => {
+  return status < 500;
+};
+// axios.interceptors.request.use(
+//   req => {
+//     console.log(req, "test user action");
+//     return req;
+//   },
+//   error => {
+//     console.log(error, "test user action");
+//   }
+// );
 
 ReactDOM.render(
   <MetronicI18nProvider>
