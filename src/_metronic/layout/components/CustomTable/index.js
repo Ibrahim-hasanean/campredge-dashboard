@@ -287,6 +287,7 @@ export default function EnhancedTable({ data, updateTableData, usersTable }) {
                           <UsersTableActions
                             user={item}
                             updateSnackbarState={setSnackbarState}
+                            updateTableData={updateTableData}
                           />
                         </TableCell>
                         {/* <TableCell align="center">

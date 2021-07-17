@@ -7,7 +7,12 @@ import { addToUserWallet } from "api/Users";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { useStyles } from "./style";
 
-const AddToWallet = ({ userId, updateSnackbarState, closeDialog }) => {
+const AddToWallet = ({
+  userId,
+  updateSnackbarState,
+  updateTableData,
+  closeDialog
+}) => {
   const classes = useStyles();
   const [wallet, setWallet] = React.useState("");
 
@@ -20,7 +25,7 @@ const AddToWallet = ({ userId, updateSnackbarState, closeDialog }) => {
     addToUserWallet(userData)
       .then(response => {
         if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-          // delete user from users Array
+          updateTableData();
           updateSnackbarState({
             open: true,
             message: response.message,

@@ -10,7 +10,7 @@ import { suspendUser, unSuspendUser } from "api/Users";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { getUserMenuOptions } from "./constant";
 
-const UsersTableActions = ({ user, updateSnackbarState }) => {
+const UsersTableActions = ({ user, updateSnackbarState, updateTableData }) => {
   const [openUserDetailsDialog, setOpenUserDetailsDialog] = React.useState(
     false
   );
@@ -27,7 +27,6 @@ const UsersTableActions = ({ user, updateSnackbarState }) => {
       setOpenUserWalletDialog(true);
     } else if (action === "Suspend user") {
       //call suspend user api
-      setIsSuspended(true);
       suspendUserHandler();
     } else if (action === "UnSuspend user") {
       //call UnSuspend user api
@@ -46,10 +45,9 @@ const UsersTableActions = ({ user, updateSnackbarState }) => {
   const suspendUserHandler = () => {
     suspendUser(userId)
       .then(response => {
-        console.log("test user action", response);
         if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-          // setIsSuspended(response.isSuspended);
-          // update user status in users Array
+          setIsSuspended(true);
+          updateTableData();
           updateSnackbarState({
             open: true,
             message: response.message,
@@ -58,7 +56,7 @@ const UsersTableActions = ({ user, updateSnackbarState }) => {
         } else {
           updateSnackbarState({
             open: true,
-            message: response.message,
+            message: response.message || "Error 😥",
             variant: "error"
           });
         }
@@ -72,9 +70,9 @@ const UsersTableActions = ({ user, updateSnackbarState }) => {
   const unSuspendUserHandler = () => {
     unSuspendUser(userId)
       .then(response => {
-        console.log("test user action", response);
         if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-          // delete user from users Array
+          setIsSuspended(false);
+          updateTableData();
           updateSnackbarState({
             open: true,
             message: response.message,
@@ -83,7 +81,7 @@ const UsersTableActions = ({ user, updateSnackbarState }) => {
         } else {
           updateSnackbarState({
             open: true,
-            message: response.message,
+            message: response.message || "Error 😥",
             variant: "error"
           });
         }
@@ -129,6 +127,7 @@ const UsersTableActions = ({ user, updateSnackbarState }) => {
           <AddToWallet
             userId={userId}
             updateSnackbarState={updateSnackbarState}
+            updateTableData={updateTableData}
             closeDialog={closeUserWalletDialog}
           />
         </CustomDialog>
