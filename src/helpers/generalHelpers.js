@@ -58,3 +58,22 @@ export const getUserInfoList = userData => {
     }
   ];
 };
+
+export const getUserOrdersList = order => {
+  return [
+    {
+      primary: `Order paid via cash - ${order.walletAdded}`,
+      id: 1
+    },
+    {
+      primary: "Order paid via wallet balance",
+      secondary: order.walletAdded,
+      id: 2
+    },
+    {
+      primary: "Total cost",
+      secondary: order.totalCost,
+      id: 3
+    }
+  ];
+};
