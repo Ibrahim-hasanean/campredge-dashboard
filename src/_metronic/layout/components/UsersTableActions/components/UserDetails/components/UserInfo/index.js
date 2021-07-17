@@ -14,7 +14,7 @@ const UserInfo = ({ userData }) => {
   const classes = useStyles();
 
   return (
-    <Grid item xs={12} sm={3}>
+    <Grid item xs={12} sm={4}>
       <CustomCard className={classes.userCardContainer}>
         <Grid container direction="column" wrap="nowrap" alignItems="center">
           <Avatar
