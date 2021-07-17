@@ -13,7 +13,7 @@ export const getFirstCharactersOfUserName = user => {
   return `${user?.firstName[0] || "😥"} ${user?.secondName[0] || "😥"}`;
 };
 
-export const getUsersInfoList = userData => {
+export const getUserInfoList = userData => {
   return [
     {
       primary: "DOB",
