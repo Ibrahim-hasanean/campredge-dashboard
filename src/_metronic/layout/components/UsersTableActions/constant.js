@@ -1,7 +1,7 @@
 import React from "react";
 import BlockIcon from "@material-ui/icons/Block";
 import DetailsIcon from "@material-ui/icons/Details";
-import DeleteIcon from "@material-ui/icons/Delete";
+// import DeleteIcon from "@material-ui/icons/Delete";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
@@ -18,11 +18,11 @@ export const getUserMenuOptions = options => {
     {
       label: "Suspend user",
       icon: <BlockIcon color="secondary" />
-    },
-    {
-      label: "Delete user",
-      icon: <DeleteIcon color="secondary" />
     }
+    // {
+    //   label: "Delete user",
+    //   icon: <DeleteIcon color="secondary" />
+    // }
   ];
 
   if (options.isSuspended) {
