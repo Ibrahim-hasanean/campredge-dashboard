@@ -1,40 +1,33 @@
 import React from "react";
-import {
-  Grid,
-  InputAdornment,
-  IconButton,
-  Tooltip,
-  useMediaQuery,
-  useTheme
-} from "@material-ui/core";
+import { Grid, IconButton, Tooltip } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import RotateLeftIcon from "@material-ui/icons/RotateLeft";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import CustomInput from "../CustomInput";
-import CustomSelect from "../CustomSelect";
 import CustomButton from "../CustomButton";
-import UserFormDialog from "../UserFormDialog";
-import { USERS_TYPE } from "app/constants";
+import RadioGroup from "../RadioGroup";
+// import UserFormDialog from "../UserFormDialog";
+import { VERIFIED_RADIOS, SUSPEND_RADIOS } from "app/constants";
 import { useStyles } from "./style";
 
 const initailFilterValue = {
-  userName: "",
-  userType: "الكل"
+  firstName: "",
+  secondName: "",
+  phoneNumber: "",
+  ordersNumber: "",
+  verified: null,
+  suspend: null
 };
 const UsersFilterControls = ({ onSearchClicked, onResetClicked }) => {
   const [filterData, setFilterData] = React.useState(initailFilterValue);
-  const [openUserDialog, setOpenUserDialog] = React.useState(false);
   const classes = useStyles();
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("xs"));
 
-  const handleClickOpenUserDialog = () => {
-    setOpenUserDialog(true);
-  };
-
-  const handleCloseUserDialog = () => {
-    setOpenUserDialog(false);
-  };
+  // const [openUserDialog, setOpenUserDialog] = React.useState(false);
+  // const handleClickOpenUserDialog = () => {
+  //   setOpenUserDialog(true);
+  // };
+  // const handleCloseUserDialog = () => {
+  //   setOpenUserDialog(false);
+  // };
 
   const changeHandler = event => {
     event.persist();
@@ -53,32 +46,56 @@ const UsersFilterControls = ({ onSearchClicked, onResetClicked }) => {
     <Grid container spacing={2} className={classes.ordersFilterContainer}>
       <Grid item sm={3} xs={12}>
         <CustomInput
-          placeholder="اسم المستخدم"
-          name="userName"
-          value={filterData.userName}
+          placeholder="First Name"
+          name="firstName"
+          value={filterData.firstName}
           onChange={changeHandler}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <IconButton
-                  size="small"
-                  onClick={() => onSearchClicked(filterData)}
-                >
-                  <SearchIcon color="secondary" />
-                </IconButton>
-              </InputAdornment>
-            )
-          }}
         />
       </Grid>
-      <Grid item sm={2} xs={12}>
-        <CustomSelect
-          data={USERS_TYPE}
-          name="userType"
-          value={filterData.userType}
+      <Grid item sm={3} xs={12}>
+        <CustomInput
+          placeholder="Second Name"
+          name="secondName"
+          value={filterData.secondName}
           onChange={changeHandler}
-          fullWidth
-          label="نوع المتسخدم"
+        />
+      </Grid>
+      <Grid item sm={3} xs={12}>
+        <CustomInput
+          placeholder="Phone Number"
+          name="phoneNumber"
+          type="tel"
+          value={filterData.phoneNumber}
+          onChange={changeHandler}
+        />
+      </Grid>
+      <Grid item sm={3} xs={12}>
+        <CustomInput
+          placeholder="Order Number"
+          name="ordersNumber"
+          type="number"
+          value={filterData.ordersNumber}
+          onChange={changeHandler}
+        />
+      </Grid>
+      <Grid item sm={4} xs={12}>
+        <RadioGroup
+          label="Account status"
+          name="verified"
+          onChange={changeHandler}
+          value={filterData.verified}
+          radios={VERIFIED_RADIOS}
+          row
+        />
+      </Grid>
+      <Grid item sm={5} xs={12}>
+        <RadioGroup
+          label="User status"
+          name="suspend"
+          onChange={changeHandler}
+          value={filterData.suspend}
+          radios={SUSPEND_RADIOS}
+          row
         />
       </Grid>
       <Grid
@@ -91,19 +108,18 @@ const UsersFilterControls = ({ onSearchClicked, onResetClicked }) => {
         sm={3}
       >
         <CustomButton
-          size="small"
           icon={<SearchIcon />}
           onClick={() => onSearchClicked(filterData)}
         >
-          ابحث
+          Search
         </CustomButton>
-        <Tooltip title="اعادة تعيين فلتر البحث">
+        <Tooltip title="Reset filter">
           <IconButton onClick={resetFilter}>
             <RotateLeftIcon color="error" />
           </IconButton>
         </Tooltip>
       </Grid>
-      <Grid
+      {/* <Grid
         item
         container
         justify={matches ? "center" : "flex-end"}
@@ -124,7 +140,7 @@ const UsersFilterControls = ({ onSearchClicked, onResetClicked }) => {
             handleClose={handleCloseUserDialog}
           />
         )}
-      </Grid>
+      </Grid> */}
     </Grid>
   );
 };
