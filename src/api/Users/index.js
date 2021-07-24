@@ -4,7 +4,7 @@ import axios from "axios";
 export const getUsers = async query => {
   let url = "/admin/users";
   if (query) {
-    url = `/users/all?${query}`;
+    url = `/admin/users?${query}`;
   }
   try {
     const response = await axios.get(url, {
@@ -208,9 +208,8 @@ export const addToUserWallet = async userData => {
 
 export const suspendUser = async userId => {
   try {
-    console.log("test user action", userId, `/admin​/users​/suspend`);
     const response = await axios.post(
-      `/admin​/users​/suspend`,
+      "/admin/users/suspend",
       { userId },
       {
         headers: {
@@ -218,7 +217,6 @@ export const suspendUser = async userId => {
         }
       }
     );
-    console.log("test user action", response);
     let data = {};
     switch (response.status) {
       case API_COMMON_STATUS.SUCCESS:
@@ -251,13 +249,12 @@ export const suspendUser = async userId => {
 
 export const unSuspendUser = async userId => {
   try {
-    const response = await axios.delete(`/admin​/users​/suspend`, {
+    const response = await axios.delete("admin/users/suspend", {
       data: { userId },
       headers: {
         Authorization: localStorage.getItem("token")
       }
     });
-    console.log("test user action", response);
     let data = {};
     switch (response.status) {
       case API_COMMON_STATUS.SUCCESS:
