@@ -20,12 +20,6 @@ export const ORDERS_DELIVERY_METHOD = {
   delivery: "توصيل"
 };
 
-export const USERS_TYPE = {
-  allUsers: "الكل",
-  seller: "بائع",
-  buyer: "مشتري"
-};
-
 export const ordersHeadCells = [
   {
     id: "number",
@@ -126,5 +120,27 @@ export const usersHeadCells = [
     numeric: true,
     disablePadding: false,
     label: "Actions"
+  }
+];
+
+export const VERIFIED_RADIOS = [
+  {
+    label: "Verified",
+    value: "verified"
+  },
+  {
+    label: "UnVerified",
+    value: "unverified"
+  }
+];
+
+export const SUSPEND_RADIOS = [
+  {
+    label: "Suspended",
+    value: "suspended"
+  },
+  {
+    label: "UnSuspended",
+    value: "unSuspended"
   }
 ];
