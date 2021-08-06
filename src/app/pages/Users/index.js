@@ -32,7 +32,7 @@ const Users = () => {
     setUsersData(null);
     getUsers(query)
       .then(response => {
-        console.log("test users data", response);
+        console.log("test users data in users page component", response);
         if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
           if (prevDataOffset.current) {
             setUsersData(prevUsersData => [
@@ -111,7 +111,7 @@ const Users = () => {
   };
 
   return (
-    <Box height="100%" style={{ backgroundColor: "#fff", padding: "5px" }}>
+    <Box height="100%" bgcolor="#fff" padding="5px">
       <UsersFilterControls
         onSearchClicked={updateOrdersQuery}
         onResetClicked={resetFilterOrdersData}
