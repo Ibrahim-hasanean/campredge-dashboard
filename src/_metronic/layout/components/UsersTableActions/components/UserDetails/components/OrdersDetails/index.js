@@ -22,9 +22,10 @@ const OrdersDetails = ({ orders }) => {
           <CustomAccordion
             key={order._id}
             title={`Order ${index + 1} - ${formatDate(order.createdAt)}`}
-          ></CustomAccordion>
+          >
+            <CustomList items={getUserOrdersList(order)} dense />
+          </CustomAccordion>
         ))}
-        {/* <CustomList items={getUserOrdersList(orders)} /> */}
       </>
     );
   } else {
