@@ -62,18 +62,28 @@ export const getUserInfoList = userData => {
 export const getUserOrdersList = order => {
   return [
     {
-      primary: `Order paid via cash - ${order.walletAdded}`,
+      primary: `Total order price - ${order.totalCost}`,
       id: 1
     },
     {
-      primary: "Order paid via wallet balance",
-      secondary: order.walletAdded,
+      primary: `Cash paid - ${order.walletAdded}`,
       id: 2
     },
     {
-      primary: "Total cost",
-      secondary: order.totalCost,
+      primary: `Wallet balance paid - ${order.totalCost - order.walletAdded}`,
       id: 3
+    },
+    {
+      primary: `Total Stop price - ${order.stopCost}`,
+      id: 4
+    },
+    {
+      primary: `Total stop time - ${order.totalStoptime}`,
+      id: 5
+    },
+    {
+      primary: `Price destination - ${order.estimatedCost}`,
+      id: 6
     }
   ];
 };
