@@ -12,7 +12,7 @@ import Snackbar from "../CustomSnackbar";
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { updateUserData, addNewUser } from "api/Users";
+// import {} from "api/Users";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { useStyles } from "./style";
 
@@ -79,75 +79,75 @@ const UserFormDialog = ({ open, handleClose, userData }) => {
     onSubmit: (values, { setSubmitting }) => {
       setLoading(true);
       if (userData) {
-        const updatedUserPayload = {
-          userId: userData.id,
-          userData: {
-            username: values.userName,
-            phone: values.phone,
-            email: values.email
-          }
-        };
-        updateUserData(updatedUserPayload)
-          .then(response => {
-            setLoading(false);
-            setSubmitting(false);
-            if (
-              response.responseStatus === API_COMMON_STATUS.RESOURCE_CREATED
-            ) {
-              // maybe update users array to get the new data
-              setSnackbarState({
-                open: true,
-                message: response.message,
-                variant: "success"
-              });
-            } else {
-              setSnackbarState({
-                open: true,
-                message: response.message,
-                variant: "error"
-              });
-            }
-          })
-          .catch(error => {
-            setLoading(false);
-            setSubmitting(false);
-            console.log(error);
-            console.error(error);
-          });
+        // const updatedUserPayload = {
+        //   userId: userData.id,
+        //   userData: {
+        //     username: values.userName,
+        //     phone: values.phone,
+        //     email: values.email
+        //   }
+        // };
+        // updateUserData(updatedUserPayload)
+        //   .then(response => {
+        //     setLoading(false);
+        //     setSubmitting(false);
+        //     if (
+        //       response.responseStatus === API_COMMON_STATUS.RESOURCE_CREATED
+        //     ) {
+        //       // maybe update users array to get the new data
+        //       setSnackbarState({
+        //         open: true,
+        //         message: response.message,
+        //         variant: "success"
+        //       });
+        //     } else {
+        //       setSnackbarState({
+        //         open: true,
+        //         message: response.message,
+        //         variant: "error"
+        //       });
+        //     }
+        //   })
+        //   .catch(error => {
+        //     setLoading(false);
+        //     setSubmitting(false);
+        //     console.log(error);
+        //     console.error(error);
+        //   });
       } else {
-        const newUserPayload = {
-          username: values.userName,
-          phone: values.phone,
-          email: values.email,
-          password: values.password
-        };
-        addNewUser(newUserPayload)
-          .then(response => {
-            setLoading(false);
-            setSubmitting(false);
-            if (
-              response.responseStatus === API_COMMON_STATUS.RESOURCE_CREATED
-            ) {
-              // maybe update users array to get the new data
-              setSnackbarState({
-                open: true,
-                message: response.message,
-                variant: "success"
-              });
-            } else {
-              setSnackbarState({
-                open: true,
-                message: response.message,
-                variant: "error"
-              });
-            }
-          })
-          .catch(error => {
-            setLoading(false);
-            setSubmitting(false);
-            console.log(error);
-            console.error(error);
-          });
+        // const newUserPayload = {
+        //   username: values.userName,
+        //   phone: values.phone,
+        //   email: values.email,
+        //   password: values.password
+        // };
+        // addNewUser(newUserPayload)
+        //   .then(response => {
+        //     setLoading(false);
+        //     setSubmitting(false);
+        //     if (
+        //       response.responseStatus === API_COMMON_STATUS.RESOURCE_CREATED
+        //     ) {
+        //       // maybe update users array to get the new data
+        //       setSnackbarState({
+        //         open: true,
+        //         message: response.message,
+        //         variant: "success"
+        //       });
+        //     } else {
+        //       setSnackbarState({
+        //         open: true,
+        //         message: response.message,
+        //         variant: "error"
+        //       });
+        //     }
+        //   })
+        //   .catch(error => {
+        //     setLoading(false);
+        //     setSubmitting(false);
+        //     console.log(error);
+        //     console.error(error);
+        //   });
       }
     }
   });
