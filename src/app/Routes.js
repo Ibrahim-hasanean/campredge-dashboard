@@ -15,7 +15,6 @@ import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 
 export function Routes() {
   const [{ isAuthorized }] = React.useContext(GlobalContext);
-  console.log(isAuthorized);
 
   return (
     <Switch>
