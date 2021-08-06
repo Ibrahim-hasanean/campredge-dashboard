@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 import TableHeader from "./components/TableHeader";
 import TableToolbar from "./components/TableToolbar";
 import UserAvatar from "./components/UserAvatar";
@@ -78,219 +78,244 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function EnhancedTable({ data, updateTableData, usersTable }) {
-  const classes = useStyles();
-  const [ordersStatuses, setOrdersStatuses] = React.useState({});
-  const [snackbarState, setSnackbarState] = React.useState({
-    open: false,
-    message: "",
-    variant: ""
-  });
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("calories");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+const EnhancedTable = forwardRef(
+  (
+    { data, updateTableData, updateQuery, usersTable, startFromFirstPage },
+    ref
+  ) => {
+    const classes = useStyles();
+    // const [ordersStatuses, setOrdersStatuses] = React.useState({});
+    const [snackbarState, setSnackbarState] = React.useState({
+      open: false,
+      message: "",
+      variant: ""
+    });
+    const [order, setOrder] = React.useState("asc");
+    const [orderBy, setOrderBy] = React.useState("calories");
+    const [selected, setSelected] = React.useState([]);
+    const [page, setPage] = React.useState(0);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
-    setOrderBy(property);
-  };
-
-  const handleSelectAllClick = event => {
-    if (event.target.checked) {
-      const newSelecteds = data.map(item => item._id);
-      setSelected(newSelecteds);
-      return;
-    }
-    setSelected([]);
-  };
-
-  const handleClick = (event, id) => {
-    const selectedIndex = selected.indexOf(id);
-    let newSelected = [];
-
-    if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, id);
-    } else if (selectedIndex === 0) {
-      newSelected = newSelected.concat(selected.slice(1));
-    } else if (selectedIndex === selected.length - 1) {
-      newSelected = newSelected.concat(selected.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelected = newSelected.concat(
-        selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
-      );
-    }
-
-    setSelected(newSelected);
-  };
-
-  const handleChangePage = (event, newPage) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = event => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
-  const isSelected = id => selected.indexOf(id) !== -1;
-
-  const handleCloseSnackbar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-
-    setSnackbarState(prevSnackbarState => ({
-      ...prevSnackbarState,
-      open: false
-    }));
-  };
-
-  const orderStatusChangeHandler = (event, orderId) => {
-    const updatedValue = event.target.value;
-    const updatePaylod = {
-      orderId,
-      updatedValue
+    const handleRequestSort = (event, property) => {
+      const isAsc = orderBy === property && order === "asc";
+      setOrder(isAsc ? "desc" : "asc");
+      setOrderBy(property);
     };
-    updateOrderStatus(updatePaylod)
-      .then(response => {
-        if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-          setOrdersStatuses(prevOrdersStatuses => ({
-            ...prevOrdersStatuses,
-            [orderId]: updatedValue
-          }));
-          setSnackbarState({
-            open: true,
-            message: response.message,
-            variant: "success"
-          });
-        } else {
-          setSnackbarState({
-            open: true,
-            message: response.message,
-            variant: "error"
-          });
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        console.error(error);
-      });
-  };
 
-  React.useEffect(() => {
-    if (data && !usersTable) {
-      const formatedOrdersStatuses = {};
-      data.forEach(order => {
-        formatedOrdersStatuses[order.id] = order.order_status;
-      });
-      setOrdersStatuses(formatedOrdersStatuses);
-    }
-  }, [data, usersTable]);
+    const handleSelectAllClick = event => {
+      if (event.target.checked) {
+        const newSelecteds = data.map(item => item._id);
+        setSelected(newSelecteds);
+        return;
+      }
+      setSelected([]);
+    };
 
-  return (
-    <div className={classes.root}>
-      <Paper className={classes.paper}>
-        <TableToolbar
-          selected={selected}
-          updateTableData={updateTableData}
-          usersTable={usersTable}
-        />
-        <TableContainer className={classes.tableContainer}>
-          {data?.length ? (
-            <Table className={classes.table} size="medium">
-              <TableHeader
-                classes={classes}
-                numSelected={selected.length}
-                order={order}
-                orderBy={orderBy}
-                onSelectAllClick={handleSelectAllClick}
-                onRequestSort={handleRequestSort}
-                rowCount={data ? data?.length : 0}
-                usersTable={usersTable}
-              />
+    const handleClick = (event, id) => {
+      const selectedIndex = selected.indexOf(id);
+      let newSelected = [];
 
-              <TableBody>
-                {stableSort(data, getComparator(order, orderBy))
-                  ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                  ?.map((item, index) => {
-                    const isItemSelected = isSelected(item._id);
-                    const labelId = `enhanced-table-checkbox-${index}`;
+      if (selectedIndex === -1) {
+        newSelected = newSelected.concat(selected, id);
+      } else if (selectedIndex === 0) {
+        newSelected = newSelected.concat(selected.slice(1));
+      } else if (selectedIndex === selected.length - 1) {
+        newSelected = newSelected.concat(selected.slice(0, -1));
+      } else if (selectedIndex > 0) {
+        newSelected = newSelected.concat(
+          selected.slice(0, selectedIndex),
+          selected.slice(selectedIndex + 1)
+        );
+      }
 
-                    return (
-                      <TableRow
-                        hover
-                        role="checkbox"
-                        aria-checked={isItemSelected}
-                        tabIndex={-1}
-                        key={item._id}
-                        selected={isItemSelected}
-                      >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            onClick={event => handleClick(event, item._id)}
-                            checked={isItemSelected}
-                            inputProps={{ "aria-labelledby": labelId }}
-                          />
-                        </TableCell>
-                        <TableCell
-                          component="th"
-                          id={labelId}
-                          scope="row"
-                          padding="none"
+      setSelected(newSelected);
+    };
+
+    const handleChangePage = (event, newPage) => {
+      setPage(newPage);
+    };
+
+    const handleChangeRowsPerPage = event => {
+      setRowsPerPage(parseInt(event.target.value, 10));
+      setPage(0);
+    };
+
+    React.useEffect(() => {
+      // if (data && updateQuery) {
+      //   const newOffset = data.length;
+      //   const pagesNumber = Math.ceil(newOffset / rowsPerPage);
+      //   console.log(newOffset, "test users data", pagesNumber);
+      //   if (page === pagesNumber - 1 && ref.current !== newOffset) {
+      //     updateQuery(prevQuery =>
+      //       prevQuery ? `${prevQuery}&limit=${newOffset}` : `limit=${newOffset}`
+      //     );
+      //   }
+      // }
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [data, page, rowsPerPage]);
+
+    React.useEffect(() => {
+      setPage(0);
+    }, [startFromFirstPage]);
+
+    const isSelected = id => selected.indexOf(id) !== -1;
+
+    const handleCloseSnackbar = (event, reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+
+      setSnackbarState(prevSnackbarState => ({
+        ...prevSnackbarState,
+        open: false
+      }));
+    };
+
+    // const orderStatusChangeHandler = (event, orderId) => {
+    //   const updatedValue = event.target.value;
+    //   const updatePaylod = {
+    //     orderId,
+    //     updatedValue
+    //   };
+    //   updateOrderStatus(updatePaylod)
+    //     .then(response => {
+    //       if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+    //         setOrdersStatuses(prevOrdersStatuses => ({
+    //           ...prevOrdersStatuses,
+    //           [orderId]: updatedValue
+    //         }));
+    //         setSnackbarState({
+    //           open: true,
+    //           message: response.message,
+    //           variant: "success"
+    //         });
+    //       } else {
+    //         setSnackbarState({
+    //           open: true,
+    //           message: response.message,
+    //           variant: "error"
+    //         });
+    //       }
+    //     })
+    //     .catch(error => {
+    //       console.log(error);
+    //       console.error(error);
+    //     });
+    // };
+
+    // React.useEffect(() => {
+    //   if (data && !usersTable) {
+    //     const formatedOrdersStatuses = {};
+    //     data.forEach(order => {
+    //       formatedOrdersStatuses[order.id] = order.order_status;
+    //     });
+    //     setOrdersStatuses(formatedOrdersStatuses);
+    //   }
+    // }, [data, usersTable]);
+
+    return (
+      <div className={classes.root}>
+        <Paper className={classes.paper}>
+          <TableToolbar
+            selected={selected}
+            updateTableData={updateTableData}
+            usersTable={usersTable}
+          />
+          <TableContainer className={classes.tableContainer}>
+            {data?.length ? (
+              <Table className={classes.table} size="medium">
+                <TableHeader
+                  classes={classes}
+                  numSelected={selected.length}
+                  order={order}
+                  orderBy={orderBy}
+                  onSelectAllClick={handleSelectAllClick}
+                  onRequestSort={handleRequestSort}
+                  rowCount={data ? data?.length : 0}
+                  usersTable={usersTable}
+                />
+
+                <TableBody>
+                  {stableSort(data, getComparator(order, orderBy))
+                    ?.slice(
+                      page * rowsPerPage,
+                      page * rowsPerPage + rowsPerPage
+                    )
+                    ?.map((item, index) => {
+                      const isItemSelected = isSelected(item._id);
+                      const labelId = `enhanced-table-checkbox-${index}`;
+
+                      return (
+                        <TableRow
+                          hover
+                          role="checkbox"
+                          aria-checked={isItemSelected}
+                          tabIndex={-1}
+                          key={item._id}
+                          selected={isItemSelected}
                         >
-                          {!usersTable ? item.order_number : index + 1}
-                        </TableCell>
-                        <TableCell align="center">
-                          {!usersTable ? (
-                            item.user_name
-                          ) : (
-                            <UserAvatar user={item} />
-                          )}
-                        </TableCell>
-                        <TableCell align="center">
-                          {!usersTable
-                            ? item.seller_name
-                            : item.email || "No-email😥@gmail.com"}
-                        </TableCell>
-                        <TableCell align="center">
-                          {!usersTable
-                            ? item.order_date
-                            : item.dateBirth || "No DOB 😥"}
-                        </TableCell>
-                        <TableCell align="center">
-                          {!usersTable
-                            ? item.order_total
-                            : item.phoneNumber || "No number 😥"}
-                        </TableCell>
-                        <TableCell align="center">
-                          {!usersTable
-                            ? item.delivery_method
-                            : item.ordersNumber}
-                        </TableCell>
-                        <TableCell
-                          align="center"
-                          style={item.wallet < 0 ? { color: "red" } : {}}
-                        >
-                          {!usersTable ? item.delivery_method : item.wallet}
-                        </TableCell>
-                        <TableCell align="center">
-                          <AccountStatusIcons
-                            suspended={item.suspend}
-                            verified={item.verified}
-                          />
-                        </TableCell>
-                        <TableCell align="center">
-                          <UsersTableActions
-                            user={item}
-                            updateSnackbarState={setSnackbarState}
-                            updateTableData={updateTableData}
-                          />
-                        </TableCell>
-                        {/* <TableCell align="center">
+                          <TableCell padding="checkbox">
+                            <Checkbox
+                              onClick={event => handleClick(event, item._id)}
+                              checked={isItemSelected}
+                              inputProps={{ "aria-labelledby": labelId }}
+                            />
+                          </TableCell>
+                          <TableCell
+                            component="th"
+                            id={labelId}
+                            scope="row"
+                            padding="none"
+                          >
+                            {!usersTable ? item.order_number : index + 1}
+                          </TableCell>
+                          <TableCell align="center">
+                            {!usersTable ? (
+                              item.user_name
+                            ) : (
+                              <UserAvatar user={item} />
+                            )}
+                          </TableCell>
+                          <TableCell align="center">
+                            {!usersTable
+                              ? item.seller_name
+                              : item.email || "No-email😥@gmail.com"}
+                          </TableCell>
+                          <TableCell align="center">
+                            {!usersTable
+                              ? item.order_date
+                              : item.dateBirth || "No DOB 😥"}
+                          </TableCell>
+                          <TableCell align="center">
+                            {!usersTable
+                              ? item.order_total
+                              : item.phoneNumber || "No number 😥"}
+                          </TableCell>
+                          <TableCell align="center">
+                            {!usersTable
+                              ? item.delivery_method
+                              : item.ordersNumber}
+                          </TableCell>
+                          <TableCell
+                            align="center"
+                            style={item.wallet < 0 ? { color: "red" } : {}}
+                          >
+                            {!usersTable ? item.delivery_method : item.wallet}
+                          </TableCell>
+                          <TableCell align="center">
+                            <AccountStatusIcons
+                              suspended={item.suspend}
+                              verified={item.verified}
+                            />
+                          </TableCell>
+                          <TableCell align="center">
+                            <UsersTableActions
+                              user={item}
+                              updateSnackbarState={setSnackbarState}
+                              updateTableData={updateTableData}
+                            />
+                          </TableCell>
+                          {/* <TableCell align="center">
                           {!usersTable ? item.delivery_method : item.type}
                         </TableCell>
                         <TableCell align="center">
@@ -317,49 +342,52 @@ export default function EnhancedTable({ data, updateTableData, usersTable }) {
                         {!usersTable && (
                           <TableCell align="center">{item.fees}</TableCell>
                         )} */}
-                      </TableRow>
-                    );
-                  })}
-              </TableBody>
-            </Table>
-          ) : (
-            <>
-              {!data && (
-                <Box
-                  height="250px"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
-                >
-                  <CircularProgress size={50} />
-                </Box>
-              )}
+                        </TableRow>
+                      );
+                    })}
+                </TableBody>
+              </Table>
+            ) : (
+              <>
+                {!data && (
+                  <Box
+                    height="250px"
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                  >
+                    <CircularProgress size={50} />
+                  </Box>
+                )}
 
-              {data && !data.length && (
-                <Typography align="center" variant="h4">
-                  عذرا لايوجد أي طلب حاليا
-                </Typography>
-              )}
-            </>
-          )}
-        </TableContainer>
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={data ? data?.length : 0}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onChangePage={handleChangePage}
-          onChangeRowsPerPage={handleChangeRowsPerPage}
-          style={{ direction: "ltr" }}
+                {data && !data.length && (
+                  <Typography align="center" variant="h4">
+                    Sorry there's no data yet!
+                  </Typography>
+                )}
+              </>
+            )}
+          </TableContainer>
+          <TablePagination
+            rowsPerPageOptions={[5, 10, 25]}
+            component="div"
+            count={data ? data?.length : 0}
+            rowsPerPage={rowsPerPage}
+            page={page}
+            onChangePage={handleChangePage}
+            onChangeRowsPerPage={handleChangeRowsPerPage}
+            style={{ direction: "ltr" }}
+          />
+        </Paper>
+        <Snackbar
+          open={!!snackbarState.open}
+          handleClose={handleCloseSnackbar}
+          type={snackbarState.variant}
+          text={snackbarState.message}
         />
-      </Paper>
-      <Snackbar
-        open={!!snackbarState.open}
-        handleClose={handleCloseSnackbar}
-        type={snackbarState.variant}
-        text={snackbarState.message}
-      />
-    </div>
-  );
-}
+      </div>
+    );
+  }
+);
+
+export default EnhancedTable;
