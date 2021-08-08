@@ -2,7 +2,6 @@
 import React from "react";
 import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
-import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
 
 export function HeaderMenu({ layoutProps }) {
@@ -26,10 +25,20 @@ export function HeaderMenu({ layoutProps }) {
           )}`}
         >
           <NavLink className="menu-link" to="/dashboard">
-            <span className="menu-text">Dashboard</span>
+            <span className="menu-text">لوحة التحكم</span>
             {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
           </NavLink>
         </li>
+        {/* <li
+          className={`menu-item menu-item-rel ${getMenuItemActive(
+            "/dashboard"
+          )}`}
+        >
+          <NavLink className="menu-link" to="/dashboard">
+            <span className="menu-text">المستخدمين</span>
+            {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
+          </NavLink>
+        </li> */}
         {/*end::1 Level*/}
       </ul>
       {/*end::Header Nav*/}

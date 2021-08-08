@@ -36,7 +36,6 @@ const CustomCard = ({
             </Typography>
             <Typography variant="h6">{value}</Typography>
           </Box>
-          <Icon className={classes.cardIcon} fontSize="large" />
         </>
       ) : (
         children

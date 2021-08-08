@@ -7,19 +7,9 @@ import { API_COMMON_STATUS } from "helpers/api-helper";
 import { GlobalContext } from "contexts/GlobalState";
 import { GLOBALSTATE_ACTIONS } from "app/constants";
 import { phoneRegExp } from "helpers/generalRegex";
-
-/*
-  INTL (i18n) docs:
-  https://github.com/formatjs/react-intl/blob/master/docs/Components.md#formattedmessage
-*/
-
-/*
-  Formik+YUP:
-  https://jaredpalmer.com/formik/docs/tutorial#getfieldprops
-*/
-
+import { Typography } from "@material-ui/core";
 const initialValues = {
-  phoneNumber: "",
+  email: "",
   password: ""
 };
 
@@ -29,23 +19,13 @@ function Login(props) {
   const [, dispatch] = React.useContext(GlobalContext);
 
   const LoginSchema = Yup.object().shape({
-    phoneNumber: Yup.string()
-      .matches(phoneRegExp, "Wrong Phone number format")
-      .min(10, "Minimum 10 symbols")
-      .max(10, "Maximum 10 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD"
-        })
-      ),
+    email: Yup.string()
+      .email("الايميل غير صحيح")
+      .required("الايميل مطلوب"),
     password: Yup.string()
-      .min(3, "Minimum 3 symbols")
-      .max(50, "Maximum 50 symbols")
-      .required(
-        intl.formatMessage({
-          id: "AUTH.VALIDATION.REQUIRED_FIELD"
-        })
-      )
+      .min(5, "حد ادنى 5  احرف/ارقام/رموز")
+      .max(50, "حد اقصى 50 احرف/ارقام/رموز ")
+      .required("كلمة السر مطلوبة")
   });
 
   const enableLoading = () => {
@@ -74,7 +54,7 @@ function Login(props) {
     onSubmit: (values, { setStatus, setSubmitting }) => {
       enableLoading();
       const loginData = {
-        phoneNumber: values.phoneNumber,
+        email: values.email,
         password: values.password
       };
 
@@ -110,11 +90,9 @@ function Login(props) {
       {/* begin::Head */}
       <div className="text-center mb-10 mb-lg-20">
         <h3 className="font-size-h1">
-          <FormattedMessage id="AUTH.LOGIN.TITLE" />
+          <Typography variant="h4">تسجيل الدخول</Typography>
         </h3>
-        <p className="text-muted font-weight-bold">
-          Enter your username and password
-        </p>
+        <p className="text-muted font-weight-bold">أدخل ايميلك و كلمة السر</p>
       </div>
       {/* end::Head */}
 
@@ -130,25 +108,25 @@ function Login(props) {
         ) : (
           <div className="mb-10 alert alert-custom alert-light-info alert-dismissible">
             <div className="alert-text">
-              Please enter your <strong>Phone Number</strong> and{" "}
-              <strong>Password</strong> to continue.
+              أرجو ادخال <strong>الايميل</strong> و <strong>كلمة السر</strong>{" "}
+              للدخول.
             </div>
           </div>
         )}
 
         <div className="form-group fv-plugins-icon-container">
           <input
-            placeholder="059-912-3456"
+            placeholder="example@gmail.com"
             type="tel"
             className={`form-control form-control-solid h-auto py-5 px-6 ${getInputClasses(
-              "phoneNumber"
+              "email"
             )}`}
-            name="phoneNumber"
-            {...formik.getFieldProps("phoneNumber")}
+            name="email"
+            {...formik.getFieldProps("email")}
           />
-          {formik.touched.phoneNumber && formik.errors.phoneNumber ? (
+          {formik.touched.email && formik.errors.email ? (
             <div className="fv-plugins-message-container">
-              <div className="fv-help-block">{formik.errors.phoneNumber}</div>
+              <div className="fv-help-block">{formik.errors.email}</div>
             </div>
           ) : null}
         </div>
@@ -168,7 +146,7 @@ function Login(props) {
             </div>
           ) : null}
         </div>
-        <div className="form-group d-flex flex-wrap justify-content-end align-items-center">
+        <div className="form-group d-flex flex-wrap justify-content-center align-items-center">
           <button
             id="kt_login_signin_submit"
             type="submit"

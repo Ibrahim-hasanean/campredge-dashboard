@@ -15,6 +15,19 @@ export function AuthPage() {
           className="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-column-fluid bg-white"
           id="kt_login"
         >
+          {/*begin::Content*/}
+          <div className="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
+            {/* begin::Content body */}
+            <div className="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
+              <Switch>
+                <ContentRoute path="/auth/login" component={Login} />
+                <Redirect from="/auth" exact={true} to="/auth/login" />
+                <Redirect to="/auth/login" />
+              </Switch>
+            </div>
+            {/*end::Content body*/}
+          </div>
+          {/*end::Content*/}
           {/*begin::Aside*/}
           <div
             className="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
@@ -52,20 +65,6 @@ export function AuthPage() {
             {/*end: Aside Container*/}
           </div>
           {/*begin::Aside*/}
-
-          {/*begin::Content*/}
-          <div className="d-flex flex-column flex-row-fluid position-relative p-7 overflow-hidden">
-            {/* begin::Content body */}
-            <div className="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
-              <Switch>
-                <ContentRoute path="/auth/login" component={Login} />
-                <Redirect from="/auth" exact={true} to="/auth/login" />
-                <Redirect to="/auth/login" />
-              </Switch>
-            </div>
-            {/*end::Content body*/}
-          </div>
-          {/*end::Content*/}
         </div>
         {/*end::Login*/}
       </div>

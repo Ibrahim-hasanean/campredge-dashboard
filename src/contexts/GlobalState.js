@@ -4,8 +4,8 @@ import { GLOBALSTATE_ACTIONS } from "app/constants";
 const initialState = {
   isAuthorized: !!localStorage.getItem("isAuth"),
   admin: {
-    firstname: localStorage.getItem("firsname") || "",
-    lastname: localStorage.getItem("lastname") || ""
+    name: localStorage.getItem("name") || "",
+    email: localStorage.getItem("email") || ""
   }
 };
 
@@ -15,17 +15,15 @@ const Reducer = (state, action) => {
   switch (action.type) {
     case GLOBALSTATE_ACTIONS.SET_IS_AUTH: {
       const payload = action.data;
-      localStorage.setItem("token", payload.token);
+      localStorage.setItem("token", payload.accessToken);
       localStorage.setItem("isAuth", true);
-      localStorage.setItem("firsname", payload.admin.firstName);
-      localStorage.setItem("lastname", payload.admin.secondName);
+      localStorage.setItem("name", payload.data.name);
       return {
         ...state,
         isAuthorized: true,
         admin: {
-          firstname: payload.admin.firstName,
-          lastname: payload.admin.secondName,
-          phoneNumber: payload.admin.phoneNumber
+          name: payload.data.name,
+          email: payload.data.email
         }
       };
     }

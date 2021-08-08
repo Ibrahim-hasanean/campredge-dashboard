@@ -4,10 +4,19 @@ import objectPath from "object-path";
 import SVG from "react-inlinesvg";
 import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../_helpers";
+import ArrowNext from "../../../_assets/plugins/keenthemes-icons/svg/006-arrow-next.svg";
+import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import { IconButton } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 
+const useSyle = makeStyles(() => ({
+  icon: {
+    color: "#3699ff"
+  }
+}));
 export function Brand() {
   const uiService = useHtmlClassService();
-
+  const classes = useSyle();
   const layoutProps = useMemo(() => {
     return {
       brandClasses: uiService.getClasses("brand", true),
@@ -34,15 +43,15 @@ export function Brand() {
         </Link>
         {/* end::Logo */}
         {/* begin::Toggle */}
-        <button className="brand-toggle btn btn-sm px-0" id="kt_aside_toggle">
+        <IconButton
+          className="brand-toggle btn btn-sm px-0"
+          id="kt_aside_toggle"
+        >
           <span className="svg-icon svg-icon-xl">
-            <SVG
-              src={toAbsoluteUrl(
-                "/media/svg/icons/Navigation/Angle-double-left.svg"
-              )}
-            />
+            {/* <SVG src={ArrowNext} /> */}
+            <ArrowForwardIosIcon className={classes.icon} fontSize="large" />
           </span>
-        </button>
+        </IconButton>
       </div>
       {/* end::Brand */}
     </>

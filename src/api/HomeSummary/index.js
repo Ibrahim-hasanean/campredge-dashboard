@@ -3,11 +3,12 @@ import axios from "axios";
 
 export const getHomeSummary = async token => {
   try {
-    const response = await axios.get(`/admin/home`, {
+    const response = await axios.get(`/admin/summery`, {
       headers: {
         Authorization: token
       }
     });
+
     let data = {};
     switch (response.status) {
       case API_COMMON_STATUS.SUCCESS:

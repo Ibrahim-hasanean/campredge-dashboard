@@ -9,30 +9,41 @@ import { useStyles } from "./style";
 
 const SummarySection = ({ homeDetails }) => {
   const classes = useStyles();
-
   const CARDS_DATA = useMemo(
     () => [
       {
-        title: "Active Drivers",
-        value: homeDetails.activeDrivers,
+        title: "عدد المبيعات الكلية",
+        value: null,
         icon: GroupIcon,
         className: classes.firstCard
       },
       {
-        title: "Total Orders",
-        value: homeDetails.total?.ordersNO,
+        title: "مجموع المبيعات الكلية",
+        value: homeDetails.data?.totalOrdersPrice || null,
         icon: ShoppingCartIcon,
         className: classes.secondCard
       },
       {
-        title: "Total Cost",
-        value: homeDetails.total?.totalCost,
+        title: "عدد الطلبات اليومي",
+        value: homeDetails.data?.totalCost || null,
         icon: AttachMoneyIcon,
         className: classes.thirdCard
       },
       {
-        title: "Total Wallet",
-        value: homeDetails.total?.totalWallet,
+        title: "عدد الطلبات الكلي",
+        value: homeDetails.data?.totalOrdersCount || null,
+        icon: LocalAtmIcon,
+        className: classes.fourthCard
+      },
+      {
+        title: "عدد المستخدمين النشيطين",
+        value: homeDetails.data?.activeUsersCount || null,
+        icon: AttachMoneyIcon,
+        className: classes.thirdCard
+      },
+      {
+        title: "عدد المستخدمين غير النشيطين",
+        value: homeDetails.data?.inactiveUsersCount || null,
         icon: LocalAtmIcon,
         className: classes.fourthCard
       }
@@ -47,9 +58,14 @@ const SummarySection = ({ homeDetails }) => {
   return (
     <>
       <Typography variant="h5" gutterBottom>
-        Overall Summary
+        احصائيات المبيعات
       </Typography>
-      <Grid container spacing={3} className={classes.summarySectionContainer}>
+      <Grid
+        container
+        justify="center"
+        spacing={3}
+        className={classes.summarySectionContainer}
+      >
         {CARDS_DATA.map(card => (
           <Grid key={card.title} item xs={12} sm={6} lg={3}>
             <CustomCard
