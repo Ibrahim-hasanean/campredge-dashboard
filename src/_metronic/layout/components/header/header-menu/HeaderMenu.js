@@ -2,7 +2,7 @@
 import React from "react";
 import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
-import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
+import { checkIsActive } from "../../../../_helpers";
 
 export function HeaderMenu({ layoutProps }) {
   const location = useLocation();

@@ -6,7 +6,6 @@ import { login } from "api/Auth";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { GlobalContext } from "contexts/GlobalState";
 import { GLOBALSTATE_ACTIONS } from "app/constants";
-import { phoneRegExp } from "helpers/generalRegex";
 import { Typography } from "@material-ui/core";
 const initialValues = {
   email: "",

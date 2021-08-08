@@ -1,6 +1,4 @@
 import React from "react";
-import SVG from "react-inlinesvg";
-import { toAbsoluteUrl } from "../../../_helpers";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import { IconButton } from "@material-ui/core";
 export function ScrollTop() {

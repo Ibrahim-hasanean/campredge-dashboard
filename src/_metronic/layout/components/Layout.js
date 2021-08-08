@@ -10,7 +10,6 @@ import { LayoutInit } from "./LayoutInit";
 import { SubHeader } from "./subheader/SubHeader";
 import { QuickPanel } from "./extras/offcanvas/QuickPanel";
 import { ScrollTop } from "./extras/ScrollTop";
-import { StickyToolbar } from "./extras/StickyToolbar";
 
 export function Layout({ children }) {
   const uiService = useHtmlClassService();

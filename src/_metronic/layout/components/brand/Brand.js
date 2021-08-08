@@ -1,10 +1,8 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import objectPath from "object-path";
-import SVG from "react-inlinesvg";
-import { useHtmlClassService } from "../../_core/MetronicLayout";
+// import objectPath from "object-path";
+// import { useHtmlClassService } from "../../_core/MetronicLayout";
 import { toAbsoluteUrl } from "../../../_helpers";
-import ArrowNext from "../../../_assets/plugins/keenthemes-icons/svg/006-arrow-next.svg";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
@@ -15,19 +13,19 @@ const useSyle = makeStyles(() => ({
   }
 }));
 export function Brand() {
-  const uiService = useHtmlClassService();
+  // const uiService = useHtmlClassService();
   const classes = useSyle();
-  const layoutProps = useMemo(() => {
-    return {
-      brandClasses: uiService.getClasses("brand", true),
-      asideSelfMinimizeToggle: objectPath.get(
-        uiService.config,
-        "aside.self.minimize.toggle"
-      ),
-      headerLogo: uiService.getLogo(),
-      headerStickyLogo: uiService.getStickyLogo()
-    };
-  }, [uiService]);
+  // const layoutProps = useMemo(() => {
+  //   return {
+  //     brandClasses: uiService.getClasses("brand", true),
+  //     asideSelfMinimizeToggle: objectPath.get(
+  //       uiService.config,
+  //       "aside.self.minimize.toggle"
+  //     ),
+  //     headerLogo: uiService.getLogo(),
+  //     headerStickyLogo: uiService.getStickyLogo()
+  //   };
+  // }, [uiService]);
 
   return (
     <>
