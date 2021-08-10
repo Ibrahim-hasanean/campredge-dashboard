@@ -25,7 +25,28 @@ export function HeaderMenu({ layoutProps }) {
           )}`}
         >
           <NavLink className="menu-link" to="/dashboard">
-            <span className="menu-text">لوحة التحكم</span>
+            <span className="menu-text">الصفحة الرئيسية</span>
+            {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item menu-item-rel ${getMenuItemActive(
+            "/dashboard"
+          )}`}
+        >
+          <NavLink className="menu-link" to="/users">
+            <span className="menu-text">المستخدمين</span>
+            {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
+          </NavLink>
+        </li>
+
+        <li
+          className={`menu-item menu-item-rel ${getMenuItemActive(
+            "/dashboard"
+          )}`}
+        >
+          <NavLink className="menu-link" to="/orders">
+            <span className="menu-text">المبيعات</span>
             {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
           </NavLink>
         </li>
