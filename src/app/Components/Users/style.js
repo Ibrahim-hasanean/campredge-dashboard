@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyle = makeStyles(theme => ({
+const useStyle = makeStyles(() => ({
   tableRow: {
     "&:hover": {
       background: "#d8d4d4"
@@ -15,20 +15,15 @@ const useStyle = makeStyles(theme => ({
   table: {
     minWidth: 650
   },
-  productsContainer: {
-    // width: "max-content"
-  },
   avatar: {
     width: "70px",
     height: "70px"
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120
+  editeIcon: {
+    color: "#c3c34a"
   },
-  options: {
-    margin: theme.spacing(1),
-    minWidth: 120
+  deleteUser: {
+    padding: "0px 0px 20px 0px"
   }
 }));
 

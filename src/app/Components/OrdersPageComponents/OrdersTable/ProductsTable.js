@@ -11,7 +11,7 @@ import useStyle from "./style";
 const ProductsTable = ({ products }) => {
   const classes = useStyle();
   return (
-    <TableContainer component={Paper}>
+    <TableContainer className={classes.productsContainer} component={Paper}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>

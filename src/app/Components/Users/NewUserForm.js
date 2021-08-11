@@ -1,0 +1,244 @@
+import React, { useState } from "react";
+import {
+  TextField,
+  makeStyles,
+  Grid,
+  Button,
+  Typography
+} from "@material-ui/core";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { addNewUser } from "../../../api/Users/index";
+import { API_COMMON_STATUS } from "helpers/api-helper";
+import { Alert } from "@material-ui/lab";
+
+const useStyle = makeStyles(() => ({
+  form: {
+    minWidth: "600px",
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: "30px 15px"
+  },
+  inputs: {
+    width: "60%",
+    textAlign: "right",
+    margin: "10px 0px"
+  },
+  buttons: {
+    fontSize: "14px"
+  },
+  invalid: {
+    border: "solid 1px red"
+  },
+  alert: {
+    fontSize: "14px"
+  }
+}));
+const NewUserForm = ({ handleClose, users, setUsers }) => {
+  const classes = useStyle();
+  // const [data, setData] = useState({});
+  const [error, setError] = useState(null);
+  const [openSnackBar, setOpenSnackBar] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const schema = Yup.object().shape({
+    fullName: Yup.string().required(" اسم المستخدم مطلوب"),
+    email: Yup.string()
+      .email("الايميل غير صحيح")
+      .required("الايميل مطلوب"),
+    phoneNum: Yup.number("رقم الجوال غير غير صحيح").required(
+      "رقم الجوال مطلوب"
+    ),
+    password: Yup.string()
+      .min(5, "حد ادنى 5  احرف/ارقام/رموز")
+      .max(50, "حد اقصى 50 احرف/ارقام/رموز ")
+      .required("كلمة السر مطلوبة")
+  });
+  const initialValues = {
+    fullName: "",
+    email: "",
+    phoneNum: "",
+    password: ""
+  };
+
+  const enableLoading = () => {
+    setLoading(true);
+  };
+
+  const disableLoading = () => {
+    setLoading(false);
+  };
+
+  const getInputClasses = fieldname => {
+    if (formik.touched[fieldname] && formik.errors[fieldname]) {
+      return classes.invalid;
+    }
+
+    if (formik.touched[fieldname] && !formik.errors[fieldname]) {
+      return "is-valid";
+    }
+
+    return "";
+  };
+
+  const formik = useFormik({
+    initialValues,
+    validationSchema: schema,
+    onSubmit: (values, { setStatus, setSubmitting }) => {
+      enableLoading();
+      const data = {
+        fullName: values.fullName,
+        email: values.email,
+        phoneNum: values.phoneNum,
+        password: values.password
+      };
+      addNewUser(data)
+        .then(response => {
+          console.log(response, "add user response");
+          disableLoading();
+          if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+            console.log(response.data.user);
+            let newUsers = users;
+            newUsers.unshift(response.data.user);
+            setUsers([...newUsers]);
+            formik.resetForm();
+            setOpenSnackBar(true);
+            // handleClose();
+          } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
+            setSubmitting(false);
+            setError(response.message);
+            setOpenSnackBar(true);
+          } else if (response.responseStatus === API_COMMON_STATUS.ERROR) {
+            setSubmitting(false);
+            setError(response.message);
+            setOpenSnackBar(true);
+          }
+        })
+        .catch(err => {
+          disableLoading();
+          setSubmitting(false);
+          setError("خطأ غير معروف");
+          setOpenSnackBar(true);
+        });
+    }
+  });
+  const cancel = () => {
+    handleClose();
+  };
+
+  return (
+    <form className={classes.form} onSubmit={formik.handleSubmit}>
+      {openSnackBar ? (
+        error ? (
+          <Alert className={classes.alert} variant="outlined" severity="error">
+            {error}
+          </Alert>
+        ) : (
+          <Alert
+            className={classes.alert}
+            variant="outlined"
+            severity="success"
+          >
+            تمت اضافة المستخدم بنجاح
+          </Alert>
+        )
+      ) : (
+        <div></div>
+      )}
+
+      <TextField
+        className={classes.inputs}
+        variant="outlined"
+        name="fullName"
+        InputProps={{
+          classes: {
+            notchedOutline: getInputClasses("fullName")
+          }
+        }}
+        placeholder="اسم الستخدم"
+        {...formik.getFieldProps("fullName")}
+      />
+      {formik.touched.fullName && formik.errors.fullName ? (
+        <Typography color="secondary" variant="body2">
+          {formik.errors.fullName}
+        </Typography>
+      ) : null}
+      <TextField
+        className={classes.inputs}
+        variant="outlined"
+        name="email"
+        placeholder="ايميل الستخدم"
+        InputProps={{
+          classes: {
+            notchedOutline: getInputClasses("email")
+          }
+        }}
+        {...formik.getFieldProps("email")}
+      />
+      {formik.touched.email && formik.errors.email ? (
+        <Typography color="secondary" variant="body2">
+          {formik.errors.email}
+        </Typography>
+      ) : null}
+      <TextField
+        className={classes.inputs}
+        variant="outlined"
+        name="phoneNum"
+        placeholder="جوال الستخدم"
+        InputProps={{
+          classes: {
+            notchedOutline: getInputClasses("phoneNum")
+          }
+        }}
+        {...formik.getFieldProps("phoneNum")}
+      />
+      {formik.touched.phoneNum && formik.errors.phoneNum ? (
+        <Typography color="secondary" variant="body2">
+          {formik.errors.phoneNum}
+        </Typography>
+      ) : null}
+      <TextField
+        className={classes.inputs}
+        variant="outlined"
+        name="password"
+        placeholder="كلمة سر الحساب"
+        type="password"
+        {...formik.getFieldProps("password")}
+        InputProps={{
+          classes: {
+            notchedOutline: getInputClasses("password")
+          }
+        }}
+      />
+      {formik.touched.password && formik.errors.password ? (
+        <Typography color="secondary" variant="body2">
+          {formik.errors.password}
+        </Typography>
+      ) : null}
+      <Grid container justify="space-around">
+        <Button
+          type="submit"
+          className={classes.buttons}
+          variant="contained"
+          color="primary"
+          disabled={formik.isSubmitting}
+        >
+          {loading && <span className="ml-3 spinner spinner-white"></span>}
+          اضافة
+        </Button>
+        <Button
+          className={classes.buttons}
+          variant="contained"
+          color="secondary"
+          type="button"
+          onClick={cancel}
+        >
+          الغاء
+        </Button>
+      </Grid>
+    </form>
+  );
+};
+
+export default NewUserForm;

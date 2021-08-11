@@ -4,6 +4,7 @@ import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
 import { BuilderPage } from "./pages/BuilderPage";
 import DashboardPage from "./pages/Home";
 import Orders from "./pages/Orders/Orders";
+import User from "./pages/Users/User";
 
 export default function BasePage() {
   return (
@@ -15,6 +16,7 @@ export default function BasePage() {
         }
         <ContentRoute path="/dashboard" component={DashboardPage} />
         <ContentRoute path="/orders" component={Orders} />
+        <ContentRoute path="/users" component={User} />
         <ContentRoute path="/builder" component={BuilderPage} />
         <Redirect to="error/error-v1" />
       </Switch>

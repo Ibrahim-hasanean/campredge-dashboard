@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import { Grid, Typography, CircularProgress } from "@material-ui/core";
 import CustomCard from "../CustomCard";
-import GroupIcon from "@material-ui/icons/Group";
 import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import LocalAtmIcon from "@material-ui/icons/LocalAtm";
@@ -9,13 +8,14 @@ import { useStyles } from "./style";
 
 const SummarySection = ({ homeDetails }) => {
   const classes = useStyles();
+  console.log(homeDetails.data);
   const CARDS_DATA = useMemo(
     () => [
       {
-        title: "عدد المبيعات الكلية",
-        value: null,
-        icon: GroupIcon,
-        className: classes.firstCard
+        title: "عدد الطلبات الكلي",
+        value: homeDetails.data?.totalOrdersCount || null,
+        icon: LocalAtmIcon,
+        className: classes.fourthCard
       },
       {
         title: "مجموع المبيعات الكلية",
@@ -25,15 +25,17 @@ const SummarySection = ({ homeDetails }) => {
       },
       {
         title: "عدد الطلبات اليومي",
-        value: homeDetails.data?.totalCost || null,
+        value: homeDetails.data?.todayOrders
+          ? homeDetails.data.todayOrders.length
+          : null,
         icon: AttachMoneyIcon,
         className: classes.thirdCard
       },
       {
-        title: "عدد الطلبات الكلي",
-        value: homeDetails.data?.totalOrdersCount || null,
-        icon: LocalAtmIcon,
-        className: classes.fourthCard
+        title: " مجموع المبيعات اليومي",
+        value: homeDetails.data?.totalCost || null,
+        icon: AttachMoneyIcon,
+        className: classes.thirdCard
       },
       {
         title: "عدد المستخدمين النشيطين",

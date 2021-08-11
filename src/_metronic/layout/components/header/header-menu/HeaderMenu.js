@@ -30,9 +30,7 @@ export function HeaderMenu({ layoutProps }) {
           </NavLink>
         </li>
         <li
-          className={`menu-item menu-item-rel ${getMenuItemActive(
-            "/dashboard"
-          )}`}
+          className={`menu-item menu-item-rel ${getMenuItemActive("/users")}`}
         >
           <NavLink className="menu-link" to="/users">
             <span className="menu-text">المستخدمين</span>
@@ -41,9 +39,7 @@ export function HeaderMenu({ layoutProps }) {
         </li>
 
         <li
-          className={`menu-item menu-item-rel ${getMenuItemActive(
-            "/dashboard"
-          )}`}
+          className={`menu-item menu-item-rel ${getMenuItemActive("/orders")}`}
         >
           <NavLink className="menu-link" to="/orders">
             <span className="menu-text">المبيعات</span>
