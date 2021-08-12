@@ -54,9 +54,17 @@ const OrdersTable = () => {
 
   return (
     <>
-      <Grid container justify="flex-start">
-        <Typography variant="h4">المبيعات</Typography>
-        <OrdersFilter getData={getData} />
+      <Grid
+        spacing={4}
+        className={classes.header}
+        container
+        justify="flex-start"
+        alignItems="flex-end"
+      >
+        <Typography className={classes.headerItems} variant="h4">
+          المبيعات
+        </Typography>
+        <OrdersFilter className={classes.headerItems} getData={getData} />
       </Grid>
       <Grid container>
         <TableContainer component={Paper}>
