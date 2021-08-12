@@ -8,7 +8,7 @@ const User = () => {
   return (
     <Grid container>
       <UsersHeader users={users} setUsers={setUsers} />
-      <Grid container justify="center">
+      <Grid>
         <UsersTable users={users} setUsers={setUsers} />
       </Grid>
     </Grid>

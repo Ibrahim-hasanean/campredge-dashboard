@@ -11,6 +11,7 @@ import { useFormik } from "formik";
 import { updateUser } from "../../../api/Users/index";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { Alert } from "@material-ui/lab";
+import RTLProvider from "../RTLProvider";
 
 const useStyle = makeStyles(() => ({
   form: {
@@ -21,12 +22,17 @@ const useStyle = makeStyles(() => ({
     padding: "30px 15px"
   },
   inputs: {
-    width: "60%",
+    width: "90%",
     textAlign: "right",
     margin: "10px 0px"
   },
+  buttonsContainer: {
+    width: "90%"
+  },
   buttons: {
-    fontSize: "14px"
+    fontSize: "14px",
+    width: "30%",
+    margin: "10px 0px"
   },
   invalid: {
     border: "solid 1px red"
@@ -125,99 +131,109 @@ const EditeUser = ({ user, handleClose, users, setUsers }) => {
   };
 
   return (
-    <form className={classes.form} onSubmit={formik.handleSubmit}>
-      {openSnackBar ? (
-        error ? (
-          <Alert className={classes.alert} variant="outlined" severity="error">
-            {error}
-          </Alert>
+    <RTLProvider>
+      <form className={classes.form} onSubmit={formik.handleSubmit}>
+        {openSnackBar ? (
+          error ? (
+            <Alert
+              className={classes.alert}
+              variant="outlined"
+              severity="error"
+            >
+              {error}
+            </Alert>
+          ) : (
+            <Alert
+              className={classes.alert}
+              variant="outlined"
+              severity="success"
+            >
+              تمت تعديل المستخدم بنجاح
+            </Alert>
+          )
         ) : (
-          <Alert
-            className={classes.alert}
-            variant="outlined"
-            severity="success"
+          <div></div>
+        )}
+
+        <TextField
+          className={classes.inputs}
+          variant="outlined"
+          name="fullName"
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("fullName")
+            }
+          }}
+          label="اسم الستخدم"
+          {...formik.getFieldProps("fullName")}
+        />
+        {formik.touched.fullName && formik.errors.fullName ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.fullName}
+          </Typography>
+        ) : null}
+        <TextField
+          className={classes.inputs}
+          variant="outlined"
+          name="email"
+          label="ايميل الستخدم"
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("email")
+            }
+          }}
+          {...formik.getFieldProps("email")}
+        />
+        {formik.touched.email && formik.errors.email ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.email}
+          </Typography>
+        ) : null}
+        <TextField
+          className={classes.inputs}
+          variant="outlined"
+          name="phoneNum"
+          label="جوال الستخدم"
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("phoneNum")
+            }
+          }}
+          {...formik.getFieldProps("phoneNum")}
+        />
+        {formik.touched.phoneNum && formik.errors.phoneNum ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.phoneNum}
+          </Typography>
+        ) : null}
+
+        <Grid
+          container
+          justify="space-between"
+          className={classes.buttonsContainer}
+        >
+          <Button
+            type="submit"
+            className={classes.buttons}
+            variant="contained"
+            color="primary"
+            disabled={formik.isSubmitting}
           >
-            تمت تعديل المستخدم بنجاح
-          </Alert>
-        )
-      ) : (
-        <div></div>
-      )}
-
-      <TextField
-        className={classes.inputs}
-        variant="outlined"
-        name="fullName"
-        InputProps={{
-          classes: {
-            notchedOutline: getInputClasses("fullName")
-          }
-        }}
-        placeholder="اسم الستخدم"
-        {...formik.getFieldProps("fullName")}
-      />
-      {formik.touched.fullName && formik.errors.fullName ? (
-        <Typography color="secondary" variant="body2">
-          {formik.errors.fullName}
-        </Typography>
-      ) : null}
-      <TextField
-        className={classes.inputs}
-        variant="outlined"
-        name="email"
-        placeholder="ايميل الستخدم"
-        InputProps={{
-          classes: {
-            notchedOutline: getInputClasses("email")
-          }
-        }}
-        {...formik.getFieldProps("email")}
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <Typography color="secondary" variant="body2">
-          {formik.errors.email}
-        </Typography>
-      ) : null}
-      <TextField
-        className={classes.inputs}
-        variant="outlined"
-        name="phoneNum"
-        placeholder="جوال الستخدم"
-        InputProps={{
-          classes: {
-            notchedOutline: getInputClasses("phoneNum")
-          }
-        }}
-        {...formik.getFieldProps("phoneNum")}
-      />
-      {formik.touched.phoneNum && formik.errors.phoneNum ? (
-        <Typography color="secondary" variant="body2">
-          {formik.errors.phoneNum}
-        </Typography>
-      ) : null}
-
-      <Grid container justify="space-around">
-        <Button
-          type="submit"
-          className={classes.buttons}
-          variant="contained"
-          color="primary"
-          disabled={formik.isSubmitting}
-        >
-          {loading && <span className="ml-3 spinner spinner-white"></span>}
-          تعديل
-        </Button>
-        <Button
-          className={classes.buttons}
-          variant="contained"
-          color="secondary"
-          type="button"
-          onClick={cancel}
-        >
-          الغاء
-        </Button>
-      </Grid>
-    </form>
+            {loading && <span className="ml-3 spinner spinner-white"></span>}
+            تعديل
+          </Button>
+          <Button
+            className={classes.buttons}
+            variant="contained"
+            color="secondary"
+            type="button"
+            onClick={cancel}
+          >
+            الغاء
+          </Button>
+        </Grid>
+      </form>
+    </RTLProvider>
   );
 };
 

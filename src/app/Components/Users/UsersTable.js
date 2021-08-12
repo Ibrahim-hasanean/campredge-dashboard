@@ -12,6 +12,7 @@ import Paper from "@material-ui/core/Paper";
 import { Pagination } from "@material-ui/lab";
 import useStyle from "./style";
 import UsersRows from "./UsersRows";
+import RTLProvider from "../RTLProvider";
 const UsersTable = ({ users, setUsers }) => {
   const classes = useStyle();
   // const [users, setUsers] = useState([]);
@@ -49,8 +50,8 @@ const UsersTable = ({ users, setUsers }) => {
     await getData(`page=${page}`);
   };
   return (
-    <>
-      <TableContainer component={Paper}>
+    <RTLProvider>
+      <TableContainer className={classes.tableContainer} component={Paper}>
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
@@ -135,7 +136,7 @@ const UsersTable = ({ users, setUsers }) => {
           showLastButton
         />
       </TableContainer>
-    </>
+    </RTLProvider>
   );
 };
 

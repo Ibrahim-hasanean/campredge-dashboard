@@ -37,25 +37,25 @@ const UsersRows = ({ user, index, users, setUsers }) => {
           {index + 1}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.fullName}
+          {user.fullName || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.email}
+          {user.email || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.phoneNum}
+          {user.phoneNum || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.activityLevel}
+          {user.activityLevel || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.dietGoal}
+          {user.dietGoal || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.dob}
+          {user.dob || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.gender}
+          {user.gender || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           <IconButton onClick={() => OpenUpdate()}>

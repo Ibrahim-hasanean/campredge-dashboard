@@ -14,6 +14,7 @@ import useStyle from "./style";
 import OrdersRow from "./OrdersRow";
 import { Grid, Typography } from "@material-ui/core";
 import OrdersFilter from "./OrdersFilter";
+import RTLProvider from "app/Components/RTLProvider";
 
 const OrdersTable = () => {
   const classes = useStyle();
@@ -53,7 +54,7 @@ const OrdersTable = () => {
   };
 
   return (
-    <>
+    <RTLProvider>
       <Grid
         spacing={4}
         className={classes.header}
@@ -141,7 +142,7 @@ const OrdersTable = () => {
           />
         </TableContainer>
       </Grid>
-    </>
+    </RTLProvider>
   );
 };
 

@@ -1,20 +1,27 @@
 import React from "react";
-import DialogTitle from "@material-ui/core/DialogTitle";
 import Dialog from "@material-ui/core/Dialog";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 
 const useStyle = makeStyles(() => ({
   title: {
     widht: "100%",
-    textAlign: "center"
+    textAlign: "center",
+    padding: "30px 15px 0 15px"
   }
 }));
 
 const PopUp = ({ open, handleClose, title, maxWidth, children }) => {
   const classes = useStyle();
   return (
-    <Dialog maxWidth={maxWidth} onClose={handleClose} open={open}>
-      <DialogTitle className={classes.title}>{title}</DialogTitle>
+    <Dialog
+      className={classes.dialog}
+      maxWidth={maxWidth}
+      onClose={handleClose}
+      open={open}
+    >
+      <Typography className={classes.title} variant="h5">
+        {title}
+      </Typography>
       {children}
     </Dialog>
   );

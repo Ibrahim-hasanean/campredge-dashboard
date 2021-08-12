@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles(() => ({
+  tableContainer: {
+    width: "100%"
+  },
   tableRow: {
     "&:hover": {
       background: "#d8d4d4"
@@ -23,7 +26,7 @@ const useStyle = makeStyles(() => ({
     color: "#c3c34a"
   },
   deleteUser: {
-    padding: "0px 0px 20px 0px"
+    padding: "20px 0px"
   }
 }));
 
