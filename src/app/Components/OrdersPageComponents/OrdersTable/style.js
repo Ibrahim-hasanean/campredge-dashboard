@@ -24,7 +24,7 @@ const useStyle = makeStyles(theme => ({
     height: "70px"
   },
   formControl: {
-    margin: theme.spacing(1),
+    margin: "0px 10px",
     minWidth: 120
   },
   options: {
@@ -39,6 +39,12 @@ const useStyle = makeStyles(theme => ({
   },
   select: {
     width: "100px"
+  },
+  searchButton: {
+    margin: "0px 10px"
+  },
+  inputs: {
+    margin: "0px 10px"
   }
 }));
 

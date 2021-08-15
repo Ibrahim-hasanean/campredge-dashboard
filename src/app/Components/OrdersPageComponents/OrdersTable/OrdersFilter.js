@@ -6,10 +6,18 @@ import { useHistory } from "react-router-dom";
 import FormControl from "@material-ui/core/FormControl";
 import useStyle from "./style";
 import InputLabel from "@material-ui/core/InputLabel";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 const OrdersFilter = ({ getData }) => {
   const classes = useStyle();
   const [packages, setPackages] = useState([]);
+  const [data, setData] = useState({
+    date: null,
+    packageId: null,
+    status: null,
+    orderNo: null
+  });
   const history = useHistory();
 
   const getPackages = useCallback(
@@ -26,9 +34,24 @@ const OrdersFilter = ({ getData }) => {
   );
 
   const handleChange = e => {
-    console.log(e.target.name);
-    let query = `packageId=${e.target.value}`;
+    let name = e.target.name;
+    let value = e.target.value;
+    setData({ ...data, [name]: value });
+  };
+
+  const search = async () => {
+    let query = "";
+    if (data.date) query = query + `&date=${data.date}`;
+    if (data.packageId) query = query + `&packageId=${data.packageId}`;
+    if (data.status) query = query + `&status=${data.status}`;
+    if (data.orderNo) query = query + `&orderNo=${data.orderNo}`;
+    console.log(query);
     getData(query);
+  };
+
+  const reset = () => {
+    getData();
+    setData({ date: null, packageId: null, status: null, orderNo: null });
   };
 
   useEffect(() => {
@@ -36,16 +59,78 @@ const OrdersFilter = ({ getData }) => {
   }, [getPackages]);
 
   return (
-    <FormControl className={classes.formControl}>
-      <InputLabel htmlFor="age-native-simple">نوع الباكيج</InputLabel>
-      <Select className={classes.select} onChange={handleChange}>
-        {packages.map((pack, index) => (
-          <option className={classes.options} key={index} value={pack._id}>
-            {pack.name.ar}
+    <>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-native-simple">نوع الباقة</InputLabel>
+        <Select
+          value={data.packageId}
+          className={classes.select}
+          onChange={handleChange}
+          name="packageId"
+        >
+          {packages.map((pack, index) => (
+            <option className={classes.options} key={index} value={pack._id}>
+              {pack.name.ar}
+            </option>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl className={classes.formControl}>
+        <InputLabel htmlFor="age-native-simple">حالة الطلب</InputLabel>
+        <Select
+          name="status"
+          className={classes.select}
+          onChange={handleChange}
+          value={data.status}
+        >
+          <option className={classes.options} value="delivered">
+            تم التوصيل
           </option>
-        ))}
-      </Select>
-    </FormControl>
+          <option className={classes.options} value="pending">
+            معلق
+          </option>
+          <option className={classes.options} value="canceled">
+            تم الغاؤه
+          </option>
+        </Select>
+      </FormControl>
+      <TextField
+        onChange={handleChange}
+        className={classes.inputs}
+        variant="standard"
+        name="orderNo"
+        label="رقم الطلب"
+        type="number"
+        value={data.orderNO}
+      />
+
+      <TextField
+        onChange={handleChange}
+        className={classes.inputs}
+        variant="standard"
+        name="date"
+        type="date"
+        value={data.date}
+        id="orderDate"
+      />
+
+      <Button
+        className={classes.searchButton}
+        variant="contained"
+        color="primary"
+        onClick={search}
+      >
+        بحث
+      </Button>
+      <Button
+        className={classes.searchButton}
+        variant="contained"
+        color="default"
+        onClick={reset}
+      >
+        تفريغ الحقول
+      </Button>
+    </>
   );
 };
 

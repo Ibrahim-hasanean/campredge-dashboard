@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { Link, Switch, Redirect } from "react-router-dom";
-import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
+// import { toAbsoluteUrl } from "../../../../_metronic/_helpers";
 import { ContentRoute } from "../../../../_metronic/layout";
 import Login from "./Login";
 import "../../../../_metronic/_assets/sass/pages/login/classic/login-1.scss";
-
+import logo from "../../../../_metronic/_assets/images/campredge.png";
 export function AuthPage() {
   return (
     <>
@@ -32,9 +32,7 @@ export function AuthPage() {
           <div
             className="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-10"
             style={{
-              backgroundImage: `url(${toAbsoluteUrl(
-                "/media/bg/splash-screen.gif"
-              )})`,
+              backgroundImage: logo,
               backgroundPosition: "center"
             }}
           >
@@ -42,11 +40,7 @@ export function AuthPage() {
             <div className="d-flex flex-row-fluid flex-column justify-content-between">
               {/* start:: Aside header */}
               <Link to="/" className="flex-column-auto mt-5 pb-lg-0 pb-10">
-                <img
-                  alt="Logo"
-                  className="max-h-70px"
-                  src={toAbsoluteUrl("/media/logos/logo.png")}
-                />
+                <img alt="Logo" className="max-h-70px" src={logo} />
               </Link>
               {/* end:: Aside header */}
 

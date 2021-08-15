@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core";
 
-const useStyle = makeStyles(() => ({
+const useStyle = makeStyles(theme => ({
   tableContainer: {
     width: "100%"
   },
@@ -31,6 +31,20 @@ const useStyle = makeStyles(() => ({
   },
   activateIcon: {
     color: "green"
+  },
+  select: {
+    width: "100px"
+  },
+  formControl: {
+    margin: "0px 10px",
+    minWidth: 120
+  },
+  options: {
+    margin: theme.spacing(1),
+    minWidth: 120
+  },
+  searchButton: {
+    margin: "0px 10px"
   }
 }));
 

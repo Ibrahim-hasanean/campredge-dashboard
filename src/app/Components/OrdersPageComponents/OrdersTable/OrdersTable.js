@@ -61,12 +61,14 @@ const OrdersTable = () => {
         justify="flex-start"
         alignItems="flex-end"
       >
-        <Grid item>
+        <Grid container item xs={12} justify="center">
           <Typography className={classes.headerItems} variant="h4">
             المبيعات
           </Typography>
         </Grid>
-        <OrdersFilter className={classes.headerItems} getData={getData} />
+        <Grid container item xs={10} justify="flex-start" alignItems="flex-end">
+          <OrdersFilter className={classes.headerItems} getData={getData} />
+        </Grid>
       </Grid>
       <Grid container>
         <TableContainer component={Paper}>

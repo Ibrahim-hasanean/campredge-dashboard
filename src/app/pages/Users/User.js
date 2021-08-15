@@ -36,7 +36,7 @@ const User = () => {
 
   return (
     <Grid container>
-      <UsersHeader users={users} setUsers={setUsers} />
+      <UsersHeader getData={getData} users={users} setUsers={setUsers} />
       <Grid>
         <UsersTable
           page={page}
