@@ -8,7 +8,7 @@ import Snackbar from "_metronic/layout/components/CustomSnackbar";
 import BarChart from "app/Components/HomePageComponents/BarChart/BarChart";
 import SpecializeTable from "app/Components/HomePageComponents/SpecializeTable/SpecializeTable";
 import MaleFemaleChart from "app/Components/HomePageComponents/MaleFemaleChart/MaleFemaleChart";
-
+import { useHistory } from "react-router-dom";
 const useStyle = makeStyles(() => ({
   sections: {
     margin: "0 0 50px 0"
@@ -17,6 +17,7 @@ const useStyle = makeStyles(() => ({
 
 const DashboardPage = () => {
   const classes = useStyle();
+  const history = useHistory();
   const [homeDetails, setHomeDetails] = useState({});
   const [hasError, setHasError] = useState(false);
 
@@ -31,12 +32,13 @@ const DashboardPage = () => {
         } else if (response.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
           // show no auth message response.message
           setHasError(true);
+          history.push("/logout");
         }
       })
       .catch(error => {
         console.error(error);
       });
-  }, []);
+  }, [history]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
