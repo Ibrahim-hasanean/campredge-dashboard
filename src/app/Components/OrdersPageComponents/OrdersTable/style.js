@@ -36,6 +36,9 @@ const useStyle = makeStyles(theme => ({
   },
   headerItems: {
     margin: "0px 10px"
+  },
+  select: {
+    width: "100px"
   }
 }));
 

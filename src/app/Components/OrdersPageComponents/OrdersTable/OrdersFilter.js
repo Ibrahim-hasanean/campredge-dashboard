@@ -38,7 +38,7 @@ const OrdersFilter = ({ getData }) => {
   return (
     <FormControl className={classes.formControl}>
       <InputLabel htmlFor="age-native-simple">نوع الباكيج</InputLabel>
-      <Select onChange={handleChange}>
+      <Select className={classes.select} onChange={handleChange}>
         {packages.map((pack, index) => (
           <option className={classes.options} key={index} value={pack._id}>
             {pack.name.ar}
