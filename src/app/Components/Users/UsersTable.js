@@ -70,6 +70,7 @@ const UsersTable = ({ getData, setPage, users, setUsers, page, pages }) => {
               >
                 جنس المستخدم
               </TableCell>
+
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
@@ -80,7 +81,7 @@ const UsersTable = ({ getData, setPage, users, setUsers, page, pages }) => {
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                ايقاف المستخدم
+                ايقاف/تنشيط المستخدم
               </TableCell>
             </TableRow>
           </TableHead>

@@ -101,7 +101,7 @@ const EditeUser = ({ user, handleClose, users, setUsers }) => {
             let newUsers = users;
             let updatedUser = response.data.user;
             let oldUserIndex = newUsers.findIndex(
-              x => x._id === updateUser._id
+              x => x._id === updatedUser._id
             );
             newUsers[oldUserIndex] = updatedUser;
             setUsers([...newUsers]);

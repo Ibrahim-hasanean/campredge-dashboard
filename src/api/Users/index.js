@@ -185,15 +185,11 @@ export const updateUser = async (userId, userData) => {
 
 export const suspendUser = async userId => {
   try {
-    const response = await axios.post(
-      "/admin/users/suspend",
-      { userId },
-      {
-        headers: {
-          Authorization: localStorage.getItem("token")
-        }
+    const response = await axios.get(`/admin/activate/${userId}`, {
+      headers: {
+        Authorization: localStorage.getItem("token")
       }
-    );
+    });
     let data = {};
     switch (response.status) {
       case API_COMMON_STATUS.SUCCESS:

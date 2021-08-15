@@ -26,7 +26,7 @@ const useStyle = makeStyles(() => ({
   editeIcon: {
     color: "#c3c34a"
   },
-  deleteUser: {
+  delete: {
     padding: "20px 0px"
   },
   active: {

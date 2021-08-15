@@ -2,11 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 // import objectPath from "object-path";
 // import { useHtmlClassService } from "../../_core/MetronicLayout";
-import { toAbsoluteUrl } from "../../../_helpers";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import { IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core";
-
+import logo from "../../../_assets/images/campredge.png";
 const useSyle = makeStyles(() => ({
   icon: {
     color: "#3699ff"
@@ -33,11 +32,7 @@ export function Brand() {
       <div className="brand flex-column-auto" id="kt_brand">
         {/* begin::Logo */}
         <Link to="/" className="brand-logo">
-          <img
-            alt="logo"
-            width="20%"
-            src={toAbsoluteUrl("/media/logos/logo.png")}
-          />
+          <img alt="logo" width="50%" height="100%" src={logo} />
         </Link>
         {/* end::Logo */}
         {/* begin::Toggle */}

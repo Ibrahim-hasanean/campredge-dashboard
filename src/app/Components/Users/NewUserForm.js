@@ -12,6 +12,8 @@ import { addNewUser } from "../../../api/Users/index";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { Alert } from "@material-ui/lab";
 import RTLProvider from "../RTLProvider";
+// import FormControl from "@material-ui/core/FormControl";
+// import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyle = makeStyles(() => ({
   form: {
@@ -59,13 +61,17 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
     password: Yup.string()
       .min(5, "حد ادنى 5  احرف/ارقام/رموز")
       .max(50, "حد اقصى 50 احرف/ارقام/رموز ")
-      .required("كلمة السر مطلوبة")
+      .required("كلمة السر مطلوبة"),
+    dob: Yup.date(),
+    gender: Yup.string().matches(/(ذكر|أنثى)/)
   });
   const initialValues = {
     fullName: "",
     email: "",
     phoneNum: "",
-    password: ""
+    password: "",
+    dob: "",
+    gender: ""
   };
 
   const enableLoading = () => {
@@ -228,6 +234,45 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
             {formik.errors.password}
           </Typography>
         ) : null}
+        {/* <TextField
+          className={classes.inputs}
+          variant="outlined"
+          name="dob"
+          label="تاريخ الميلاد"
+          type="date"
+          {...formik.getFieldProps("dob")}
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("dob")
+            }
+          }}
+        />
+        {formik.touched.dob && formik.errors.dob ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.dob}
+          </Typography>
+        ) : null}
+        <FormControl className={classes.inputs}>
+          <InputLabel>جنس المسشتخدم</InputLabel>
+          <Select
+            className={classes.inputs}
+            name="gender"
+            {...formik.getFieldProps("gender")}
+            defaultValue=""
+          >
+            <option className={classes.options} value="ذكر">
+              ذكر
+            </option>
+            <option className={classes.options} value="أنثى">
+              أنثى
+            </option>
+          </Select>
+          {formik.touched.gender && formik.errors.gender ? (
+            <Typography color="secondary" variant="body2">
+              {formik.errors.gender}
+            </Typography>
+          ) : null}
+        </FormControl> */}
         <Grid
           className={classes.buttonsContainer}
           container

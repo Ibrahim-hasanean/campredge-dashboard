@@ -8,7 +8,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import PopUp from "../PopUp/PopUp";
 import EditeUser from "./EditeUser";
 import DeleteUser from "./DeleteUser";
-
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 const UsersRows = ({ user, index, users, setUsers }) => {
   const classes = useStyle();
   const [openDelete, setOpenDelete] = useState(false);
@@ -52,7 +52,7 @@ const UsersRows = ({ user, index, users, setUsers }) => {
           {user.dietGoal || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {user.dob || "_"}
+          {user.dob ? new Date(user.dob).toLocaleDateString() : "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           {user.gender || "_"}
@@ -64,7 +64,14 @@ const UsersRows = ({ user, index, users, setUsers }) => {
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           <IconButton onClick={() => OpenDelete()}>
-            <DeleteIcon fontSize="inherit" color="secondary" />
+            {user.allowedToUseApp ? (
+              <DeleteIcon fontSize="inherit" color="secondary" />
+            ) : (
+              <CheckCircleIcon
+                className={classes.activateIcon}
+                fontSize="inherit"
+              />
+            )}
           </IconButton>
         </TableCell>
       </TableRow>
@@ -83,7 +90,11 @@ const UsersRows = ({ user, index, users, setUsers }) => {
       <PopUp
         handleClose={handleCloseDelete}
         open={openDelete}
-        title={`هل تريد بالتكايد ايقاف المستخدم ${user.fullName}`}
+        title={
+          user.allowedToUseApp
+            ? `هل تريد بالتكايد ايقاف المستخدم ${user.fullName}`
+            : `هل تريد بالتكايد تنشيط المستخدم ${user.fullName}`
+        }
       >
         <DeleteUser
           handleClose={handleCloseDelete}

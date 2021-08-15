@@ -17,7 +17,7 @@ const useStyle = makeStyles(() => ({
     fontWeight: "700"
   },
   table: {
-    minWidth: 650
+    width: "100%"
   },
   avatar: {
     width: "70px",
@@ -28,6 +28,9 @@ const useStyle = makeStyles(() => ({
   },
   deleteUser: {
     padding: "20px 0px"
+  },
+  activateIcon: {
+    color: "green"
   }
 }));
 
