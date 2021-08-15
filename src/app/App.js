@@ -1,4 +1,6 @@
 import React from "react";
+import "./App.css";
+
 import { create } from "jss";
 import rtl from "jss-rtl";
 import { BrowserRouter } from "react-router-dom";
@@ -12,7 +14,17 @@ import {
   jssPreset
 } from "@material-ui/core/styles";
 const theme = createMuiTheme({
-  direction: "rtl"
+  direction: "rtl",
+  typography: {
+    fontFamily: ["Cairo", "sans-serif"].join(",")
+  },
+  overrides: {
+    MuiCssBaseline: {
+      "@global": {
+        "@font-face": ["Cairo", "sans-serif"]
+      }
+    }
+  }
 });
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -20,22 +32,23 @@ const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 export default function App({ basename }) {
   return (
     <StylesProvider jss={jss}>
-      <ThemeProvider theme={theme}>
-        {/* Add high level `Suspense` in case if was not handled inside the React tree. */}
-        <React.Suspense fallback={<LayoutSplashScreen />}>
-          {/* Override `basename` (e.g: `homepage` in `package.json`) */}
-          <BrowserRouter basename={basename}>
-            {/*This library only returns the location that has been active before the recent location change in the current window lifetime.*/}
-            <MaterialThemeProvider>
-              {/* Provide `react-intl` context synchronized with Redux state.  */}
-              <I18nProvider>
+      {/* <CssBaseline /> */}
+      {/* Add high level `Suspense` in case if was not handled inside the React tree. */}
+      <React.Suspense fallback={<LayoutSplashScreen />}>
+        {/* Override `basename` (e.g: `homepage` in `package.json`) */}
+        <BrowserRouter basename={basename}>
+          {/*This library only returns the location that has been active before the recent location change in the current window lifetime.*/}
+          <MaterialThemeProvider theme={theme}>
+            {/* Provide `react-intl` context synchronized with Redux state.  */}
+            <I18nProvider>
+              <ThemeProvider theme={theme}>
                 {/* Render routes with provided `Layout`. */}
                 <Routes />
-              </I18nProvider>
-            </MaterialThemeProvider>
-          </BrowserRouter>
-        </React.Suspense>
-      </ThemeProvider>
+              </ThemeProvider>
+            </I18nProvider>
+          </MaterialThemeProvider>
+        </BrowserRouter>
+      </React.Suspense>
     </StylesProvider>
   );
 }

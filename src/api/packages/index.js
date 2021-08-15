@@ -40,3 +40,52 @@ export const getPackges = async query => {
     console.error(error);
   }
 };
+export const addNewPackage = async packageData => {
+  try {
+    const response = await axios.post(`/package`, packageData, {
+      headers: {
+        Authorization: `${localStorage.getItem("token")}`
+      }
+    });
+    console.log(response);
+    let data = {};
+    switch (response.status) {
+      case API_COMMON_STATUS.SUCCESS:
+        data = {
+          responseStatus: API_COMMON_STATUS.SUCCESS,
+          ...response.data
+        };
+        break;
+      case API_COMMON_STATUS.UNAUTHORIZED:
+        data = {
+          responseStatus: API_COMMON_STATUS.UNAUTHORIZED,
+          message: response.data.errors[0].msg
+        };
+        break;
+      case API_COMMON_STATUS.CONFLICT:
+        data = {
+          responseStatus: API_COMMON_STATUS.CONFLICT,
+          message: response.data.errors[0].msg
+        };
+        break;
+      case API_COMMON_STATUS.ERROR:
+        data = {
+          responseStatus: API_COMMON_STATUS.ERROR,
+          message: response.data.errors[0].msg
+        };
+        break;
+      case API_COMMON_STATUS.BAD_REQUEST:
+        data = {
+          responseStatus: API_COMMON_STATUS.BAD_REQUEST,
+          message: response.data.message
+        };
+        break;
+      default:
+        data = getUnknownStatusError();
+    }
+    return data;
+  } catch (error) {
+    console.log(error, error.message, error.name);
+    console.error(error);
+  }
+};

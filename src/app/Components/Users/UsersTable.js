@@ -1,7 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { getUsers } from "../../../api/Users/index";
-import { API_COMMON_STATUS } from "helpers/api-helper";
-import { useHistory } from "react-router-dom";
+import React from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -13,37 +10,8 @@ import { Pagination } from "@material-ui/lab";
 import useStyle from "./style";
 import UsersRows from "./UsersRows";
 import RTLProvider from "../RTLProvider";
-const UsersTable = ({ users, setUsers }) => {
+const UsersTable = ({ getData, setPage, users, setUsers, page, pages }) => {
   const classes = useStyle();
-  // const [users, setUsers] = useState([]);
-  // const [count, setCount] = useState(0);
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(1);
-  const history = useHistory();
-
-  const getData = useCallback(
-    async query => {
-      let q = query || "";
-      let data = await getUsers(q);
-      if (!data) {
-        return;
-      }
-      if (data.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
-        return history.push("/logout");
-      }
-      setUsers([...data.data.users]);
-      // let count = Math.ceil(data.data.total / 7);
-      // setCount(count);
-      setPages(data.data.pages);
-      console.log(data);
-    },
-    [history, setUsers]
-  );
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
   const pageChange = async (event, page) => {
     console.log(page);
     setPage(page);
@@ -134,6 +102,7 @@ const UsersTable = ({ users, setUsers }) => {
           count={pages}
           showFirstButton
           showLastButton
+          className={classes.tableCells}
         />
       </TableContainer>
     </RTLProvider>

@@ -34,43 +34,6 @@ export function Topbar() {
 
   return (
     <div className="topbar">
-      {/* {layoutProps.viewSearchDisplay && <SearchDropdown />} */}
-
-      {/* {layoutProps.viewNotificationsDisplay && <UserNotificationsDropdown />} */}
-
-      {/* {layoutProps.viewQuickActionsDisplay && <QuickActionsDropdown />} */}
-
-      {/* {layoutProps.viewCartDisplay && <MyCartDropdown />} */}
-
-      {/* {layoutProps.viewQuickPanelDisplay && (
-        <OverlayTrigger
-          placement="bottom"
-          overlay={<Tooltip id="quick-panel-tooltip">Quick panel</Tooltip>}
-        >
-          <div
-            className="topbar-item"
-            data-toggle="tooltip"
-            title="Quick panel"
-            data-placement="right"
-          >
-            <div
-              className="btn btn-icon btn-clean btn-lg mr-1"
-              id="kt_quick_panel_toggle"
-            >
-              <span className="svg-icon svg-icon-xl svg-icon-primary">
-                <SVG
-                  src={toAbsoluteUrl(
-                    "/media/svg/icons/Layout/Layout-4-blocks.svg"
-                  )}
-                />
-              </span>
-            </div>
-          </div>
-        </OverlayTrigger>
-      )} */}
-
-      {/* {layoutProps.viewLanguagesDisplay && <LanguageSelectorDropdown />} */}
-
       {layoutProps.viewUserDisplay && <QuickUserToggler />}
     </div>
   );

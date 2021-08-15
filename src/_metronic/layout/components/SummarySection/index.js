@@ -13,13 +13,13 @@ const SummarySection = ({ homeDetails }) => {
     () => [
       {
         title: "عدد الطلبات الكلي",
-        value: homeDetails.data?.totalOrdersCount || null,
+        value: homeDetails.data?.totalOrdersCount,
         icon: LocalAtmIcon,
         className: classes.fourthCard
       },
       {
         title: "مجموع المبيعات الكلية",
-        value: homeDetails.data?.totalOrdersPrice || null,
+        value: homeDetails.data?.totalOrdersPrice,
         icon: ShoppingCartIcon,
         className: classes.secondCard
       },
@@ -33,19 +33,19 @@ const SummarySection = ({ homeDetails }) => {
       },
       {
         title: " مجموع المبيعات اليومي",
-        value: homeDetails.data?.totalCost || null,
+        value: homeDetails.data?.todayOrdersPrice,
         icon: AttachMoneyIcon,
         className: classes.thirdCard
       },
       {
         title: "عدد المستخدمين النشيطين",
-        value: homeDetails.data?.activeUsersCount || null,
+        value: homeDetails.data?.activeUsersCount,
         icon: AttachMoneyIcon,
         className: classes.thirdCard
       },
       {
         title: "عدد المستخدمين غير النشيطين",
-        value: homeDetails.data?.inactiveUsersCount || null,
+        value: homeDetails.data?.inactiveUsersCount,
         icon: LocalAtmIcon,
         className: classes.fourthCard
       }

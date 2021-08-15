@@ -10,7 +10,7 @@ const useStyle = makeStyles(() => ({
   button: {
     color: "white",
     fontWeight: "600",
-    fontSize: "14px"
+    fontSize: "13px"
   }
 }));
 

@@ -10,10 +10,11 @@ const useStyle = makeStyles(theme => ({
     fontWeight: "600"
   },
   tableCells: {
-    fontSize: "13px"
+    fontSize: "13px",
+    fontWeight: "700"
   },
   table: {
-    minWidth: 650
+    width: "100%"
   },
   productsContainer: {
     // width: "max-content"
@@ -31,7 +32,7 @@ const useStyle = makeStyles(theme => ({
     minWidth: 120
   },
   header: {
-    padding: "0px 30px 30px 0px;"
+    padding: "0px 0px 30px 30px"
   },
   headerItems: {
     margin: "0px 10px"

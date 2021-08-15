@@ -36,6 +36,12 @@ const ProductsTable = ({ products }) => {
               className={`${classes.tableCells} ${classes.tableHeader}`}
               align="center"
             >
+              الكمية
+            </TableCell>
+            <TableCell
+              className={`${classes.tableCells} ${classes.tableHeader}`}
+              align="center"
+            >
               صورة المنتج
             </TableCell>
           </TableRow>

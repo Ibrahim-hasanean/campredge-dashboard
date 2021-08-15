@@ -16,7 +16,8 @@ const useStyles = makeStyles({
     width: "100%"
   },
   cells: {
-    fontSize: "14px"
+    fontSize: "14px",
+    fontWeight: "700"
   }
 });
 

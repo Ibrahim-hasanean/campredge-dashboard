@@ -1,7 +1,5 @@
-import React, { useEffect, useState, useCallback } from "react";
-import { getOrders } from "../../../../api/Orders/index";
-import { API_COMMON_STATUS } from "helpers/api-helper";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import RTLProvider from "../RTLProvider";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
@@ -9,67 +7,16 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
-import { Pagination } from "@material-ui/lab";
+// import { Pagination } from "@material-ui/lab";
+import { Grid } from "@material-ui/core";
 import useStyle from "./style";
-import OrdersRow from "./OrdersRow";
-import { Grid, Typography } from "@material-ui/core";
-import OrdersFilter from "./OrdersFilter";
-import RTLProvider from "app/Components/RTLProvider";
-
-const OrdersTable = () => {
+import PackageRows from "./PackageRows";
+const PackagesTable = ({ packages, setPackages }) => {
   const classes = useStyle();
-  const [orders, setOrders] = useState([]);
-  // const [count, setCount] = useState(0);
-  const [page, setPage] = useState(1);
-  const [pages, setPages] = useState(1);
-  const history = useHistory();
-
-  const getData = useCallback(
-    async query => {
-      let q = query || "";
-      let data = await getOrders(q);
-      if (!data) {
-        return;
-      }
-      if (data.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
-        return history.push("/logout");
-      }
-      setOrders([...data.data.orders]);
-      // let count = Math.ceil(data.data.total / 7);
-      // setCount(count);
-      setPages(data.data.pages);
-      console.log(data);
-    },
-    [history]
-  );
-
-  useEffect(() => {
-    getData();
-  }, [getData]);
-
-  const pageChange = (event, page) => {
-    console.log(page);
-    setPage(page);
-    getData(`page=${page}`);
-  };
-
   return (
     <RTLProvider>
-      <Grid
-        className={classes.header}
-        container
-        justify="flex-start"
-        alignItems="flex-end"
-      >
-        <Grid item>
-          <Typography className={classes.headerItems} variant="h4">
-            المبيعات
-          </Typography>
-        </Grid>
-        <OrdersFilter className={classes.headerItems} getData={getData} />
-      </Grid>
-      <Grid container>
-        <TableContainer component={Paper}>
+      <Grid container item xs={12}>
+        <TableContainer className={classes.tableContainer} component={Paper}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
@@ -82,69 +29,94 @@ const OrdersTable = () => {
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  اسم الباقة
+                  اسم بالعربي
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  مدة الباقة
+                  اسم بالانجليزي
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  نوع الدفع
+                  الوصف بالعربي
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  رقم الطلب
+                  الوصف بالانجليزي
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  اسم المستخدم
+                  مفعلة
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  ايميل المستخدم
+                  عدد المنتجات المسموحة
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  جوال المستخدم
+                  السعر
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  حالة الطلب
+                  سعر بعد الخصم
+                </TableCell>
+                <TableCell
+                  className={`${classes.tableCells} ${classes.tableHeader}`}
+                  align="center"
+                >
+                  الحد الاعلى للمنتجات المسموحة
+                </TableCell>
+                <TableCell
+                  className={`${classes.tableCells} ${classes.tableHeader}`}
+                  align="center"
+                >
+                  تعديل
+                </TableCell>
+                <TableCell
+                  className={`${classes.tableCells} ${classes.tableHeader}`}
+                  align="center"
+                >
+                  حذف
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {orders.map((order, index) => (
-                <OrdersRow key={index} order={order} index={index} />
+              {packages.map((pack, index) => (
+                <PackageRows
+                  packages={packages}
+                  setPackages={setPackages}
+                  key={index}
+                  pack={pack}
+                  index={index}
+                />
               ))}
             </TableBody>
           </Table>
-          <Pagination
+          {/* <Pagination
             onChange={pageChange}
             page={page}
             count={pages}
             showFirstButton
             showLastButton
-          />
+            className={classes.tableCells}
+          /> */}
         </TableContainer>
       </Grid>
     </RTLProvider>
   );
 };
 
-export default OrdersTable;
+export default PackagesTable;

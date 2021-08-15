@@ -19,6 +19,9 @@ const ProductsRow = ({ product, index }) => {
         {product.product.info.ar}
       </TableCell>
       <TableCell className={classes.tableCells} align="center">
+        {product.amount}
+      </TableCell>
+      <TableCell className={classes.tableCells} align="center">
         <Avatar
           alt="صورة المنتج"
           src={product.product.image}

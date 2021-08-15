@@ -16,10 +16,10 @@ export function UserProfileDropdown() {
     //   >
     <Grid container item alignItems="center">
       <div>
-        <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1">
+        <span className="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1 cairo-font">
           مرحبا,
         </span>
-        <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-1">
+        <span className="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-1 cairo-font">
           {admin.name}
         </span>
 
@@ -31,7 +31,10 @@ export function UserProfileDropdown() {
       </div>
       <div>
         <div>
-          <Link to="/logout" className="btn btn-light-primary font-weight-bold">
+          <Link
+            to="/logout"
+            className="btn btn-light-primary font-weight-bold cairo-font cairo-font"
+          >
             Sign Out
           </Link>
         </div>

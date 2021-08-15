@@ -110,6 +110,7 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
             setUsers([...newUsers]);
             formik.resetForm();
             setOpenSnackBar(true);
+            setSubmitting(false);
             // handleClose();
           } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
             setSubmitting(false);

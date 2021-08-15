@@ -13,7 +13,8 @@ const useStyle = makeStyles(() => ({
     fontWeight: "600"
   },
   tableCells: {
-    fontSize: "13px"
+    fontSize: "13px",
+    fontWeight: "700"
   },
   table: {
     minWidth: 650
