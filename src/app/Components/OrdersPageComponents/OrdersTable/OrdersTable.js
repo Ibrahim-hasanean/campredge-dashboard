@@ -114,13 +114,13 @@ const OrdersTable = () => {
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  ايميل المستخدم
+                  جوال المستخدم
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  جوال المستخدم
+                  تاريخ الطلب
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}

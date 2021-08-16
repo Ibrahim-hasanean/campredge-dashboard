@@ -11,10 +11,10 @@ import useStyle from "./style";
 const UserFilters = ({ getData }) => {
   const classes = useStyle();
   const [data, setData] = useState({
-    dietGoal: null,
-    activityLevel: null,
-    gender: null,
-    text: null
+    dietGoal: "",
+    activityLevel: "",
+    gender: "",
+    fullName: ""
   });
   const filters = [
     {
@@ -42,7 +42,7 @@ const UserFilters = ({ getData }) => {
 
   const reset = () => {
     getData();
-    setData({ dietGoal: null, activityLevel: null, gender: null, text: null });
+    setData({ dietGoal: "", activityLevel: "", gender: "", fullName: "" });
   };
 
   const handleChange = e => {
@@ -80,7 +80,7 @@ const UserFilters = ({ getData }) => {
         variant="standard"
         name="fullName"
         label="اسم الستخدم"
-        value={data.text}
+        value={data.fullName}
       />
       <Button
         className={classes.searchButton}

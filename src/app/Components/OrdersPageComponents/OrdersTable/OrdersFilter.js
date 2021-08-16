@@ -13,10 +13,10 @@ const OrdersFilter = ({ getData }) => {
   const classes = useStyle();
   const [packages, setPackages] = useState([]);
   const [data, setData] = useState({
-    date: null,
-    packageId: null,
-    status: null,
-    orderNo: null
+    date: "",
+    packageId: "",
+    status: "",
+    orderNo: ""
   });
   const history = useHistory();
 
@@ -51,7 +51,7 @@ const OrdersFilter = ({ getData }) => {
 
   const reset = () => {
     getData();
-    setData({ date: null, packageId: null, status: null, orderNo: null });
+    setData({ date: "", packageId: "", status: "", orderNo: "" });
   };
 
   useEffect(() => {
@@ -101,7 +101,7 @@ const OrdersFilter = ({ getData }) => {
         name="orderNo"
         label="رقم الطلب"
         type="number"
-        value={data.orderNO}
+        value={data.orderNo}
       />
 
       <TextField

@@ -37,10 +37,12 @@ const OrdersRow = ({ order, index }) => {
           {order.user.fullName}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {order.user.email}
+          {order.user.phoneNum}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {order.user.phoneNum}
+          {order.createdAt
+            ? new Date(order.createdAt).toLocaleDateString()
+            : "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           {order.status}
