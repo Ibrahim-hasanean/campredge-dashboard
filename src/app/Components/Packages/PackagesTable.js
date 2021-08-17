@@ -105,14 +105,6 @@ const PackagesTable = ({ packages, setPackages }) => {
               ))}
             </TableBody>
           </Table>
-          {/* <Pagination
-            onChange={pageChange}
-            page={page}
-            count={pages}
-            showFirstButton
-            showLastButton
-            className={classes.tableCells}
-          /> */}
         </TableContainer>
       </Grid>
     </RTLProvider>

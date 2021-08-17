@@ -37,6 +37,16 @@ export function HeaderMenu({ layoutProps }) {
             {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
           </NavLink>
         </li>
+        <li
+          className={`menu-item menu-item-rel ${getMenuItemActive(
+            "/specialists"
+          )}`}
+        >
+          <NavLink className="menu-link" to="/specialists">
+            <span className="menu-text cairo-font">الأخصائيين</span>
+            {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
+          </NavLink>
+        </li>
 
         <li
           className={`menu-item menu-item-rel ${getMenuItemActive("/orders")}`}
@@ -54,6 +64,14 @@ export function HeaderMenu({ layoutProps }) {
         >
           <NavLink className="menu-link" to="/packages">
             <span className="menu-text cairo-font">الباقات</span>
+            {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item menu-item-rel ${getMenuItemActive("/cities")}`}
+        >
+          <NavLink className="menu-link" to="/cities">
+            <span className="menu-text cairo-font">المدن</span>
             {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
           </NavLink>
         </li>

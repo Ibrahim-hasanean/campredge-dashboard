@@ -5,6 +5,9 @@ import {
   Grid,
   Button,
   Typography
+  // FormControl,
+  // InputLabel,
+  // Select
 } from "@material-ui/core";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -24,6 +27,16 @@ const useStyle = makeStyles(() => ({
   inputs: {
     width: "90%",
     textAlign: "right",
+    margin: "10px 0px"
+  },
+  options: {
+    width: "100%",
+    textAlign: "right",
+    padding: "10px 0px"
+  },
+  date: {
+    width: "90%",
+    textAlign: "center",
     margin: "10px 0px"
   },
   buttonsContainer: {
@@ -47,18 +60,24 @@ const EditeUser = ({ user, handleClose, users, setUsers }) => {
   const [error, setError] = useState(null);
   const [openSnackBar, setOpenSnackBar] = useState(false);
   const [loading, setLoading] = useState(false);
-  console.log(setUsers);
+
   const schema = Yup.object().shape({
     fullName: Yup.string().required(" اسم المستخدم مطلوب"),
     email: Yup.string()
       .email("الايميل غير صحيح")
       .required("الايميل مطلوب"),
-    phoneNum: Yup.number("رقم الجوال غير غير صحيح").required("رقم الجوال مطلوب")
+    phoneNum: Yup.number("رقم الجوال غير غير صحيح").required(
+      "رقم الجوال مطلوب"
+    ),
+    dob: Yup.date(),
+    gender: Yup.string().matches(/(ذكر|أنثى)/)
   });
   const initialValues = {
     fullName: user.fullName,
     email: user.email,
     phoneNum: user.phoneNum
+    // dob: user.dob,
+    // gender: user.gender
   };
 
   const enableLoading = () => {
@@ -90,6 +109,8 @@ const EditeUser = ({ user, handleClose, users, setUsers }) => {
         fullName: values.fullName,
         email: values.email,
         phoneNum: values.phoneNum
+        // dob: values.dob,
+        // gender: values.gender
       };
       console.log(data);
       updateUser(user._id, data)
@@ -206,6 +227,45 @@ const EditeUser = ({ user, handleClose, users, setUsers }) => {
             {formik.errors.phoneNum}
           </Typography>
         ) : null}
+        {/* <TextField
+          className={classes.date}
+          variant="outlined"
+          name="dob"
+          placeholder="تاريخ الميلاد"
+          type="date"
+          {...formik.getFieldProps("dob")}
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("dob")
+            }
+          }}
+        />
+        {formik.touched.dob && formik.errors.dob ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.dob}
+          </Typography>
+        ) : null}
+        <FormControl className={classes.inputs}>
+          <InputLabel>جنس المسشتخدم</InputLabel>
+          <Select
+            className={classes.inputs}
+            name="gender"
+            {...formik.getFieldProps("gender")}
+            defaultValue=""
+          >
+            <option className={classes.options} value="ذكر">
+              ذكر
+            </option>
+            <option className={classes.options} value="أنثى">
+              أنثى
+            </option>
+          </Select>
+          {formik.touched.gender && formik.errors.gender ? (
+            <Typography color="secondary" variant="body2">
+              {formik.errors.gender}
+            </Typography>
+          ) : null}
+        </FormControl> */}
 
         <Grid
           container

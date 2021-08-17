@@ -35,7 +35,7 @@ const UsersHeader = ({ users, setUsers, getData }) => {
       xs={12}
     >
       <Grid container item justify="center" xs={12}>
-        <Typography variant="h4">المستخدمون</Typography>
+        <Typography variant="h4">المستخدمين</Typography>
       </Grid>
       <Grid
         container

@@ -4,7 +4,10 @@ import {
   makeStyles,
   Grid,
   Button,
-  Typography
+  Typography,
+  FormControl,
+  InputLabel,
+  Select
 } from "@material-ui/core";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -26,6 +29,11 @@ const useStyle = makeStyles(() => ({
   inputs: {
     width: "90%",
     textAlign: "right",
+    margin: "10px 0px"
+  },
+  date: {
+    width: "90%",
+    textAlign: "center",
     margin: "10px 0px"
   },
   buttonsContainer: {
@@ -103,7 +111,9 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
         fullName: values.fullName,
         email: values.email,
         phoneNum: values.phoneNum,
-        password: values.password
+        password: values.password,
+        dob: values.dob,
+        gender: values.gender
       };
       addNewUser(data)
         .then(response => {
@@ -234,11 +244,11 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
             {formik.errors.password}
           </Typography>
         ) : null}
-        {/* <TextField
-          className={classes.inputs}
+        <TextField
+          className={classes.date}
           variant="outlined"
           name="dob"
-          label="تاريخ الميلاد"
+          placeholder="تاريخ الميلاد"
           type="date"
           {...formik.getFieldProps("dob")}
           InputProps={{
@@ -272,7 +282,7 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
               {formik.errors.gender}
             </Typography>
           ) : null}
-        </FormControl> */}
+        </FormControl>
         <Grid
           className={classes.buttonsContainer}
           container

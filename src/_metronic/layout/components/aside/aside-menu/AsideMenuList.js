@@ -50,6 +50,19 @@ export function AsideMenuList({ layoutProps }) {
             <span className="menu-text">المستخدمين</span>
           </NavLink>
         </li>
+        <li
+          className={`menu-item ${getMenuItemActive("/specialists", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/specialists">
+            <span className="svg-icon menu-icon">
+              <SVG
+                src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
+              />
+            </span>
+            <span className="menu-text">الأخصائيين</span>
+          </NavLink>
+        </li>
 
         <li
           className={`menu-item ${getMenuItemActive("/orders", false)}`}
@@ -75,6 +88,19 @@ export function AsideMenuList({ layoutProps }) {
               />
             </span>
             <span className="menu-text">الباقات</span>
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item ${getMenuItemActive("/cities", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/cities">
+            <span className="svg-icon menu-icon">
+              <SVG
+                src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
+              />
+            </span>
+            <span className="menu-text">المدن</span>
           </NavLink>
         </li>
       </ul>

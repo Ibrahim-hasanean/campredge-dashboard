@@ -8,6 +8,7 @@ import useStyle from "./style";
 import InputLabel from "@material-ui/core/InputLabel";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import { Grid } from "@material-ui/core";
 
 const OrdersFilter = ({ getData }) => {
   const classes = useStyle();
@@ -59,7 +60,7 @@ const OrdersFilter = ({ getData }) => {
   }, [getPackages]);
 
   return (
-    <>
+    <Grid container item xs={10} justify="flex-start" alignItems="flex-end">
       <FormControl className={classes.formControl}>
         <InputLabel htmlFor="age-native-simple">نوع الباقة</InputLabel>
         <Select
@@ -130,7 +131,7 @@ const OrdersFilter = ({ getData }) => {
       >
         تفريغ الحقول
       </Button>
-    </>
+    </Grid>
   );
 };
 

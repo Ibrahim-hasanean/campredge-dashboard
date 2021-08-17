@@ -2,9 +2,11 @@ import React, { Suspense } from "react";
 import { Redirect, Switch } from "react-router-dom";
 import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
 import { BuilderPage } from "./pages/BuilderPage";
+import City from "./pages/City/City";
 import DashboardPage from "./pages/Home";
 import Orders from "./pages/Orders/Orders";
 import Packages from "./pages/Packages/Packages";
+import Specialists from "./pages/Specialists/Specialists";
 import User from "./pages/Users/User";
 
 export default function BasePage() {
@@ -20,6 +22,8 @@ export default function BasePage() {
         <ContentRoute path="/users" component={User} />
         <ContentRoute path="/builder" component={BuilderPage} />
         <ContentRoute path="/packages" component={Packages} />
+        <ContentRoute path="/cities" component={City} />
+        <ContentRoute path="/specialists" component={Specialists} />
         <Redirect to="error/error-v1" />
       </Switch>
     </Suspense>

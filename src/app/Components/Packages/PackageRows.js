@@ -3,19 +3,16 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import useStyle from "./style";
 import { IconButton } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import PopUp from "../PopUp/PopUp";
 import EditePackage from "./EditePackage";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
-import DeletePackage from "./DeletePackage";
+import Switch from "@material-ui/core/Switch";
+import { activeToggle } from "../../../api/packages/index";
+import { API_COMMON_STATUS } from "helpers/api-helper";
 
-// import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-// import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 const PackageRows = ({ pack, index, packages, setPackages }) => {
   const classes = useStyle();
   const [openEdite, setOpenEdite] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
 
   const handleOpenEdite = () => {
     setOpenEdite(true);
@@ -24,11 +21,18 @@ const PackageRows = ({ pack, index, packages, setPackages }) => {
     setOpenEdite(false);
   };
 
-  const handleOpenDelete = () => {
-    setOpenDelete(true);
-  };
-  const handleCloseDelete = () => {
-    setOpenDelete(false);
+  const toggleActivateUser = async () => {
+    let response = await activeToggle(pack._id);
+    if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+      console.log(response.data.package);
+      let oldPackIndex = packages.findIndex(x => x._id === pack._id);
+      let newPackages = packages;
+      newPackages[oldPackIndex] = {
+        ...pack,
+        isActive: response.data.package.isActive
+      };
+      setPackages([...newPackages]);
+    }
   };
 
   return (
@@ -70,12 +74,13 @@ const PackageRows = ({ pack, index, packages, setPackages }) => {
           </IconButton>
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          <IconButton onClick={() => handleOpenDelete()}>
-            {pack.isActive ? (
-              <DeleteIcon fontSize="inherit" color="secondary" />
-            ) : (
-              <CheckCircleIcon className={classes.active} fontSize="inherit" />
-            )}
+          <IconButton>
+            <Switch
+              checked={pack.isActive}
+              onChange={toggleActivateUser}
+              name="checkedA"
+              inputProps={{ "aria-label": "secondary checkbox" }}
+            />
           </IconButton>
         </TableCell>
       </TableRow>
@@ -90,18 +95,6 @@ const PackageRows = ({ pack, index, packages, setPackages }) => {
           packages={packages}
           setPackages={setPackages}
           handleClose={handleCloseEdite}
-        />
-      </PopUp>
-      <PopUp
-        open={openDelete}
-        handleClose={handleCloseDelete}
-        title={`  هل تريد بالتاكيد ايقاف الباقة ${pack.name.ar}`}
-      >
-        <DeletePackage
-          pack={pack}
-          packages={packages}
-          handleClose={handleCloseDelete}
-          setPackages={setPackages}
         />
       </PopUp>
     </>

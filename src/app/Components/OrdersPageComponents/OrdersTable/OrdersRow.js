@@ -4,16 +4,33 @@ import TableRow from "@material-ui/core/TableRow";
 import useStyle from "./style";
 import PopUp from "app/Components/PopUp/PopUp";
 import ProductsTable from "./ProductsTable";
+import * as moment from "moment";
 const OrdersRow = ({ order, index }) => {
   const classes = useStyle();
+  // const [openSuspend, setOpenSuspend] = useState(false);
+  // const [openEdite, setOpenEdite] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClose = () => {
     setOpen(false);
   };
-
   const handleOpen = () => {
     setOpen(true);
   };
+
+  // const handleCloseSuspend = () => {
+  //   setOpenSuspend(false);
+  // };
+
+  // const handleOpenSuspend = () => {
+  //   setOpenSuspend(true);
+  // };
+
+  // const handleOpenEdite = () => {
+  //   setOpenEdite(true);
+  // };
+  // const handleCloseEdite = () => {
+  //   setOpenEdite(false);
+  // };
 
   return (
     <>
@@ -41,7 +58,9 @@ const OrdersRow = ({ order, index }) => {
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           {order.createdAt
-            ? new Date(order.createdAt).toLocaleDateString()
+            ? moment(new Date(order.createdAt).setHours(0, 0, 0, 0)).format(
+                "MM-DD-YYYY"
+              )
             : "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">

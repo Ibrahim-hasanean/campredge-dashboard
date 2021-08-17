@@ -12,14 +12,13 @@ import Paper from "@material-ui/core/Paper";
 import { Pagination } from "@material-ui/lab";
 import useStyle from "./style";
 import OrdersRow from "./OrdersRow";
-import { Grid, Typography } from "@material-ui/core";
-import OrdersFilter from "./OrdersFilter";
+import { Grid } from "@material-ui/core";
 import RTLProvider from "app/Components/RTLProvider";
+import OrdersHeader from "./OrdersHeader";
 
 const OrdersTable = () => {
   const classes = useStyle();
   const [orders, setOrders] = useState([]);
-  // const [count, setCount] = useState(0);
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState(1);
   const history = useHistory();
@@ -55,21 +54,7 @@ const OrdersTable = () => {
 
   return (
     <RTLProvider>
-      <Grid
-        className={classes.header}
-        container
-        justify="flex-start"
-        alignItems="flex-end"
-      >
-        <Grid container item xs={12} justify="center">
-          <Typography className={classes.headerItems} variant="h4">
-            المبيعات
-          </Typography>
-        </Grid>
-        <Grid container item xs={10} justify="flex-start" alignItems="flex-end">
-          <OrdersFilter className={classes.headerItems} getData={getData} />
-        </Grid>
-      </Grid>
+      <OrdersHeader getData={getData} orders={orders} setOrders={setOrders} />
       <Grid container>
         <TableContainer component={Paper}>
           <Table className={classes.table} aria-label="simple table">
@@ -128,6 +113,12 @@ const OrdersTable = () => {
                 >
                   حالة الطلب
                 </TableCell>
+                {/* <TableCell
+                  className={`${classes.tableCells} ${classes.tableHeader}`}
+                  align="center"
+                >
+                  الغاء الطلب
+                </TableCell> */}
               </TableRow>
             </TableHead>
             <TableBody>

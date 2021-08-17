@@ -1,6 +1,9 @@
 import { makeStyles } from "@material-ui/core";
 
 const useStyle = makeStyles(theme => ({
+  tableContainer: {
+    width: "100%"
+  },
   tableRow: {
     "&:hover": {
       background: "#d8d4d4"
@@ -16,12 +19,21 @@ const useStyle = makeStyles(theme => ({
   table: {
     width: "100%"
   },
-  productsContainer: {
-    // width: "max-content"
-  },
   avatar: {
     width: "70px",
     height: "70px"
+  },
+  editeIcon: {
+    color: "#c3c34a"
+  },
+  deleteUser: {
+    padding: "20px 0px"
+  },
+  activateIcon: {
+    color: "green"
+  },
+  select: {
+    width: "100px"
   },
   formControl: {
     margin: "0px 10px",
@@ -31,33 +43,34 @@ const useStyle = makeStyles(theme => ({
     margin: theme.spacing(1),
     minWidth: 120
   },
-  header: {
-    padding: "0px 0px 30px 30px"
-  },
-  headerItems: {
-    margin: "0px 10px"
-  },
-  select: {
-    width: "100px"
-  },
   searchButton: {
     margin: "0px 10px"
   },
-  inputs: {
-    margin: "0px 10px"
+  header: {
+    paddingBottom: "20px"
   },
   form: {
-    minWidth: "600px",
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: "30px 15px"
+    justifyContent: "flex-start",
+    padding: "30px",
+    width: 600
+  },
+  inputs: {
+    width: "90%",
+    textAlign: "right",
+    margin: "10px 0px"
+  },
+  buttonsContainer: {
+    width: "90%"
+  },
+
+  buttons: {
+    fontSize: "14px",
+    width: "30%",
+    margin: "10px 0px"
   }
-  // inputs: {
-  //   width: "90%",
-  //   textAlign: "right",
-  //   margin: "10px 0px"
-  // }
 }));
 
 export default useStyle;

@@ -3,24 +3,16 @@ import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import useStyle from "./style";
 import { IconButton } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import PopUp from "../PopUp/PopUp";
 import EditeUser from "./EditeUser";
-import DeleteUser from "./DeleteUser";
-import CheckCircleIcon from "@material-ui/icons/CheckCircle";
+import Switch from "@material-ui/core/Switch";
+import { API_COMMON_STATUS } from "helpers/api-helper";
+import { suspendUser } from "../../../api/Users/index";
+
 const UsersRows = ({ user, index, users, setUsers }) => {
   const classes = useStyle();
-  const [openDelete, setOpenDelete] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
-
-  const handleCloseDelete = () => {
-    setOpenDelete(false);
-  };
-
-  const OpenDelete = () => {
-    setOpenDelete(true);
-  };
 
   const handleCloseUpdate = () => {
     setOpenUpdate(false);
@@ -28,6 +20,20 @@ const UsersRows = ({ user, index, users, setUsers }) => {
 
   const OpenUpdate = () => {
     setOpenUpdate(true);
+  };
+
+  const toggleActivateUser = async () => {
+    let response = await suspendUser(user._id);
+    if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+      console.log(response.data.user);
+      let oldUserIndex = users.findIndex(x => x._id === user._id);
+      let newUsers = users;
+      newUsers[oldUserIndex] = {
+        ...user,
+        allowedToUseApp: response.data.user.allowedToUseApp
+      };
+      setUsers([...newUsers]);
+    }
   };
 
   return (
@@ -63,15 +69,13 @@ const UsersRows = ({ user, index, users, setUsers }) => {
           </IconButton>
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          <IconButton onClick={() => OpenDelete()}>
-            {user.allowedToUseApp ? (
-              <DeleteIcon fontSize="inherit" color="secondary" />
-            ) : (
-              <CheckCircleIcon
-                className={classes.activateIcon}
-                fontSize="inherit"
-              />
-            )}
+          <IconButton>
+            <Switch
+              checked={user.allowedToUseApp}
+              onChange={toggleActivateUser}
+              name="checkedA"
+              inputProps={{ "aria-label": "secondary checkbox" }}
+            />
           </IconButton>
         </TableCell>
       </TableRow>
@@ -82,22 +86,6 @@ const UsersRows = ({ user, index, users, setUsers }) => {
       >
         <EditeUser
           handleClose={handleCloseUpdate}
-          user={user}
-          users={users}
-          setUsers={setUsers}
-        />
-      </PopUp>
-      <PopUp
-        handleClose={handleCloseDelete}
-        open={openDelete}
-        title={
-          user.allowedToUseApp
-            ? `هل تريد بالتكايد ايقاف المستخدم ${user.fullName}`
-            : `هل تريد بالتكايد تنشيط المستخدم ${user.fullName}`
-        }
-      >
-        <DeleteUser
-          handleClose={handleCloseDelete}
           user={user}
           users={users}
           setUsers={setUsers}
