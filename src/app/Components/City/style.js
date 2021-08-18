@@ -86,6 +86,10 @@ const useStyle = makeStyles(theme => ({
   },
   invalid: {
     border: "1px solid red"
+  },
+  village: {
+    width: 700,
+    padding: "20px"
   }
 }));
 

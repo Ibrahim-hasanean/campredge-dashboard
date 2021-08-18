@@ -25,22 +25,30 @@ const EditeCity = ({ city, cities, setCities, handleClose }) => {
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       enableLoading();
       const data = {
+        cityId: city._id,
         name: {
           ar: values.arName,
           en: values.enName
         }
       };
-      editeCity(data)
+      editeCity(city._id, data)
         .then(response => {
           console.log(response, "add city response");
           disableLoading();
           if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-            // console.log(response.data.user);
+            console.log(response.data.city);
+            let newCities = cities;
+            let updatedCity = response.data.city;
+            let oldCityIndex = newCities.findIndex(
+              x => x._id === updatedCity._id
+            );
+            newCities[oldCityIndex] = updatedCity;
+            setCities([...newCities]);
             formik.resetForm();
             setOpenSnackBar(true);
             setSubmitting(false);
 
-            // handleClose();
+            handleClose();
           } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
             setSubmitting(false);
             setError(response.message);

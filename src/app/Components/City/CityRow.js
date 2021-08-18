@@ -10,10 +10,12 @@ import PopUp from "../PopUp/PopUp";
 import DeleteCity from "./DeleteCity";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import EditeCity from "./EditeCity";
+import Village from "./Village";
 const CityRow = ({ index, city, cities, setCities }) => {
   const classes = useStyle();
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdite, setOpenEdite] = useState(false);
+  const [openVillage, setOpenVillage] = useState(false);
 
   const handleOpenEdite = () => {
     setOpenEdite(true);
@@ -29,6 +31,13 @@ const CityRow = ({ index, city, cities, setCities }) => {
     setOpenDelete(false);
   };
 
+  const handleOpenVillage = () => {
+    setOpenVillage(true);
+  };
+  const handleCloseVillage = () => {
+    setOpenVillage(false);
+  };
+
   const villages = city.villages.map(x => x.name.ar);
   return (
     <TableRow>
@@ -42,10 +51,10 @@ const CityRow = ({ index, city, cities, setCities }) => {
         {city.name.en}
       </TableCell>
       <TableCell className={classes.tableCells} align="center">
-        {villages.length > 0 ? villages.join(",") : "_"}
+        {villages.length > 0 ? villages.join(" ,") : "_"}
       </TableCell>
       <TableCell className={classes.tableCells} align="center">
-        <IconButton>
+        <IconButton onClick={handleOpenVillage}>
           <LocationCityIcon className={classes.vilage} />
         </IconButton>
       </TableCell>
@@ -79,6 +88,19 @@ const CityRow = ({ index, city, cities, setCities }) => {
       >
         <EditeCity
           handleClose={handleCloseEdite}
+          city={city}
+          cities={cities}
+          setCities={setCities}
+        />
+      </PopUp>
+      <PopUp
+        open={openVillage}
+        handleClose={handleCloseVillage}
+        title={`الأحياء الخاصة بمدينة ${city.name.ar}`}
+        maxWidth="lg"
+      >
+        <Village
+          handleClose={handleCloseVillage}
           city={city}
           cities={cities}
           setCities={setCities}

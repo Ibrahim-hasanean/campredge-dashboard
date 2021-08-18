@@ -7,7 +7,12 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { Grid } from "@material-ui/core";
-const VillagesTable = ({ villages, ceities, setCities }) => {
+import useStyle from "./style";
+import VillageRow from "./VillageRow";
+
+const VillagesTable = ({ villages, city, cities, setCities }) => {
+  const classes = useStyle();
+
   return (
     <Grid container justify="center">
       <TableContainer className={classes.productsContainer} component={Paper}>
@@ -23,31 +28,19 @@ const VillagesTable = ({ villages, ceities, setCities }) => {
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                اسم المدينة
+                اسم الحي عربي
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                احياء المدينة
+                اسم الحي انجليزي
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                تعديل احياء المدينة
-              </TableCell>
-              <TableCell
-                className={`${classes.tableCells} ${classes.tableHeader}`}
-                align="center"
-              >
-                تعديل المدينة
-              </TableCell>
-              <TableCell
-                className={`${classes.tableCells} ${classes.tableHeader}`}
-                align="center"
-              >
-                حذف المدينة
+                حذف الحي
               </TableCell>
             </TableRow>
           </TableHead>
@@ -58,8 +51,9 @@ const VillagesTable = ({ villages, ceities, setCities }) => {
                 village={village}
                 index={index}
                 villages={villages}
-                ceities={ceities}
+                cities={cities}
                 setCities={setCities}
+                city={city}
               />
             ))}
           </TableBody>

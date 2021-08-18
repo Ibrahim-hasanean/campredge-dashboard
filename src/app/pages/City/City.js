@@ -27,7 +27,7 @@ const City = () => {
 
   return (
     <Grid container>
-      <CitiesHeader getData={getData} />
+      <CitiesHeader cities={cities} setCities={setCities} />
       <CitiesTable cities={cities} setCities={setCities} />
     </Grid>
   );

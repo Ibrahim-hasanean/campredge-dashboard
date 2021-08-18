@@ -11,9 +11,9 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import { Alert } from "@material-ui/lab";
-import { addCity } from "../../../api/Cities/index";
+import { addVillage } from "../../../api/Village/index";
 import ClearIcon from "@material-ui/icons/Clear";
-const CitiesHeader = ({ cities, setCities }) => {
+const VillageHeader = ({ city, cities, setCities }) => {
   const classes = useStyle();
   const [error, setError] = useState(null);
   const [openSnackBar, setOpenSnackBar] = useState(false);
@@ -31,18 +31,8 @@ const CitiesHeader = ({ cities, setCities }) => {
     setLoading(false);
   };
 
-  // const getInputClasses = fieldname => {
-  //   if (formik.touched[fieldname] && formik.errors[fieldname]) {
-  //     return classes.invalid;
-  //   }
-
-  //   if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-  //     return "is-valid";
-  //   }
-
-  //   return "";
-  // };
   const initialValues = {
+    cityId: city._id,
     arName: "",
     enName: ""
   };
@@ -57,18 +47,24 @@ const CitiesHeader = ({ cities, setCities }) => {
     onSubmit: async (values, { setStatus, setSubmitting }) => {
       enableLoading();
       const data = {
+        cityId: values.cityId,
         name: {
           ar: values.arName,
           en: values.enName
         }
       };
-      addCity(data)
+      addVillage(data)
         .then(async response => {
-          console.log(response, "add city response");
+          console.log(response, "add village response");
           disableLoading();
           if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-            let newCities = [...cities];
-            newCities.unshift(response.data.city);
+            console.log(response.data.village);
+            let newCities = cities;
+            let updatedCity = response.data.city;
+            let oldCityIndex = newCities.findIndex(
+              x => x._id === updatedCity._id
+            );
+            newCities[oldCityIndex] = updatedCity;
             setCities([...newCities]);
             formik.resetForm();
             setOpenSnackBar(true);
@@ -101,9 +97,6 @@ const CitiesHeader = ({ cities, setCities }) => {
 
   return (
     <Grid container>
-      <Grid className={classes.header} item xs={12}>
-        <Typography variant="h4">المدن</Typography>
-      </Grid>
       <form onSubmit={formik.handleSubmit} className={classes.form}>
         <Grid container justify="flex-start" alignItems="center" item xs={12}>
           <Grid container xs={3} direction="column" item>
@@ -193,4 +186,4 @@ const CitiesHeader = ({ cities, setCities }) => {
   );
 };
 
-export default CitiesHeader;
+export default VillageHeader;
