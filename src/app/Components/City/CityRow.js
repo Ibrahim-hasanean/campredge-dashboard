@@ -26,6 +26,12 @@ const useStyle = makeStyles(() => ({
   },
   table: {
     width: "100%"
+  },
+  vilage: {
+    color: "green"
+  },
+  editeIcon: {
+    color: "#c3c34a"
   }
 }));
 const CityRow = ({ index, city, cities, setCities }) => {
