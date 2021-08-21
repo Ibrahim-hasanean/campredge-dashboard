@@ -44,6 +44,7 @@ const useStyle = makeStyles(() => ({
     minWidth: "650px",
     display: "flex",
     flexDirection: "column",
+    alignItems: "center",
     // justifyContent: "flex-start",
     flexWrap: "wrap",
     padding: "30px 15px"

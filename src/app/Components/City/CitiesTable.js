@@ -32,7 +32,7 @@ const CitiesTable = ({ cities, setCities }) => {
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                اسم المدينة انجلش
+                اسم المدينة انجليزي
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}

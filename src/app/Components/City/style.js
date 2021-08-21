@@ -7,7 +7,7 @@ const useStyle = makeStyles(theme => ({
     }
   },
   tableHeader: {
-    fontWeight: "600"
+    // fontWeight: "600"
   },
   tableCells: {
     fontSize: "13px",

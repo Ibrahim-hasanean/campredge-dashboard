@@ -38,19 +38,19 @@ const UsersTable = ({ getData, setPage, users, setUsers, page, pages }) => {
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                ايميل المستخدم
+                البريد الالكتروني
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                رقم جوال المستخدم
+                رقم الجوال
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                نشاط المستخدم
+                النشاط
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
@@ -68,20 +68,20 @@ const UsersTable = ({ getData, setPage, users, setUsers, page, pages }) => {
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                جنس المستخدم
+                الجنس
               </TableCell>
 
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                تعديل المستخدم
+                تعديل
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                ايقاف/تنشيط المستخدم
+                تنشيط/ايقاف
               </TableCell>
             </TableRow>
           </TableHead>

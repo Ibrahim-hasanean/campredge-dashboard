@@ -39,31 +39,31 @@ const SpecialistsTable = ({
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                اسم المتخصص
+                اسم الأخصائي
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                ايميل المتخصص
+                ايميل الأخصائي
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                رقم جوال المتخصص
+                رقم جوال الأخصائي
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                تعديل المتخصص
+                تعديل الأخصائي
               </TableCell>
               <TableCell
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
-                ايقاف/تنشيط المتخصص
+                ايقاف/تنشيط الأخصائي
               </TableCell>
             </TableRow>
           </TableHead>

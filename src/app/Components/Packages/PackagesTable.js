@@ -53,7 +53,7 @@ const PackagesTable = ({ packages, setPackages }) => {
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  مفعلة
+                  الحالة
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}
@@ -89,7 +89,7 @@ const PackagesTable = ({ packages, setPackages }) => {
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
-                  حذف
+                  تفعيل/ايقاف
                 </TableCell>
               </TableRow>
             </TableHead>

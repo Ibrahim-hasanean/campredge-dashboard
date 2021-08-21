@@ -4,10 +4,7 @@ import {
   makeStyles,
   Grid,
   Button,
-  Typography,
-  FormControl,
-  InputLabel,
-  Select
+  Typography
 } from "@material-ui/core";
 import * as Yup from "yup";
 import { useFormik } from "formik";
@@ -244,7 +241,7 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
             {formik.errors.password}
           </Typography>
         ) : null}
-        <TextField
+        {/* <TextField
           className={classes.date}
           variant="outlined"
           name="dob"
@@ -282,7 +279,7 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
               {formik.errors.gender}
             </Typography>
           ) : null}
-        </FormControl>
+        </FormControl> */}
         <Grid
           className={classes.buttonsContainer}
           container
