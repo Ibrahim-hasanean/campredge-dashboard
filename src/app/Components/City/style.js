@@ -6,18 +6,12 @@ const useStyle = makeStyles(theme => ({
       background: "#d8d4d4"
     }
   },
-  tableHeader: {
-    // fontWeight: "600"
-  },
   tableCells: {
     fontSize: "13px",
     fontWeight: "700"
   },
   table: {
     width: "100%"
-  },
-  productsContainer: {
-    // width: "max-content"
   },
   formControl: {
     margin: "0px 10px",

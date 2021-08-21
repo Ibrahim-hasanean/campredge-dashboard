@@ -6,10 +6,26 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { Grid } from "@material-ui/core";
-import useStyle from "./style";
+import { Grid, makeStyles } from "@material-ui/core";
 import VillageRow from "./VillageRow";
 
+const useStyle = makeStyles(() => ({
+  tableRow: {
+    "&:hover": {
+      background: "#d8d4d4"
+    }
+  },
+  tableHeader: {
+    // fontWeight: "600"
+  },
+  tableCells: {
+    fontSize: "13px",
+    fontWeight: "700"
+  },
+  table: {
+    width: "100%"
+  }
+}));
 const VillagesTable = ({ villages, city, cities, setCities }) => {
   const classes = useStyle();
 

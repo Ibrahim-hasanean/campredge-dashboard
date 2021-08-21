@@ -2,10 +2,28 @@ import React, { useState } from "react";
 import TableCell from "@material-ui/core/TableCell";
 import TableRow from "@material-ui/core/TableRow";
 import DeleteIcon from "@material-ui/icons/Delete";
-import useStyle from "./style";
-import { IconButton } from "@material-ui/core";
+import { IconButton, makeStyles } from "@material-ui/core";
 import PopUp from "../PopUp/PopUp";
 import DeleteVillage from "./DeleteVillage";
+
+const useStyle = makeStyles(() => ({
+  tableRow: {
+    "&:hover": {
+      background: "#d8d4d4"
+    }
+  },
+  tableHeader: {
+    // fontWeight: "600"
+  },
+  tableCells: {
+    fontSize: "13px",
+    fontWeight: "700"
+  },
+  table: {
+    width: "100%"
+  }
+}));
+
 const VillageRow = ({ village, index, villages, city, cities, setCities }) => {
   const classes = useStyle();
   const [openDelete, setOpenDelete] = useState();

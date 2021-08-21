@@ -4,13 +4,30 @@ import TableRow from "@material-ui/core/TableRow";
 
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
-import useStyle from "./style";
-import { IconButton } from "@material-ui/core";
+import { IconButton, makeStyles } from "@material-ui/core";
 import PopUp from "../PopUp/PopUp";
 import DeleteCity from "./DeleteCity";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import EditeCity from "./EditeCity";
 import Village from "./Village";
+
+const useStyle = makeStyles(() => ({
+  tableRow: {
+    "&:hover": {
+      background: "#d8d4d4"
+    }
+  },
+  tableHeader: {
+    // fontWeight: "600"
+  },
+  tableCells: {
+    fontSize: "13px",
+    fontWeight: "700"
+  },
+  table: {
+    width: "100%"
+  }
+}));
 const CityRow = ({ index, city, cities, setCities }) => {
   const classes = useStyle();
   const [openDelete, setOpenDelete] = useState(false);
