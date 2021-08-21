@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, makeStyles } from "@material-ui/core";
 import Table from "@material-ui/core/Table";
 import Paper from "@material-ui/core/Paper";
 import TableBody from "@material-ui/core/TableBody";
@@ -7,8 +7,26 @@ import TableCell from "@material-ui/core/TableCell";
 import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import useStyle from "./style";
+// import useStyle from "./style";
 import CityRow from "./CityRow";
+
+const useStyle = makeStyles(() => ({
+  tableRow: {
+    "&:hover": {
+      background: "#d8d4d4"
+    }
+  },
+  tableHeader: {
+    // fontWeight: "600"
+  },
+  tableCells: {
+    fontSize: "13px",
+    fontWeight: "700"
+  },
+  table: {
+    width: "100%"
+  }
+}));
 const CitiesTable = ({ cities, setCities }) => {
   const classes = useStyle();
   return (
