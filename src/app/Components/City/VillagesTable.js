@@ -56,6 +56,12 @@ const VillagesTable = ({ villages, city, cities, setCities }) => {
                 className={`${classes.tableCells} ${classes.tableHeader}`}
                 align="center"
               >
+                تعديل الحي
+              </TableCell>
+              <TableCell
+                className={`${classes.tableCells} ${classes.tableHeader}`}
+                align="center"
+              >
                 حذف الحي
               </TableCell>
             </TableRow>

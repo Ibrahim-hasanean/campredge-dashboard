@@ -5,6 +5,8 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import { IconButton, makeStyles } from "@material-ui/core";
 import PopUp from "../PopUp/PopUp";
 import DeleteVillage from "./DeleteVillage";
+import EditeVillage from "./EditeVillage";
+import EditIcon from "@material-ui/icons/Edit";
 
 const useStyle = makeStyles(() => ({
   tableRow: {
@@ -21,18 +23,29 @@ const useStyle = makeStyles(() => ({
   },
   table: {
     width: "100%"
+  },
+  editeIcon: {
+    color: "#c3c34a"
   }
 }));
 
 const VillageRow = ({ village, index, villages, city, cities, setCities }) => {
   const classes = useStyle();
   const [openDelete, setOpenDelete] = useState();
+  const [openEdite, setOpenEdite] = useState();
 
   const handleOpenDelete = () => {
     setOpenDelete(true);
   };
   const handleCloseDelete = () => {
     setOpenDelete(false);
+  };
+
+  const handleOpenEdite = () => {
+    setOpenEdite(true);
+  };
+  const handleCloseEdite = () => {
+    setOpenEdite(false);
   };
 
   return (
@@ -45,6 +58,11 @@ const VillageRow = ({ village, index, villages, city, cities, setCities }) => {
       </TableCell>
       <TableCell className={classes.tableCells} align="center">
         {village.name.en}
+      </TableCell>
+      <TableCell className={classes.tableCells} align="center">
+        <IconButton onClick={handleOpenEdite}>
+          <EditIcon className={classes.editeIcon} />
+        </IconButton>
       </TableCell>
       <TableCell className={classes.tableCells} align="center">
         <IconButton onClick={handleOpenDelete}>
@@ -64,6 +82,21 @@ const VillageRow = ({ village, index, villages, city, cities, setCities }) => {
           village={village}
           villages={villages}
           handleClose={handleCloseDelete}
+        />
+      </PopUp>
+      <PopUp
+        maxWidth="lg"
+        open={openEdite}
+        handleClose={handleCloseEdite}
+        title={`هل انت متاكد انك تريد حذف ${village.name.ar} من ${city.name.ar}`}
+      >
+        <EditeVillage
+          cities={cities}
+          city={city}
+          setCities={setCities}
+          village={village}
+          villages={villages}
+          handleClose={handleCloseEdite}
         />
       </PopUp>
     </TableRow>
