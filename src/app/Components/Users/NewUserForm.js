@@ -241,45 +241,6 @@ const NewUserForm = ({ handleClose, users, setUsers }) => {
             {formik.errors.password}
           </Typography>
         ) : null}
-        {/* <TextField
-          className={classes.date}
-          variant="outlined"
-          name="dob"
-          placeholder="تاريخ الميلاد"
-          type="date"
-          {...formik.getFieldProps("dob")}
-          InputProps={{
-            classes: {
-              notchedOutline: getInputClasses("dob")
-            }
-          }}
-        />
-        {formik.touched.dob && formik.errors.dob ? (
-          <Typography color="secondary" variant="body2">
-            {formik.errors.dob}
-          </Typography>
-        ) : null}
-        <FormControl className={classes.inputs}>
-          <InputLabel>جنس المسشتخدم</InputLabel>
-          <Select
-            className={classes.inputs}
-            name="gender"
-            {...formik.getFieldProps("gender")}
-            defaultValue=""
-          >
-            <option className={classes.options} value="ذكر">
-              ذكر
-            </option>
-            <option className={classes.options} value="أنثى">
-              أنثى
-            </option>
-          </Select>
-          {formik.touched.gender && formik.errors.gender ? (
-            <Typography color="secondary" variant="body2">
-              {formik.errors.gender}
-            </Typography>
-          ) : null}
-        </FormControl> */}
         <Grid
           className={classes.buttonsContainer}
           container

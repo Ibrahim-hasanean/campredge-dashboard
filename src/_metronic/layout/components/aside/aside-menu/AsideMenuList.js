@@ -5,9 +5,10 @@ import { useLocation } from "react-router";
 import { NavLink } from "react-router-dom";
 import SVG from "react-inlinesvg";
 import { toAbsoluteUrl, checkIsActive } from "../../../../_helpers";
-
+import useStyle from "../../style";
 export function AsideMenuList({ layoutProps }) {
   const location = useLocation();
+  const classes = useStyle();
   const getMenuItemActive = (url, hasSubmenu = false) => {
     return checkIsActive(location, url)
       ? ` ${!hasSubmenu &&
@@ -28,7 +29,9 @@ export function AsideMenuList({ layoutProps }) {
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
             </span>
-            <span className="menu-text">الصفحة الرئيسية</span>
+            <span className={`menu-text ${classes.cairoText} `}>
+              الصفحة الرئيسية
+            </span>
           </NavLink>
         </li>
 
@@ -47,7 +50,7 @@ export function AsideMenuList({ layoutProps }) {
                 src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
               />
             </span>
-            <span className="menu-text">المستخدمين</span>
+            <span className={`menu-text ${classes.cairoText}`}>المستخدمين</span>
           </NavLink>
         </li>
         <li
@@ -60,7 +63,7 @@ export function AsideMenuList({ layoutProps }) {
                 src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
               />
             </span>
-            <span className="menu-text">الأخصائيين</span>
+            <span className={`menu-text ${classes.cairoText}`}>الأخصائيين</span>
           </NavLink>
         </li>
 
@@ -74,7 +77,7 @@ export function AsideMenuList({ layoutProps }) {
                 src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
               />
             </span>
-            <span className="menu-text">المبيعات</span>
+            <span className={`menu-text ${classes.cairoText}`}>المبيعات</span>
           </NavLink>
         </li>
         <li
@@ -87,7 +90,7 @@ export function AsideMenuList({ layoutProps }) {
                 src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
               />
             </span>
-            <span className="menu-text">الباقات</span>
+            <span className={`menu-text ${classes.cairoText}`}>الباقات</span>
           </NavLink>
         </li>
         <li
@@ -100,7 +103,20 @@ export function AsideMenuList({ layoutProps }) {
                 src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
               />
             </span>
-            <span className="menu-text">الشحنات</span>
+            <span className={`menu-text ${classes.cairoText}`}>الشحنات</span>
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item ${getMenuItemActive("/products", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/products">
+            <span className="svg-icon menu-icon">
+              <SVG
+                src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
+              />
+            </span>
+            <span className={`menu-text ${classes.cairoText}`}>المنتجات</span>
           </NavLink>
         </li>
         <li
@@ -113,7 +129,7 @@ export function AsideMenuList({ layoutProps }) {
                 src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
               />
             </span>
-            <span className="menu-text">المدن</span>
+            <span className={`menu-text ${classes.cairoText}`}>المدن</span>
           </NavLink>
         </li>
       </ul>

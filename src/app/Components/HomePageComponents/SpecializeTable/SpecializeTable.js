@@ -33,7 +33,7 @@ const SpecializeTable = ({ specialist }) => {
               <TableCell className={classes.cells}>#</TableCell>
               <TableCell className={classes.cells} align="right">
                 {" "}
-                اسم المتخصص
+                اسم الأخصائي
               </TableCell>
               <TableCell className={classes.cells} align="right">
                 عدد العملاء

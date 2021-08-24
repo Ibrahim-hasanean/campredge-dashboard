@@ -7,10 +7,12 @@ import EditIcon from "@material-ui/icons/Edit";
 import { IconButton } from "@material-ui/core";
 import PopUp from "../PopUp/PopUp";
 import EditeSpecialise from "./EditeSpecialise";
+import SpecialistUsers from "./SpecialistUsers";
 
 const SpecialistsRows = ({ spec, specialists, setSpecialists, index }) => {
   const classes = useStyle();
   const [openEdite, setOpenEdite] = useState(false);
+  const [openSpecUsers, setOpenSpecUsers] = useState(false);
 
   const handleOpenEdite = () => {
     setOpenEdite(true);
@@ -20,18 +22,42 @@ const SpecialistsRows = ({ spec, specialists, setSpecialists, index }) => {
     setOpenEdite(false);
   };
 
+  const handleOpenSpecUsers = () => {
+    setOpenSpecUsers(true);
+  };
+
+  const handleCloseSpecUsers = () => {
+    setOpenSpecUsers(false);
+  };
+
   return (
     <TableRow className={classes.tableRow}>
-      <TableCell className={classes.tableCells} align="center">
+      <TableCell
+        onClick={() => handleOpenSpecUsers()}
+        className={classes.tableCells}
+        align="center"
+      >
         {index + 1}
       </TableCell>
-      <TableCell className={classes.tableCells} align="center">
+      <TableCell
+        onClick={() => handleOpenSpecUsers()}
+        className={classes.tableCells}
+        align="center"
+      >
         {spec.fullName || "_"}
       </TableCell>
-      <TableCell className={classes.tableCells} align="center">
+      <TableCell
+        onClick={() => handleOpenSpecUsers()}
+        className={classes.tableCells}
+        align="center"
+      >
         {spec.email || "_"}
       </TableCell>
-      <TableCell className={classes.tableCells} align="center">
+      <TableCell
+        onClick={() => handleOpenSpecUsers()}
+        className={classes.tableCells}
+        align="center"
+      >
         {spec.phoneNum || "_"}
       </TableCell>
       <TableCell className={classes.tableCells} align="center">
@@ -53,6 +79,14 @@ const SpecialistsRows = ({ spec, specialists, setSpecialists, index }) => {
           setSpecialists={setSpecialists}
           handleClose={handleCloseEdite}
         />
+      </PopUp>
+      <PopUp
+        title="مستخدمين يتبعون للأخصائي"
+        open={openSpecUsers}
+        handleClose={handleCloseSpecUsers}
+        maxWidth="lg"
+      >
+        <SpecialistUsers users={spec.users} />
       </PopUp>
     </TableRow>
   );

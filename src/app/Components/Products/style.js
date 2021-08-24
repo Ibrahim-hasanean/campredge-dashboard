@@ -5,9 +5,9 @@ const useStyle = makeStyles(theme => ({
     width: "100%"
   },
   tableRow: {
-    "&:hover": {
-      background: "#d8d4d4"
-    }
+    // "&:hover": {
+    //   background: "#d8d4d4"
+    // }
   },
   tableHeader: {
     fontWeight: "600"
@@ -19,9 +19,17 @@ const useStyle = makeStyles(theme => ({
   table: {
     width: "100%"
   },
+  form: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    padding: "30px 0px",
+    width: "600px"
+  },
   avatar: {
-    width: "70px",
-    height: "70px"
+    width: "50px",
+    height: "50px"
   },
   editeIcon: {
     color: "#c3c34a"
@@ -32,15 +40,9 @@ const useStyle = makeStyles(theme => ({
   activateIcon: {
     color: "green"
   },
-  select: {
-    width: "100px"
-  },
+
   formControl: {
     margin: "0px 10px",
-    minWidth: 120
-  },
-  options: {
-    margin: theme.spacing(1),
     minWidth: 120
   },
   searchButton: {
@@ -49,30 +51,31 @@ const useStyle = makeStyles(theme => ({
   header: {
     paddingBottom: "20px"
   },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    padding: "30px",
-    width: 600
-  },
   inputs: {
     width: "90%",
     textAlign: "right",
     margin: "10px 0px"
   },
-  buttonsContainer: {
-    width: "90%"
+  select: {
+    width: "100%",
+    textAlign: "right"
   },
-
+  options: {
+    width: "100%",
+    padding: "5px"
+  },
+  maxMin: {
+    width: "40%",
+    margin: "0px 5px"
+  },
+  buttonsContainer: {
+    width: "90%",
+    margin: "5px 0px"
+  },
   buttons: {
     fontSize: "14px",
     width: "30%",
     margin: "10px 0px"
-  },
-  message: {
-    padding: "30px"
   }
 }));
 

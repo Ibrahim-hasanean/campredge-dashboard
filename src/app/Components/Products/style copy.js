@@ -45,34 +45,6 @@ const useStyle = makeStyles(theme => ({
   },
   searchButton: {
     margin: "0px 10px"
-  },
-  header: {
-    paddingBottom: "20px"
-  },
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "flex-start",
-    padding: "30px",
-    width: 600
-  },
-  inputs: {
-    width: "90%",
-    textAlign: "right",
-    margin: "10px 0px"
-  },
-  buttonsContainer: {
-    width: "90%"
-  },
-
-  buttons: {
-    fontSize: "14px",
-    width: "30%",
-    margin: "10px 0px"
-  },
-  message: {
-    padding: "30px"
   }
 }));
 
