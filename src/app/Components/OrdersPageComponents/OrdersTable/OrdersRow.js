@@ -39,6 +39,9 @@ const OrdersRow = ({ order, index }) => {
           {index + 1}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
+          {order.orderNo}
+        </TableCell>
+        <TableCell className={classes.tableCells} align="center">
           {order.package.name.ar}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
@@ -46,9 +49,6 @@ const OrdersRow = ({ order, index }) => {
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           {order.paymentType}
-        </TableCell>
-        <TableCell className={classes.tableCells} align="center">
-          {order.orderNo}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           {order.user.fullName}

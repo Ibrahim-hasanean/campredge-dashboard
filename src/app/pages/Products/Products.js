@@ -13,14 +13,17 @@ const Products = () => {
   const [page, setPage] = useState(1);
   const [pages, setPages] = useState();
   const history = useHistory();
-  const getProductData = useCallback(async () => {
-    let response = await getProduct();
-    if (response.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
-      history.push("/logout");
-    }
-    setProducts([...response.data.products]);
-    setPages(response.data.pages);
-  }, [history]);
+  const getProductData = useCallback(
+    async query => {
+      let response = await getProduct(query);
+      if (response.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
+        history.push("/logout");
+      }
+      setProducts([...response.data.products]);
+      setPages(response.data.pages);
+    },
+    [history]
+  );
 
   const getProductTypesData = useCallback(async () => {
     let response = await getProductsTypes();
@@ -51,6 +54,7 @@ const Products = () => {
         products={products}
         setProducts={setProducts}
         packages={packages}
+        getData={getProductData}
       />
       <ProductTable
         page={page}
@@ -60,6 +64,8 @@ const Products = () => {
         getData={getProductData}
         setProducts={setProducts}
         products={products}
+        productsTypes={productsTypes}
+        packages={packages}
       />
     </Grid>
   );

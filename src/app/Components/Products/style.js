@@ -76,6 +76,15 @@ const useStyle = makeStyles(theme => ({
     fontSize: "14px",
     width: "30%",
     margin: "10px 0px"
+  },
+  imageButton: {
+    width: "40%"
+  },
+  productImage: {
+    width: "70px",
+    height: "70px",
+    borderRadius: "50%",
+    objectFit: "cover"
   }
 }));
 

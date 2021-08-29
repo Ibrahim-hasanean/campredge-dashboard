@@ -26,6 +26,7 @@ const useStyle = makeStyles(() => ({
     width: "100%"
   }
 }));
+
 const CitiesTable = ({ cities, setCities }) => {
   const classes = useStyle();
   return (

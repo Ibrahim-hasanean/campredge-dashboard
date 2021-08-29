@@ -12,17 +12,20 @@ const Shipments = () => {
   const [page, setPage] = useState(1);
   const history = useHistory();
 
-  const getData = useCallback(async () => {
-    let data = await getShipments();
-    if (!data) {
-      return;
-    }
-    if (data.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
-      return history.push("/logout");
-    }
-    setShipments([...data.data.shipments]);
-    setPages(data.data.pages);
-  }, [history]);
+  const getData = useCallback(
+    async query => {
+      let data = await getShipments(query);
+      if (!data) {
+        return;
+      }
+      if (data.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
+        return history.push("/logout");
+      }
+      setShipments([...data.data.shipments]);
+      setPages(data.data.pages);
+    },
+    [history]
+  );
 
   useEffect(() => {
     getData();
@@ -30,7 +33,11 @@ const Shipments = () => {
 
   return (
     <Grid container>
-      <ShipmentHeader setShipments={setShipments} shipments={shipments} />
+      <ShipmentHeader
+        getData={getData}
+        setShipments={setShipments}
+        shipments={shipments}
+      />
       <ShipmentsTable
         setShipments={setShipments}
         shipments={shipments}

@@ -63,7 +63,7 @@ const PackageRows = ({ pack, index, packages, setPackages }) => {
           {pack.price || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {pack.discount || "_"}
+          {pack.discountPrice || "_"}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           {pack.mostDuration || "_"}

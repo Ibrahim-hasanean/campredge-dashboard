@@ -3,7 +3,8 @@ import { Button, Grid, Typography } from "@material-ui/core";
 import useStyle from "./style";
 import PopUp from "../PopUp/PopUp";
 import AddShipment from "./AddShipment";
-const ShipmentHeader = ({ shipments, setShipments }) => {
+import ShipmentsFilter from "./ShipmentsFilter";
+const ShipmentHeader = ({ shipments, setShipments, getData }) => {
   const classes = useStyle();
   const [open, setOpen] = useState(false);
 
@@ -16,11 +17,22 @@ const ShipmentHeader = ({ shipments, setShipments }) => {
   };
 
   return (
-    <Grid className={classes.header} container justify="space-between">
-      <Typography variant="h4">صفحة الشحنات</Typography>
-      <Button onClick={handleOpenAdd} variant="contained" color="primary">
-        اضافة شحنة
-      </Button>
+    <Grid className={classes.header} container>
+      <Grid container item xs={12} justify="center">
+        <Typography variant="h4">صفحة الشحنات</Typography>
+      </Grid>
+      <Grid
+        container
+        item
+        xs={12}
+        justify="space-between"
+        alignItems="flex-end"
+      >
+        <ShipmentsFilter getData={getData} />
+        <Button onClick={handleOpenAdd} variant="contained" color="primary">
+          اضافة شحنة
+        </Button>
+      </Grid>
       <PopUp
         handleClose={handleCloseAdd}
         open={open}

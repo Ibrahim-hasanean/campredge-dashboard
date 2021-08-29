@@ -69,6 +69,12 @@ const OrdersTable = () => {
                   className={`${classes.tableCells} ${classes.tableHeader}`}
                   align="center"
                 >
+                  رقم الطلب
+                </TableCell>
+                <TableCell
+                  className={`${classes.tableCells} ${classes.tableHeader}`}
+                  align="center"
+                >
                   اسم الباقة
                 </TableCell>
                 <TableCell
@@ -82,12 +88,6 @@ const OrdersTable = () => {
                   align="center"
                 >
                   نوع الدفع
-                </TableCell>
-                <TableCell
-                  className={`${classes.tableCells} ${classes.tableHeader}`}
-                  align="center"
-                >
-                  رقم الطلب
                 </TableCell>
                 <TableCell
                   className={`${classes.tableCells} ${classes.tableHeader}`}

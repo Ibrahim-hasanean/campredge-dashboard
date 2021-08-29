@@ -31,17 +31,6 @@ const CitiesHeader = ({ cities, setCities }) => {
     setLoading(false);
   };
 
-  // const getInputClasses = fieldname => {
-  //   if (formik.touched[fieldname] && formik.errors[fieldname]) {
-  //     return classes.invalid;
-  //   }
-
-  //   if (formik.touched[fieldname] && !formik.errors[fieldname]) {
-  //     return "is-valid";
-  //   }
-
-  //   return "";
-  // };
   const initialValues = {
     arName: "",
     enName: ""

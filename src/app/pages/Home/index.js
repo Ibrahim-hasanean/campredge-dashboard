@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { Grid, makeStyles } from "@material-ui/core";
-
 import { getHomeSummary } from "api/HomeSummary";
+import { getAccessToken } from "api/Auth/index";
 import { API_COMMON_STATUS } from "helpers/api-helper";
 import SummarySection from "_metronic/layout/components/SummarySection";
 import Snackbar from "_metronic/layout/components/CustomSnackbar";
@@ -21,24 +21,31 @@ const DashboardPage = () => {
   const [homeDetails, setHomeDetails] = useState({});
   const [hasError, setHasError] = useState(false);
 
+  const refreshToken = useCallback(async () => {
+    let response = await getAccessToken();
+    if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+      return;
+    } else if (response.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
+      history.push("/logout");
+    }
+  }, [history]);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-
     getHomeSummary(token)
       .then(response => {
         if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
           console.log(response);
           setHomeDetails(response);
         } else if (response.responseStatus === API_COMMON_STATUS.UNAUTHORIZED) {
-          // show no auth message response.message
-          setHasError(true);
           history.push("/logout");
         }
       })
       .catch(error => {
         console.error(error);
       });
-  }, [history]);
+    refreshToken();
+  }, [history, refreshToken]);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {

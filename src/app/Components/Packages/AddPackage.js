@@ -5,9 +5,9 @@ import * as yup from "yup";
 import { Alert } from "@material-ui/lab";
 import { useFormik } from "formik";
 import { API_COMMON_STATUS } from "helpers/api-helper";
-
 import { addNewPackage } from "../../../api/packages/index";
 import RTLProvider from "../RTLProvider";
+
 const AddPackage = ({ setPackages, packages, handleClose }) => {
   const classes = useStyle();
   const [error, setError] = useState(null);
@@ -29,18 +29,18 @@ const AddPackage = ({ setPackages, packages, handleClose }) => {
     enName: "",
     ardescription: "",
     endescription: "",
-    quantity: "",
     duration: "",
-    price: ""
+    price: "",
+    quantity: ""
   };
   const schema = yup.object().shape({
     arName: yup.string().required("هذا الحقل مطلوب"),
     enName: yup.string().required("هذا الحقل مطلوب"),
     ardescription: yup.string().required("هذا الحقل مطلوب"),
     endescription: yup.string().required("هذا الحقل مطلوب"),
-    quantity: yup.number().required("هذا الحقل مطلوب"),
     duration: yup.number().required("هذا الحقل مطلوب"),
-    price: yup.number().required("هذا الحقل مطلوب")
+    price: yup.number().required("هذا الحقل مطلوب"),
+    quantity: yup.number().required("هذا الحقل مطلوب")
   });
 
   const formik = useFormik({
@@ -54,9 +54,9 @@ const AddPackage = ({ setPackages, packages, handleClose }) => {
           ar: values.ardescription,
           en: values.endescription
         },
-        quantity: values.quantity,
         duration: values.duration,
-        price: values.price
+        price: values.price,
+        quantity: values.quantity
       };
       let response = await addNewPackage(data);
       console.log(response);
@@ -187,25 +187,6 @@ const AddPackage = ({ setPackages, packages, handleClose }) => {
             {formik.errors.endescription}
           </Typography>
         ) : null}
-
-        <TextField
-          type="number"
-          className={classes.inputs}
-          variant="outlined"
-          name="quantity"
-          label="الكمية المسموح بها"
-          {...formik.getFieldProps("quantity")}
-          InputProps={{
-            classes: {
-              notchedOutline: getInputClasses("quantity")
-            }
-          }}
-        />
-        {formik.touched.quantity && formik.errors.quantity ? (
-          <Typography color="secondary" variant="body2">
-            {formik.errors.quantity}
-          </Typography>
-        ) : null}
         <TextField
           type="number"
           className={classes.inputs}
@@ -222,6 +203,24 @@ const AddPackage = ({ setPackages, packages, handleClose }) => {
         {formik.touched.duration && formik.errors.duration ? (
           <Typography color="secondary" variant="body2">
             {formik.errors.duration}
+          </Typography>
+        ) : null}
+        <TextField
+          type="number"
+          className={classes.inputs}
+          variant="outlined"
+          name="quantity"
+          label="الكمية المسموح بها"
+          {...formik.getFieldProps("quantity")}
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("quantity")
+            }
+          }}
+        />
+        {formik.touched.quantity && formik.errors.quantity ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.quantity}
           </Typography>
         ) : null}
         <TextField

@@ -14,17 +14,17 @@ import { API_COMMON_STATUS } from "helpers/api-helper";
 import { Alert } from "@material-ui/lab";
 import RTLProvider from "../RTLProvider";
 import useStyle from "./style";
-import { addProduct } from "../../../api/Products/index";
+import { updateProduct } from "../../../api/Products/index";
 
-const AddProduct = ({
+const EditeProduct = ({
   packages,
   productsTypes,
   products,
   setProducts,
-  handleClose
+  handleClose,
+  product
 }) => {
   const classes = useStyle();
-  // const [data, setData] = useState({});
   const [image, setImage] = useState(null);
   const [imageError, setImageError] = useState(null);
   const [error, setError] = useState(null);
@@ -32,13 +32,13 @@ const AddProduct = ({
   const [loading, setLoading] = useState(false);
   const fileRef = useRef();
   const initialValues = {
-    arName: "",
-    enName: "",
-    arPreparation: "",
-    enPreparation: "",
-    arInfo: "",
-    enInfo: "",
-    typeId: ""
+    arName: product.name.ar,
+    enName: product.name.en,
+    arPreparation: product.preparation.ar,
+    enPreparation: product.preparation.en,
+    arInfo: product.info.ar,
+    enInfo: product.info.en,
+    typeId: product.type._id
   };
   const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
   let types = {
@@ -50,14 +50,24 @@ const AddProduct = ({
     enInfo: Yup.string().required("هذا الحقل مطلوب"),
     typeId: Yup.string().required("هذا الحقل مطلوب")
   };
+
   packages.forEach(pack => {
     types[`${pack._id}min`] = Yup.number();
     types[`${pack._id}max`] = Yup.number();
-    initialValues[`${pack._id}min`] = 0;
-    initialValues[`${pack._id}max`] = "";
+    const productPackageAmountIndex = product.amount.findIndex(
+      x => String(x.package) === String(pack._id)
+    );
+    initialValues[`${pack._id}min`] =
+      productPackageAmountIndex === -1
+        ? 0
+        : product.amount[productPackageAmountIndex].min || 0;
+    initialValues[`${pack._id}max`] =
+      productPackageAmountIndex === -1
+        ? ""
+        : product.amount[productPackageAmountIndex].max || "";
   });
-  const schema = Yup.object().shape(types);
 
+  const schema = Yup.object().shape(types);
   const formik = useFormik({
     initialValues,
     validationSchema: schema,
@@ -91,29 +101,28 @@ const AddProduct = ({
         ];
       });
       let formData = new FormData();
-      let dataKeys = Object.keys(data);
       formData.append("name", JSON.stringify(data.name));
       formData.append("typeId", data.typeId);
       formData.append("preparation", JSON.stringify(data.preparation));
       formData.append("info", JSON.stringify(data.info));
       formData.append("image", image);
       formData.append("amount", JSON.stringify(data.amount));
-      dataKeys.forEach(key => {
-        console.log(key, formData.get(key));
-      });
-      addProduct(formData)
+
+      updateProduct(product._id, formData)
         .then(response => {
           console.log(response, "add product response");
           disableLoading();
           if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
             console.log(response.data);
             let newProducts = products;
-            newProducts.unshift(response.data.product);
+            let updatedProduct = response.data.product;
+            let oldProductIndex = products.findIndex(
+              x => x._id === product._id
+            );
+            newProducts[oldProductIndex] = updatedProduct;
             setProducts([...newProducts]);
-            formik.resetForm();
             setOpenSnackBar(true);
             setSubmitting(false);
-            // handleClose();
           } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
             setSubmitting(false);
             setError(response.message);
@@ -171,6 +180,7 @@ const AddProduct = ({
     // setImage(file);
     if (SUPPORTED_FORMATS.includes(file.type)) return setImage(file);
     setImageError("يجب الصورة ان تكون بصيغة png او jpeg او jpg");
+    // setImageURL(URL.createObjectURL(file));
   };
 
   return (
@@ -342,6 +352,7 @@ const AddProduct = ({
         >
           اختر صورة للمنتج
         </Button>
+
         {imageError ? (
           <Typography color="secondary" variant="body2">
             {formik.errors.enName}
@@ -400,7 +411,7 @@ const AddProduct = ({
             disabled={formik.isSubmitting}
           >
             {loading && <span className="ml-3 spinner spinner-white"></span>}
-            اضافة
+            تعديل
           </Button>
           <Button
             className={classes.buttons}
@@ -417,4 +428,4 @@ const AddProduct = ({
   );
 };
 
-export default AddProduct;
+export default EditeProduct;

@@ -5,8 +5,9 @@ import RTLProvider from "../RTLProvider";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Alert } from "@material-ui/lab";
-// import { API_COMMON_STATUS } from "helpers/api-helper";
-// import { addNewSpecialist } from "../../../api/Specialists/index";
+
+import { API_COMMON_STATUS } from "helpers/api-helper";
+import { addNewSpecialist } from "../../../api/Specialists/index";
 const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
   const classes = useStyle();
   const [loading, setLoading] = useState(false);
@@ -23,9 +24,9 @@ const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
     setLoading(true);
   };
 
-  // const disableLoading = () => {
-  //   setLoading(false);
-  // };
+  const disableLoading = () => {
+    setLoading(false);
+  };
 
   const schema = yup.object().shape({
     fullName: yup.string().required("هذا الحقل مطلوب"),
@@ -56,35 +57,35 @@ const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
         phoneNum: values.phoneNum
       };
       console.log(data);
-      //   addNewSpecialist(data)
-      //     .then(response => {
-      //       console.log(response, "add specialists response");
-      //       disableLoading();
-      //       if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-      //         console.log(response.data.user);
-      //         let newSpecialists = specialists;
-      //         newSpecialists.unshift(response.data.specialist);
-      //         setSpecialists([...newSpecialists]);
-      //         formik.resetForm();
-      //         setOpenSnackBar(true);
-      //         setSubmitting(false);
-      //         // handleClose();
-      //       } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
-      //         setSubmitting(false);
-      //         setError(response.message);
-      //         setOpenSnackBar(true);
-      //       } else if (response.responseStatus === API_COMMON_STATUS.ERROR) {
-      //         setSubmitting(false);
-      //         setError(response.message);
-      //         setOpenSnackBar(true);
-      //       }
-      //     })
-      //     .catch(err => {
-      //       disableLoading();
-      //       setSubmitting(false);
-      //       setError("خطأ غير معروف");
+      // addNewSpecialist(data)
+      //   .then(response => {
+      //     console.log(response, "add specialists response");
+      //     disableLoading();
+      //     if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+      //       console.log(response.data.user);
+      //       let newSpecialists = specialists;
+      //       newSpecialists.unshift(response.data.specialist);
+      //       setSpecialists([...newSpecialists]);
+      //       formik.resetForm();
       //       setOpenSnackBar(true);
-      //     });
+      //       setSubmitting(false);
+      //       // handleClose();
+      //     } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
+      //       setSubmitting(false);
+      //       setError(response.message);
+      //       setOpenSnackBar(true);
+      //     } else if (response.responseStatus === API_COMMON_STATUS.ERROR) {
+      //       setSubmitting(false);
+      //       setError(response.message);
+      //       setOpenSnackBar(true);
+      //     }
+      //   })
+      //   .catch(err => {
+      //     disableLoading();
+      //     setSubmitting(false);
+      //     setError("خطأ غير معروف");
+      //     setOpenSnackBar(true);
+      //   });
     }
   });
 

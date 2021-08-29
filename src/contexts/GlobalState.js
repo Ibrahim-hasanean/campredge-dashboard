@@ -16,6 +16,7 @@ const Reducer = (state, action) => {
     case GLOBALSTATE_ACTIONS.SET_IS_AUTH: {
       const payload = action.data;
       localStorage.setItem("token", payload.accessToken);
+      localStorage.setItem("refreshToken", payload.refreshToken);
       localStorage.setItem("isAuth", true);
       localStorage.setItem("name", payload.data.name);
       return {

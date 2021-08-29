@@ -5,9 +5,9 @@ import * as yup from "yup";
 import { Alert } from "@material-ui/lab";
 import { useFormik } from "formik";
 import { API_COMMON_STATUS } from "helpers/api-helper";
-
 import { editePackage } from "../../../api/packages/index";
 import RTLProvider from "../RTLProvider";
+
 const EditePackage = ({ pack, handleClose, setPackages, packages }) => {
   const classes = useStyle();
   const [error, setError] = useState(null);
@@ -29,18 +29,18 @@ const EditePackage = ({ pack, handleClose, setPackages, packages }) => {
     enName: pack.name.en,
     ardescription: pack.description.ar,
     endescription: pack.description.en,
-    quantity: pack.quantity,
     duration: pack.duration,
-    price: pack.price
+    price: pack.price,
+    discountPrice: pack.discountPrice || ""
   };
   const schema = yup.object().shape({
     arName: yup.string().required("هذا الحقل مطلوب"),
     enName: yup.string().required("هذا الحقل مطلوب"),
     ardescription: yup.string().required("هذا الحقل مطلوب"),
     endescription: yup.string().required("هذا الحقل مطلوب"),
-    quantity: yup.number().required("هذا الحقل مطلوب"),
     duration: yup.number().required("هذا الحقل مطلوب"),
-    price: yup.number().required("هذا الحقل مطلوب")
+    price: yup.number().required("هذا الحقل مطلوب"),
+    discountPrice: yup.number()
   });
 
   const formik = useFormik({
@@ -54,9 +54,9 @@ const EditePackage = ({ pack, handleClose, setPackages, packages }) => {
           ar: values.ardescription,
           en: values.endescription
         },
-        quantity: values.quantity,
         duration: values.duration,
-        price: values.price
+        price: values.price,
+        discountPrice: values.discountPrice
       };
       let response = await editePackage(data, pack._id);
 
@@ -194,25 +194,6 @@ const EditePackage = ({ pack, handleClose, setPackages, packages }) => {
             {formik.errors.endescription}
           </Typography>
         ) : null}
-
-        <TextField
-          type="number"
-          className={classes.inputs}
-          variant="outlined"
-          name="quantity"
-          label="الكمية المسموح بها"
-          {...formik.getFieldProps("quantity")}
-          InputProps={{
-            classes: {
-              notchedOutline: getInputClasses("quantity")
-            }
-          }}
-        />
-        {formik.touched.quantity && formik.errors.quantity ? (
-          <Typography color="secondary" variant="body2">
-            {formik.errors.quantity}
-          </Typography>
-        ) : null}
         <TextField
           type="number"
           className={classes.inputs}
@@ -247,6 +228,24 @@ const EditePackage = ({ pack, handleClose, setPackages, packages }) => {
         {formik.touched.price && formik.errors.price ? (
           <Typography color="secondary" variant="body2">
             {formik.errors.price}
+          </Typography>
+        ) : null}
+        <TextField
+          type="number"
+          className={classes.inputs}
+          variant="outlined"
+          name="discountPrice"
+          label="السعر بعد الخصم"
+          {...formik.getFieldProps("discountPrice")}
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("discountPrice")
+            }
+          }}
+        />
+        {formik.touched.discountPrice && formik.errors.discountPrice ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.discountPrice}
           </Typography>
         ) : null}
         <Grid

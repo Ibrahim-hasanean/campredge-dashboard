@@ -17,7 +17,9 @@ const ProductTable = ({
   page,
   setPage,
   pages,
-  getData
+  getData,
+  packages,
+  productsTypes
 }) => {
   const classes = useStyle();
   const pageChange = async (event, page) => {
@@ -100,6 +102,8 @@ const ProductTable = ({
                 key={index}
                 product={product}
                 index={index}
+                packages={packages}
+                productsTypes={productsTypes}
               />
             ))}
           </TableBody>
