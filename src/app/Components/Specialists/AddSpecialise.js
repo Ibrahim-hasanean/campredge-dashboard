@@ -6,8 +6,8 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Alert } from "@material-ui/lab";
 
-import { API_COMMON_STATUS } from "helpers/api-helper";
-import { addNewSpecialist } from "../../../api/Specialists/index";
+// import { API_COMMON_STATUS } from "helpers/api-helper";
+// import { addNewSpecialist } from "../../../api/Specialists/index";
 const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
   const classes = useStyle();
   const [loading, setLoading] = useState(false);
@@ -24,9 +24,9 @@ const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
     setLoading(true);
   };
 
-  const disableLoading = () => {
-    setLoading(false);
-  };
+  // const disableLoading = () => {
+  //   setLoading(false);
+  // };
 
   const schema = yup.object().shape({
     fullName: yup.string().required("هذا الحقل مطلوب"),
