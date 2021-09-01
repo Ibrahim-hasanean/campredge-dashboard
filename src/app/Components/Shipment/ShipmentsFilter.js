@@ -10,7 +10,7 @@ import {
 import useStyle from "./style";
 
 const ShipmentsFilter = ({ getData }) => {
-  const [data, setData] = useState({ status: "", shipmentNo: "" });
+  const [data, setData] = useState({ status: "", shipmentNo: "", orderNo: "" });
   const classes = useStyle();
 
   const handleChange = e => {
@@ -23,16 +23,18 @@ const ShipmentsFilter = ({ getData }) => {
     let query = "";
     if (data.status) query = query + `&status=${data.status}`;
     if (data.shipmentNo) query = query + `&shipmentNo=${data.shipmentNo}`;
+    if (data.orderNo) query = query + `&orderNo=${data.orderNo}`;
+    console.log(query);
     getData(query);
   };
 
   const reset = () => {
-    setData({ productTypeId: "", text: "" });
+    setData({ productTypeId: "", shipmentNo: "", orderNo: "" });
     getData();
   };
 
   return (
-    <Grid container item xs={8} justify="flex-start" alignItems="flex-end">
+    <Grid container item xs={10} justify="flex-start" alignItems="flex-end">
       <FormControl className={classes.formControl}>
         <InputLabel className={classes.inputLabel} htmlFor="age-native-simple">
           نوع الشحنة
@@ -56,6 +58,13 @@ const ShipmentsFilter = ({ getData }) => {
         label="رقم الشحنة"
         className={classes.formControl}
         name="shipmentNo"
+        onChange={handleChange}
+      />
+      <TextField
+        value={data.orderNo}
+        label="رقم الاوردر"
+        className={classes.formControl}
+        name="orderNo"
         onChange={handleChange}
       />
 

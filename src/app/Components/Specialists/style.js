@@ -73,6 +73,9 @@ const useStyle = makeStyles(theme => ({
   },
   message: {
     padding: "30px"
+  },
+  leftRightMargin: {
+    margin: "0px 10px"
   }
 }));
 

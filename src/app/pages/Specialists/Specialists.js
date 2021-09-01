@@ -33,7 +33,11 @@ const Specialists = () => {
   }, [getData]);
   return (
     <Grid container>
-      <SpecialistsHeader />
+      <SpecialistsHeader
+        setSpecialists={setSpecialists}
+        specialists={specialists}
+        getData={getData}
+      />
       <SpecialistsTable
         specialists={specialists}
         setPage={setPage}
