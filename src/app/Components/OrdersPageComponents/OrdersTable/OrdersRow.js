@@ -51,10 +51,10 @@ const OrdersRow = ({ order, index }) => {
           {order.paymentType}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {order.user.fullName}
+          {order.user?.fullName}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
-          {order.user.phoneNum}
+          {order.user?.phoneNum}
         </TableCell>
         <TableCell className={classes.tableCells} align="center">
           {order.createdAt

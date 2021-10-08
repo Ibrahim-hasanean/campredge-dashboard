@@ -27,6 +27,7 @@ const OrdersTable = () => {
     async query => {
       let q = query || "";
       let data = await getOrders(q);
+      console.log(data);
       if (!data) {
         return;
       }
