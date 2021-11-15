@@ -95,6 +95,16 @@ export function HeaderMenu({ layoutProps }) {
           </NavLink>
         </li>
         <li
+          className={`menu-item menu-item-rel ${getMenuItemActive(
+            "/productstypes"
+          )}`}
+        >
+          <NavLink className="menu-link" to="/productstypes">
+            <span className={` ${classes.cairoText}`}>انواع المنتجات</span>
+            {layoutProps.rootArrowEnabled && <i className="menu-arrow" />}
+          </NavLink>
+        </li>
+        <li
           className={`menu-item menu-item-rel ${getMenuItemActive("/cities")}`}
         >
           <NavLink className="menu-link" to="/cities">

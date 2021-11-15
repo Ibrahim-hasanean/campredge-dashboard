@@ -120,6 +120,21 @@ export function AsideMenuList({ layoutProps }) {
           </NavLink>
         </li>
         <li
+          className={`menu-item ${getMenuItemActive("/productstypes", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/productstypes">
+            <span className="svg-icon menu-icon">
+              <SVG
+                src={toAbsoluteUrl("/media/svg/icons/Communication/Group.svg")}
+              />
+            </span>
+            <span className={`menu-text ${classes.cairoText}`}>
+              انواع المنتجات{" "}
+            </span>
+          </NavLink>
+        </li>
+        <li
           className={`menu-item ${getMenuItemActive("/cities", false)}`}
           aria-haspopup="true"
         >

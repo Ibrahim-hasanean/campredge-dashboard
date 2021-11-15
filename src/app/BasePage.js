@@ -10,6 +10,7 @@ import Products from "./pages/Products/Products";
 import Shipments from "./pages/Shipments/Shipments";
 import Specialists from "./pages/Specialists/Specialists";
 import User from "./pages/Users/User";
+import ProductTypes from "./pages/ProductTypes/ProductTypes";
 
 export default function BasePage() {
   return (
@@ -28,6 +29,7 @@ export default function BasePage() {
         <ContentRoute path="/specialists" component={Specialists} />
         <ContentRoute path="/shipments" component={Shipments} />
         <ContentRoute path="/products" component={Products} />
+        <ContentRoute path="/productstypes" component={ProductTypes} />
         <Redirect to="error/error-v1" />
       </Switch>
     </Suspense>
