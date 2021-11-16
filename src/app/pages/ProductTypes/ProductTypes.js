@@ -18,12 +18,18 @@ const useStyles = makeStyles({
     margin: "auto"
   },
   image: {
-    width: "70px",
-    height: "70px"
+    width: "90px",
+    height: "60px"
   },
+
   inputs: {
     // background: "white",
-    margin: "0px 10px"
+    margin: "0px 10px",
+    fontWeight: "700",
+    color: "black"
+  },
+  tableCell: {
+    padding: "0px"
   }
 });
 const ProductTypes = () => {
@@ -55,8 +61,8 @@ const ProductTypes = () => {
 
   const addProductType = async () => {
     console.log(data);
-    if (!data.arName || !data.enName) {
-      setError("الاسم عربي و الاسم انجليزي مطلوب");
+    if (!data.arName || !data.image) {
+      setError(" نوع المنتج و الصورة مطلوبان");
     } else {
       let formData = new FormData();
       let names = { ar: data.arName, en: data.enName };
@@ -73,8 +79,8 @@ const ProductTypes = () => {
           setData({ arName: "", enName: "" });
           getProductsTypes();
           setSuccess(true);
+          setError(false);
           setTimeout(() => {
-            setError(false);
             setSuccess(false);
           }, 3000);
         })
@@ -96,13 +102,7 @@ const ProductTypes = () => {
           value={data.arName}
           onChange={e => setData({ ...data, arName: e.target.value })}
           className={classes.inputs}
-          placeholder=" اسم المنتج عربي"
-        />
-        <TextField
-          value={data.enName}
-          onChange={e => setData({ ...data, enName: e.target.value })}
-          className={classes.inputs}
-          placeholder=" اسم المنتج انجليزي"
+          placeholder=" نوع  المنتج "
         />
         <TextField
           className={classes.inputs}
@@ -138,17 +138,21 @@ const ProductTypes = () => {
             <TableHead>
               <TableRow>
                 <TableCell align="center">
-                  <h4 style={{ fontWeight: "bold" }}>صورة المنتج</h4>
+                  <h4 style={{ fontWeight: "bold" }}>نوع المنتج</h4>
                 </TableCell>
                 <TableCell align="center">
-                  <h4 style={{ fontWeight: "bold" }}>اسم المنتج</h4>
+                  <h4 style={{ fontWeight: "bold" }}>صورة المنتج</h4>
                 </TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {productTypes.map(type => (
                 <TableRow>
-                  <TableCell align="center" key={type.name}>
+                  <TableCell
+                    className={classes.tableCell}
+                    align="center"
+                    key={type.name}
+                  >
                     <p
                       style={{
                         color: "black",
@@ -159,7 +163,11 @@ const ProductTypes = () => {
                       {type.name}
                     </p>
                   </TableCell>
-                  <TableCell align="center" key={type.image}>
+                  <TableCell
+                    className={classes.tableCell}
+                    align="center"
+                    key={type.image}
+                  >
                     <img
                       className={classes.image}
                       src={type.image}
