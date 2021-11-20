@@ -37,13 +37,19 @@ export const addProduct = async productData => {
           responseStatus: API_COMMON_STATUS.FAILED
         };
         break;
+      case API_COMMON_STATUS.Valid_Error:
+        data = {
+          responseStatus: API_COMMON_STATUS.Valid_Error,
+          message: response.data?.errors[0]?.msg
+        };
+        break;
       default:
         data = getUnknownStatusError();
     }
     return data;
   } catch (error) {
-    console.log(error, error.message, error.name);
-    console.error(error);
+    console.log("errorrrrr");
+    console.log(error);
   }
 };
 
@@ -172,7 +178,7 @@ export const toggleAcitvateProduct = async id => {
     }
     return data;
   } catch (error) {
-    console.log(error, error.message, error.name);
+    console.log(error);
     console.error(error);
   }
 };

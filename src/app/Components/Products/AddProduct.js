@@ -122,6 +122,12 @@ const AddProduct = ({
             setSubmitting(false);
             setError(response.message);
             setOpenSnackBar(true);
+          } else if (
+            response.responseStatus === API_COMMON_STATUS.Valid_Error
+          ) {
+            setSubmitting(false);
+            setError(response.message);
+            setOpenSnackBar(true);
           } else if (response.responseStatus === API_COMMON_STATUS.FAILED) {
             setSubmitting(false);
             setError("خطا غير معروف");
@@ -129,6 +135,7 @@ const AddProduct = ({
           }
         })
         .catch(err => {
+          console.log(err);
           disableLoading();
           setSubmitting(false);
           setError("خطأ غير معروف");

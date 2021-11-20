@@ -13,7 +13,8 @@ const API_COMMON_STATUS = Object.freeze({
   UNAUTHENTICATED: 403,
   ERROR: 404,
   BAD_REQUEST: 400,
-  CONFLICT: 409
+  CONFLICT: 409,
+  Valid_Error: 422
 });
 
 /**
