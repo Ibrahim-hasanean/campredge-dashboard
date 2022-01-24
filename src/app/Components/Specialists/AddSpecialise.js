@@ -6,32 +6,34 @@ import * as yup from "yup";
 import { useFormik } from "formik";
 import { Alert } from "@material-ui/lab";
 
-// import { API_COMMON_STATUS } from "helpers/api-helper";
-// import { addNewSpecialist } from "../../../api/Specialists/index";
+import { API_COMMON_STATUS } from "helpers/api-helper";
+import { addNewSpecialist } from "../../../api/Specialists/index";
 const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
   const classes = useStyle();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  console.log(setError, setOpenSnackBar);
 
   const initialValues = {
     fullName: "",
     email: "",
-    phoneNum: ""
+    phoneNum: "",
+    password: ""
   };
   const enableLoading = () => {
     setLoading(true);
+    setError(null);
   };
 
-  // const disableLoading = () => {
-  //   setLoading(false);
-  // };
+  const disableLoading = () => {
+    setLoading(false);
+  };
 
   const schema = yup.object().shape({
     fullName: yup.string().required("هذا الحقل مطلوب"),
     email: yup.string().required("هذا الحقل مطلوب"),
-    phoneNum: yup.string().required("هذا الحقل مطلوب")
+    phoneNum: yup.string().required("هذا الحقل مطلوب"),
+    password: yup.string().required("هذا الحقل مطلوب")
   });
 
   const getInputClasses = fieldname => {
@@ -54,38 +56,40 @@ const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
       const data = {
         fullName: values.fullName,
         email: values.email,
-        phoneNum: values.phoneNum
+        phoneNum: values.phoneNum,
+        password: values.password
       };
       console.log(data);
-      // addNewSpecialist(data)
-      //   .then(response => {
-      //     console.log(response, "add specialists response");
-      //     disableLoading();
-      //     if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-      //       console.log(response.data.user);
-      //       let newSpecialists = specialists;
-      //       newSpecialists.unshift(response.data.specialist);
-      //       setSpecialists([...newSpecialists]);
-      //       formik.resetForm();
-      //       setOpenSnackBar(true);
-      //       setSubmitting(false);
-      //       // handleClose();
-      //     } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
-      //       setSubmitting(false);
-      //       setError(response.message);
-      //       setOpenSnackBar(true);
-      //     } else if (response.responseStatus === API_COMMON_STATUS.ERROR) {
-      //       setSubmitting(false);
-      //       setError(response.message);
-      //       setOpenSnackBar(true);
-      //     }
-      //   })
-      //   .catch(err => {
-      //     disableLoading();
-      //     setSubmitting(false);
-      //     setError("خطأ غير معروف");
-      //     setOpenSnackBar(true);
-      //   });
+      addNewSpecialist(data)
+        .then(response => {
+          console.log(response, "add specialists response");
+          disableLoading();
+          if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+            console.log(response.data.user);
+            let newSpecialists = specialists;
+            newSpecialists.unshift(response.data.specialist);
+            setSpecialists([...newSpecialists]);
+            formik.resetForm();
+            setOpenSnackBar(true);
+            setSubmitting(false);
+            // handleClose();
+          } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
+            setSubmitting(false);
+            setError(response.message);
+            setOpenSnackBar(true);
+          } else if (response.responseStatus === API_COMMON_STATUS.ERROR) {
+            setSubmitting(false);
+            setError(response.message);
+            setOpenSnackBar(true);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+          disableLoading();
+          setSubmitting(false);
+          setError("خطأ غير معروف");
+          setOpenSnackBar(true);
+        });
     }
   });
 
@@ -162,6 +166,23 @@ const AddSpecialise = ({ specialists, setSpecialists, handleClose }) => {
             }
           }}
           {...formik.getFieldProps("phoneNum")}
+        />
+        {formik.touched.phoneNum && formik.errors.phoneNum ? (
+          <Typography color="secondary" variant="body2">
+            {formik.errors.phoneNum}
+          </Typography>
+        ) : null}
+        <TextField
+          className={classes.inputs}
+          variant="outlined"
+          name="password"
+          label="كلمة المرور "
+          InputProps={{
+            classes: {
+              notchedOutline: getInputClasses("password")
+            }
+          }}
+          {...formik.getFieldProps("password")}
         />
         {formik.touched.phoneNum && formik.errors.phoneNum ? (
           <Typography color="secondary" variant="body2">

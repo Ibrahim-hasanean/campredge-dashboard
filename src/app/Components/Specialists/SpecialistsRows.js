@@ -8,7 +8,8 @@ import { IconButton } from "@material-ui/core";
 import PopUp from "../PopUp/PopUp";
 import EditeSpecialise from "./EditeSpecialise";
 import SpecialistUsers from "./SpecialistUsers";
-
+import { API_COMMON_STATUS } from "helpers/api-helper";
+import { suspendSpec } from "api/Specialists";
 const SpecialistsRows = ({ spec, specialists, setSpecialists, index }) => {
   const classes = useStyle();
   const [openEdite, setOpenEdite] = useState(false);
@@ -28,6 +29,20 @@ const SpecialistsRows = ({ spec, specialists, setSpecialists, index }) => {
 
   const handleCloseSpecUsers = () => {
     setOpenSpecUsers(false);
+  };
+
+  const toggleActivateUser = async () => {
+    let response = await suspendSpec(spec._id);
+    if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+      console.log(response.data.specialist);
+      let oldUserIndex = specialists.findIndex(x => x._id === spec._id);
+      let newSpecs = specialists;
+      newSpecs[oldUserIndex] = {
+        ...specialists,
+        allowedToUseApp: response.data.specialist.allowedToUseApp
+      };
+      setSpecialists([...newSpecs]);
+    }
   };
 
   return (
@@ -66,7 +81,12 @@ const SpecialistsRows = ({ spec, specialists, setSpecialists, index }) => {
         </IconButton>
       </TableCell>
       <TableCell className={classes.tableCells} align="center">
-        <Switch />
+        <Switch
+          checked={spec.allowedToUseApp}
+          onChange={toggleActivateUser}
+          name="checkedA"
+          inputProps={{ "aria-label": "secondary checkbox" }}
+        />
       </TableCell>
       <PopUp
         title="تعديل الأخصائي"

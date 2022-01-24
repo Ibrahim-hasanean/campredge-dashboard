@@ -5,8 +5,8 @@ import RTLProvider from "../RTLProvider";
 import * as yup from "yup";
 import { useFormik } from "formik";
 import { Alert } from "@material-ui/lab";
-// import { API_COMMON_STATUS } from "helpers/api-helper";
-// import { editeSpecialist } from "../../../api/Specialists/index";
+import { API_COMMON_STATUS } from "helpers/api-helper";
+import { editeSpecialist } from "../../../api/Specialists/index";
 const EditeSpecialise = ({
   spec,
   specialists,
@@ -17,20 +17,20 @@ const EditeSpecialise = ({
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [openSnackBar, setOpenSnackBar] = useState(false);
-  console.log(setError, setOpenSnackBar);
   const initialValues = {
     fullName: spec.fullName,
     email: spec.email,
-    phoneNum: spec.email
+    phoneNum: spec.phoneNum
   };
 
   const enableLoading = () => {
     setLoading(true);
+    setError(null);
   };
 
-  // const disableLoading = () => {
-  //   setLoading(false);
-  // };
+  const disableLoading = () => {
+    setLoading(false);
+  };
 
   const schema = yup.object().shape({
     fullName: yup.string().required("هذا الحقل مطلوب"),
@@ -61,35 +61,38 @@ const EditeSpecialise = ({
         phoneNum: values.phoneNum
       };
       console.log(data);
-      //   editeSpecialist(data)
-      //     .then(response => {
-      //       console.log(response, "add specialists response");
-      //       disableLoading();
-      //       if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
-      //         console.log(response.data.user);
-      //         let newSpecialists = specialists;
-      //         newSpecialists.unshift(response.data.specialist);
-      //         setSpecialists([...newSpecialists]);
-      //         formik.resetForm();
-      //         setOpenSnackBar(true);
-      //         setSubmitting(false);
-      //         // handleClose();
-      //       } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
-      //         setSubmitting(false);
-      //         setError(response.message);
-      //         setOpenSnackBar(true);
-      //       } else if (response.responseStatus === API_COMMON_STATUS.ERROR) {
-      //         setSubmitting(false);
-      //         setError(response.message);
-      //         setOpenSnackBar(true);
-      //       }
-      //     })
-      //     .catch(err => {
-      //       disableLoading();
-      //       setSubmitting(false);
-      //       setError("خطأ غير معروف");
-      //       setOpenSnackBar(true);
-      //     });
+      editeSpecialist(spec._id, data)
+        .then(response => {
+          console.log(response, "add specialists response");
+          disableLoading();
+          if (response.responseStatus === API_COMMON_STATUS.SUCCESS) {
+            console.log(response.data.user);
+            let newSpecialists = specialists;
+            newSpecialists.unshift(response.data.specialist);
+            setSpecialists([...newSpecialists]);
+            formik.resetForm();
+            setOpenSnackBar(true);
+            setSubmitting(false);
+            setTimeout(() => {
+              handleClose();
+            }, 1000);
+            // handleClose();
+          } else if (response.responseStatus === API_COMMON_STATUS.CONFLICT) {
+            setSubmitting(false);
+            setError(response.message);
+            setOpenSnackBar(true);
+          } else if (response.responseStatus === API_COMMON_STATUS.ERROR) {
+            setSubmitting(false);
+            setError(response.message);
+            setOpenSnackBar(true);
+          }
+        })
+        .catch(err => {
+          disableLoading();
+          setSubmitting(false);
+          setError("خطأ غير معروف");
+          setOpenSnackBar(true);
+        });
     }
   });
 
@@ -115,7 +118,7 @@ const EditeSpecialise = ({
               variant="outlined"
               severity="success"
             >
-              تمت اضافة أخصائي بنجاح
+              تمت تعديل أخصائي بنجاح
             </Alert>
           )
         ) : (
