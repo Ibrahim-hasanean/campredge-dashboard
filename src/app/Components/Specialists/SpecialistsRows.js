@@ -38,7 +38,7 @@ const SpecialistsRows = ({ spec, specialists, setSpecialists, index }) => {
       let oldUserIndex = specialists.findIndex(x => x._id === spec._id);
       let newSpecs = specialists;
       newSpecs[oldUserIndex] = {
-        ...specialists,
+        ...spec,
         allowedToUseApp: response.data.specialist.allowedToUseApp
       };
       setSpecialists([...newSpecs]);
